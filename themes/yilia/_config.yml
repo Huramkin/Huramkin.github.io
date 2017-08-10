@@ -106,7 +106,7 @@ slider:
 # 比如
 #smart_menu:
 #  friends: false
-smart_menu:true
+smart_menu:
   innerArchive: '所有文章'
   friends: '友链'
   aboutme: '关于我'
