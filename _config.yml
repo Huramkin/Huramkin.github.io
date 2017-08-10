@@ -91,9 +91,20 @@ jsonContent:
       excerpt: false
       categories: false
       tags: true
+      rss: /atom.xml
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repository: git@github.com:Huramkin/Huramkin.github.io
   branch: master
+
+sitemap:
+    path: sitemap.xml
+baidusitemap:
+    path: baidusitemap.xm
+
+feed:
+    type: atom
+    path: atom.xml
+    limit: 100
