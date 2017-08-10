@@ -7,22 +7,22 @@ menu:
 # SubNav
 subnav:
   github: "https://github.com/Huramkin"
-  weibo: "#"
+  weibo: "http://www.weibo.com/2582507167/profile?rightmod=1&wvr=6&mod=personinfo"
   rss: "/atom.xml"
-  zhihu: "#"
+  zhihu: "https://www.zhihu.com/people/hu-jing-dong/activities"
   #qq: "#"
   #weixin: "#"
-  #jianshu: "#"
+  jianshu: "http://www.jianshu.com/users/315ab389c221/timeline"
   #douban: "#"
-  #segmentfault: "#"
+  segmentfault: "https://segmentfault.com/u/hujindong"
   #bilibili: "#"
   #acfun: "#"
   mail: "1s@moha.red"
-  #facebook: "#"
-  #google: "#"
-  #twitter: "#"
-  #linkedin: "#"
-
+  facebook: "https://www.facebook.com/profile.php?id=100013158099826"
+  google: "https://plus.google.com/u/0/114433072998585185221"
+  twitter: "https://twitter.com/Huramkin"
+  linkedin: "http://www.linkedin.com/in/huramkin/"
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/cn/80x15.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议</a>进行许可。
 rss: /atom.xml
 
 # 是否需要修改 root 路径
@@ -64,7 +64,7 @@ top: true
 
 # Miscellaneous
 baidu_analytics: ''
-google_analytics: ''
+google_analytics: 'UA-104376500-1'
 favicon: /favicon.png
 
 #你的头像url
