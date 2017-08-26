@@ -1,4 +1,5 @@
 ---
+title: Latex笔记（一)
 date: 2017-8-26
 categories: Software
 tags:
