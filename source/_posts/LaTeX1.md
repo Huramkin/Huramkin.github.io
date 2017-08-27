@@ -3,8 +3,8 @@ title: Latex笔记（一)
 date: 2017-8-26
 categories: Software
 tags:
-    -Latex
-    -学习笔记
+    - Latex
+    - 学习笔记
 ---
 ## 本文章出现的内容有
 1. Tex基本使用方法
