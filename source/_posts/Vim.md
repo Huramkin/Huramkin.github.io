@@ -1,6 +1,6 @@
 ---
 title: Vim入门
-date: 2017-8-26
+date: 2017-8-28
 categories: Software
 tags:
     - Vim
