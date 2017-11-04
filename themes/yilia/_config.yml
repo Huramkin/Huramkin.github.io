@@ -7,17 +7,17 @@ menu:
 # SubNav
 subnav:
   github: "https://github.com/Huramkin"
-  weibo: "http://www.weibo.com/2582507167/profile?rightmod=1&wvr=6&mod=personinfo"
+  weibo: "https://www.weibo.com/2582507167/profile?rightmod=1&wvr=6&mod=personinfo"
   rss: "/atom.xml"
   zhihu: "https://www.zhihu.com/people/hu-jing-dong/activities"
   #qq: "#"
   #weixin: "#"
-  jianshu: "http://www.jianshu.com/users/315ab389c221/timeline"
+  jianshu: "https://www.jianshu.com/users/315ab389c221/timeline"
   #douban: "#"
   segmentfault: "https://segmentfault.com/u/hujindong"
   #bilibili: "#"
   #acfun: "#"
-  mail: "1s@moha.red"
+  mail: "mailto:1s@moha.red"
   facebook: "https://www.facebook.com/profile.php?id=100013158099826"
   google: "https://plus.google.com/u/0/114433072998585185221"
   twitter: "https://twitter.com/Huramkin"
@@ -31,15 +31,15 @@ rss: /atom.xml
 root:
 
 # Content
-
+fancybox: true
 # 文章太长，截断按钮文字
-excerpt_link: more
+excerpt_link: 'more'
 # 文章卡片右下角常驻链接，不需要请设置为false
 show_all_link: '展开全文'
 # 数学公式
 mathjax: false
 # 是否在新窗口打开链接
-open_in_new: false
+open_in_new: true
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
@@ -71,10 +71,10 @@ google_analytics:
 favicon: /favicon.png
 
 #你的头像url
-avatar: http://i2.tiimg.com/601618/b82567c7dd09c920.jpg
+avatar: https://i.niupic.com/images/2017/10/14/O0wTD7.jpg
 
 #是否开启分享
-share_jia: true
+share_jia: false
 
 #评论：1、多说；2、网易云跟帖；3、畅言；4、Disqus 不需要使用某项，直接设置值为false，或注释掉
 #具体请参考wiki：https://github.com/litten/hexo-theme-yilia/wiki/
@@ -90,7 +90,7 @@ changyan_appid: false
 changyan_conf: false
 
 #4、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia的
-disqus: true
+disqus: false
 
 # 样式定制 - 一般不需要修改，除非有很强的定制欲望…
 style:
@@ -115,8 +115,8 @@ smart_menu:
   aboutme: '关于我'
 
 friends:
-  莫名其妙的另一个主页: http://hookcard.cn/
-  还没上线的另一个主页: http://hujindong.xin/
+  莫名其妙的另一个主页: https://hookcard.cn/
+  还没上线的另一个主页: https://hujindong.xin/
 
 aboutme: +1s
 
