@@ -6,17 +6,19 @@ tags:
     - Latex
     - 学习笔记
 ---
-## 本文章出现的内容有
+## 本文章的内容有
 1. Tex基本使用方法
 2. 中英文混合输入
 3. 基本文章结构
 4. 在Tex中插入数学公式/化学式
 5. 在Tex中插入表格/图片
 
+<!--more-->
+
 ## Tex基本使用方法
-![gui](http://oun0eb8i2.bkt.clouddn.com/X5BX%25%7D5D08%5DIO$%5DK379%5B8IX.png)
+![gui](https://i.niupic.com/images/2017/10/14/Vmd0Am.png)
 安装了Tex后，一般会携带一个编辑器，如上图
-![cmd](http://ouh3el9ec.bkt.clouddn.com/17-8-26/36539747.jpg)
+![cmd](https://i.niupic.com/images/2017/10/14/LakUsq.jpg)
 也可以使用Cmd编辑Tex文件，当然也可以使用其他文本编辑器来编辑Tex文件，这里为了方便起见，使用自带的编辑器TeXworks。
 ### Hello，world
 ```Tex
@@ -27,7 +29,7 @@ tags:
 ```
 第一行中，表示使用article文档类型格式排版
 按排版按钮，输出结果
-![](http://ouh3el9ec.bkt.clouddn.com/17-8-26/57394525.jpg)
+![](https://i.niupic.com/images/2017/10/14/t5Smeg.jpg)
 
 ## 中日英混合输入
 ```Tex
@@ -38,9 +40,9 @@ tags:
 ```
 使用UTF8编码可以很好的支持多国语言
 输入结果如下图
-![](http://ouh3el9ec.bkt.clouddn.com/17-8-26/61775740.jpg)
+![](https://i.niupic.com/images/2017/10/14/7icboj.jpg)
 
-##文章结构
+## 文章结构
 
 ```Tex
 \documentclass[UTF8]{ctexart}
@@ -66,7 +68,7 @@ LaTeX是坠吼的
 こんにちは,Latex世界
 \end{document}
 ```
-![](http://ouh3el9ec.bkt.clouddn.com/17-8-26/50164223.jpg)
+![](https://i.niupic.com/images/2017/10/14/l64R7m.jpg)
 
 ##  数学公式/化学式
 
@@ -120,7 +122,7 @@ A little matrix $ ( \begin{smallmatrix} a&b\\c&d \end{smallmatrix} ) $.
 \end{document}
 ```
 排版结果
-![](http://ouh3el9ec.bkt.clouddn.com/17-8-26/43899600.jpg)
+![](https://i.niupic.com/images/2017/10/14/85PaRJ.jpg)
 
 ### 化学式
 ```Tex
@@ -140,10 +142,10 @@ A little matrix $ ( \begin{smallmatrix} a&b\\c&d \end{smallmatrix} ) $.
 ```
 排版结果
 
-![](http://ouh3el9ec.bkt.clouddn.com/17-8-26/67925193.jpg)
+![](https://i.niupic.com/images/2017/10/14/MB6Y5V.jpg)
 
 这里用到了mhchem和chemfig两个宏包，下面附有文件的链接
 
->[chemfig说明文档](http://mirrors.ctan.org/macros/generic/chemfig/chemfig-en.pdf)
+>[chemfig说明文档](https://mirrors.ctan.org/macros/generic/chemfig/chemfig-en.pdf)
 
->[mhchem说明文档](http://mirrors.ctan.org/macros/latex/contrib/mhchem/mhchem.pdf)
+>[mhchem说明文档](https://mirrors.ctan.org/macros/latex/contrib/mhchem/mhchem.pdf)
