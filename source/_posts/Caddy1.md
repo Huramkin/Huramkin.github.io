@@ -1,4 +1,11 @@
-# Caddy的简单应用（一）
+---
+title: Caddy的简单应用（一）
+date: 2017-9-2
+categories: Server
+tags:
+    - Web
+    - Server
+---
 
 ##  Caddy获取以及安装
 
