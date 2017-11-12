@@ -22,7 +22,7 @@ macOS首先需要安装[Homebrew](https://brew.sh/)使用homebrew安装git
 Linux根据发行版的不同使用apt-get/yum来进行安装
 
 ## 常用简单命令
-![](https://i.niupic.com/images/2017/11/12/nor5m6.png)
+![](https://github.com/Huramkin/libpic/blob/master/git1.png?raw=true)
 
 |说明|命令|
 |-----|-----|

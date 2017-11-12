@@ -16,9 +16,9 @@ tags:
 <!--more-->
 
 ## Tex基本使用方法
-![gui](https://i.niupic.com/images/2017/10/14/Vmd0Am.png)
+![gui](https://github.com/Huramkin/libpic/blob/master/X5BX%25%7D5D08%5DIO$%5DK379%5B8IX.png?raw=true)
 安装了Tex后，一般会携带一个编辑器，如上图
-![cmd](https://i.niupic.com/images/2017/10/14/LakUsq.jpg)
+![cmd](https://github.com/Huramkin/libpic/blob/master/36539747.jpg?raw=true)
 也可以使用Cmd编辑Tex文件，当然也可以使用其他文本编辑器来编辑Tex文件，这里为了方便起见，使用自带的编辑器TeXworks。
 ### Hello，world
 ```Tex
@@ -29,7 +29,7 @@ tags:
 ```
 第一行中，表示使用article文档类型格式排版
 按排版按钮，输出结果
-![](https://i.niupic.com/images/2017/10/14/t5Smeg.jpg)
+![](https://github.com/Huramkin/libpic/blob/master/57394525.jpg?raw=true)
 
 ## 中日英混合输入
 ```Tex
@@ -40,7 +40,7 @@ tags:
 ```
 使用UTF8编码可以很好的支持多国语言
 输入结果如下图
-![](https://i.niupic.com/images/2017/10/14/7icboj.jpg)
+![](https://github.com/Huramkin/libpic/blob/master/61775740.jpg?raw=true)
 
 ## 文章结构
 
@@ -68,7 +68,7 @@ LaTeX是坠吼的
 こんにちは,Latex世界
 \end{document}
 ```
-![](https://i.niupic.com/images/2017/10/14/l64R7m.jpg)
+![](https://github.com/Huramkin/libpic/blob/master/50164223.jpg?raw=true)
 
 ##  数学公式/化学式
 
@@ -122,7 +122,7 @@ A little matrix $ ( \begin{smallmatrix} a&b\\c&d \end{smallmatrix} ) $.
 \end{document}
 ```
 排版结果
-![](https://i.niupic.com/images/2017/10/14/85PaRJ.jpg)
+![](https://github.com/Huramkin/libpic/blob/master/43899600.jpg?raw=true)
 
 ### 化学式
 ```Tex
@@ -142,7 +142,7 @@ A little matrix $ ( \begin{smallmatrix} a&b\\c&d \end{smallmatrix} ) $.
 ```
 排版结果
 
-![](https://i.niupic.com/images/2017/10/14/MB6Y5V.jpg)
+![](https://github.com/Huramkin/libpic/blob/master/67925193.jpg?raw=true)
 
 这里用到了mhchem和chemfig两个宏包，下面附有文件的链接
 
