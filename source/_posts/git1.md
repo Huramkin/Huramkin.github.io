@@ -35,4 +35,3 @@ Linux根据发行版的不同使用apt-get/yum来进行安装
 |下载远程仓库变更   |  git fetch |
 |取回远程仓库并合并   |  git pull [remote] [branch] |
 |  从本地上传到远程仓库| git push [remote] [branch]   |
-|   |   |
