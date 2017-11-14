@@ -4,7 +4,7 @@ date: 2017-8-16 21:36:15
 categories: Other
 tags: 关于
 ---
-![友人赠图](https://i.niupic.com/images/2017/10/14/ZrsqOk.jpg)
+![友人赠图](https://github.com/Huramkin/libpic/blob/master/malisa%20%E6%98%9F.jpg?raw=true)
 
 <!--more-->
 
