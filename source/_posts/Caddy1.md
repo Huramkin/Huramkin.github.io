@@ -5,11 +5,13 @@ categories: Server
 tags:
     - Web
     - Server
+    - 随笔
 ---
 
 ##  Caddy获取以及安装
 
 Caddy项目的[GitHub](https://github.com/mholt/caddy)地址。按照指南可以快速安装完毕。也有一些一键安装脚本可以使用。在此不过多赘述。
+<!--more-->
 
 ## 基本操作与重要文件位置
 
@@ -62,6 +64,6 @@ https://huramkin.me {
  ## 常见问题
  q:Caddy邮件自签SSL证书文件位置
  a:/.caddy/acme/acme-v01.api.letsencrypt.org/sites/域名/
- 
+
  q:caddy启动失败，但访问IP地址显示It works
  a:使用 ``netstat -lntp``查看80端口占用

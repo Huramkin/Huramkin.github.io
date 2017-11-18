@@ -5,7 +5,11 @@ categories: Skill
 tags:
     - Code
     - Tool
+    - 随笔
 ---
+GitHub的版本控制系统，用来上传与管理代码非常方便，当然可以选择比如像[SourceTree](https://www.sourcetreeapp.com/)这类GUI,但是Git可以使用更多的功能。
+
+<!--more-->
 
 ## 安装Git
 
