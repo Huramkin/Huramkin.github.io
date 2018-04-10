@@ -10,7 +10,7 @@ tags:
     - 隐私保护
 ---
 
-[DNSCrypt](https://zh.wikipedia.org/zh-hans/DNSCrypt)可以加密DNS服务器通信，来实现保护用户的目的。如防止运营商的DNS劫持，广告跟踪植入，保护个人隐私。
+[DNSCrypt](https://zh.wikipedia.org/zh-hans/DNSCrypt)通过加密DNS服务器通信，来实现保护用户的目的。如防止运营商的DNS劫持，广告跟踪植入，保护个人隐私。
 
 [DNSCrypt Proxy](https://github.com/jedisct1/dnscrypt-proxy)可以让我们使用这项功能，并且支持非常多的平台
 <!--more-->
