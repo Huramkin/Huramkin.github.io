@@ -40,7 +40,9 @@ tags:
  sudo brew services start dnscrypt-proxy
 
 #Linux的启动命令
- sudo ./dnscrypt-proxy -service start
+ sudo ./dnscrypt-proxy -service install //第一次启动要先安装
+
+ sudo ./dnscrypt-proxy -service start //安装后启动的命令
 ```
 ## 其他
  与DNSmaqs联用，DNSCrypt-proxy作为上级DNS,创建纯净的解析环境
