@@ -46,7 +46,9 @@ screen [-AmRvx -ls -wipe][-d <pid/tty/host>][-h <行数>][-r <作业名称>][-s 
 |-wipe|检查目前所有的screen作业，并删除已经无法使用的screen作业|
 
 ## 快捷键
+```
 C-a 为 Ctrl+A组合键的简写
+```
 |组合键|说明|
 |---|--|
 |C-a ? | 显示所有键绑定信息|
