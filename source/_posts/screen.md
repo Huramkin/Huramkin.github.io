@@ -12,16 +12,16 @@ Screen可以帮助管理员同时进行多项任务,实现后台运行程序的�
 ## 常用语法和快捷键
 |语法和快捷键|说明|
 |-|-|
-screen |进入screen模式
-exit |退出当前窗口，如果它是此screen的唯一窗口时，此screen也将完全退出。
-screen -ls |查看有哪些screen
+|screen |进入screen模式|
+|exit |退出当前窗口，如果它是此screen的唯一窗口时，此screen也将完全退出。|
+|screen -ls |查看有哪些screen|
 |screen -d [pid/tty/host]|将指定的screen作业离线|
-screen -r [id/name] |打开编号为id或者名称为name的screen窗口
-screen -wipe |清除死掉的会话
-C-a d | detach，暂离当前session，将目前的session丢到后台执行，即使登出也不受影响|
-C-a c | 创建一个新的运行shell的窗口并切换到该窗口
-C-a n | Next，切换到下一个 window 
-C-a k | 强行关闭当前的 window
+|screen -r [id/name] |打开编号为id或者名称为name的screen窗口|
+|screen -wipe |清除死掉的会话|
+|C-a d | detach，暂离当前session，将目前的session丢到后台执行，即使登出也不受影响|
+|C-a c | 创建一个新的运行shell的窗口并切换到该窗口|
+|C-a n | Next，切换到下一个 window |
+|C-a k | 强行关闭当前的 window|
 ## 语法
 ```
 screen [-AmRvx -ls -wipe][-d <pid/tty/host>][-h <行数>][-r <作业名称>][-s ][-S <作业名称>]
@@ -49,28 +49,28 @@ screen [-AmRvx -ls -wipe][-d <pid/tty/host>][-h <行数>][-r <作业名称>][-s 
 C-a 为 Ctrl+A组合键的简写
 |组合键|说明|
 |------|--|
-C-a ? | 显示所有键绑定信息
-C-a c | 创建一个新的运行shell的窗口并切换到该窗口
-C-a n | Next，切换到下一个 window 
-C-a p | Previous，切换到前一个 window 
-C-a 0..9 | 切换到第 0..9 个 window
-Ctrl+a [Space] | 由视窗0循序切换到视窗9
-C-a C-a | 在两个最近使用的 window 间切换 
-C-a x | 锁住当前的 window，需用用户密码解锁
-C-a d | detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响。 
-C-a z | 把当前session放到后台执行，用 shell 的 fg 命令则可回去。
-C-a w | 显示所有窗口列表
-C-a t | Time，显示当前时间，和系统的 load 
-C-a k | kill window，强行关闭当前的 window
-C-a [ | 进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 vi 一样
-C-b |Backward，PageUp 
-C-f |Forward，PageDown 
-H(大写) |High，将光标移至左上角 
-L |Low，将光标移至左下角 
-0 |移到行首 
-$ |行末 
-w |forward one word，以字为单位往前移 
-b |backward one word，以字为单位往后移 
-Space |第一次按为标记区起点，第二次按为终点 
-Esc |结束 copy mode 
-C-a ] | Paste，把刚刚在 copy mode 选定的内容贴上
+|C-a ? | 显示所有键绑定信息|
+|C-a c | 创建一个新的运行shell的窗口并切换到该窗口|
+|C-a n | Next，切换到下一个 window |
+|C-a p | Previous，切换到前一个 window| 
+|C-a 0..9 | 切换到第 0..9 个 window|
+|Ctrl+a [Space] | 由视窗0循序切换到视窗9|
+|C-a C-a | 在两个最近使用的 window 间切换 |
+|C-a x | 锁住当前的 window，需用用户密码解锁|
+|C-a d | detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响。 |
+|C-a z | 把当前session放到后台执行，用 shell 的 fg 命令则可回去。|
+|C-a w | 显示所有窗口列表|
+|C-a t | Time，显示当前时间，和系统的 load |
+|C-a k | kill window，强行关闭当前的 window|
+|C-a [ | 进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 vi 一样|
+|C-b |Backward，PageUp |
+|C-f |Forward，PageDown |
+|H(大写) |High，将光标移至左上角| 
+|L |Low，将光标移至左下角| 
+|0 |移到行首 |
+|$ |行末 |
+|w |forward one word，以字为单位往前移 |
+|b |backward one word，以字为单位往后移 |
+|Space |第一次按为标记区起点，第二次按为终点 |
+|Esc |结束 copy mode |
+|C-a ] | Paste，把刚刚在 copy mode 选定的内容贴上|
