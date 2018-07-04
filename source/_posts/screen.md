@@ -48,7 +48,7 @@ screen [-AmRvx -ls -wipe][-d <pid/tty/host>][-h <行数>][-r <作业名称>][-s 
 ## 快捷键
 C-a 为 Ctrl+A组合键的简写
 |组合键|说明|
-|------|--|
+|--|--|
 |C-a ? | 显示所有键绑定信息|
 |C-a c | 创建一个新的运行shell的窗口并切换到该窗口|
 |C-a n | Next，切换到下一个 window |
