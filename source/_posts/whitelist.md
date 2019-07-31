@@ -8,6 +8,10 @@ tags:
     - 软件
 ---
 
+用以允许特定国家访问服务器以及服务,达到锁定区域的目的
+
+<!--more-->
+
 ## 部署方法
 ```
 apt-get -y install ipset #Ubuntu系统安装ipset
