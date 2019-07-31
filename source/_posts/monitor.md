@@ -8,6 +8,8 @@ tags:
     - 软件
 ---
 
+在平时使用服务器的过程中,总有一些挂针的需求,这里介绍几款监控的面板,有免费的服务也有需要自建的开源项目
+
 <!--more-->
 
 ## 监控服务
@@ -81,3 +83,7 @@ Docker安装方式需要通过修改``/data/smokeping/config/Targets``然后重�
 https://smartping.org/
 https://docs.smartping.org/install/
 https://github.com/smartping/smartping
+
+### Torch-Web
+
+https://github.com/TorchPing/Torch-Web
