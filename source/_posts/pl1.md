@@ -29,6 +29,7 @@ tags:
 |virtualmin|www.virtualmin.com|
 |宝塔面板|bt.cn|
 |appnode|www.appnode.com|
+|CyberPanel|cyberpanel.net|
 
 ## 快速从域名服务商转出域名
 ### 快速从Namesilo转出域名
