@@ -39,7 +39,6 @@ URL='https://www.dynu.com/support/downloadfile/31'; FILE=`mktemp`; wget "$URL" -
 配置文件内容
 
 ```
-
 username YOURUSERNAME  # Your account username.(你的用户名)
 password YOURPASSWORD  # Your account password or IP update password. (你的用户密码或者IP更新密码)
 location LOCATIONNAME  # Can be left empty. Location name can be assigned to hostnames in the control panel.(所使用域名的位置名,这里的位置名就是面板中的 Location )
@@ -48,13 +47,11 @@ ipv6 false             # Can be true or false.(关闭更新ipv6地址)
 pollinterval 300       # IP update interval in seconds. Minimum is 120.(IP更新时间,最小120秒)
 debug false            # Can be true or false
 quiet true             # Can be true or false
-
 ```         
 
 
-以下是示例配置
-
 ```
+# 示例配置
 username webtester
 password somepassword
 location Work
