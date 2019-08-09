@@ -9,8 +9,6 @@ tags:
     - cloudflare
 ---
 
-## CF Partner 介绍
-
 作为普通用户，接入域名只能在 Cloudflare 官网用修改 NS 的方式接入域名，但是作为 CF Partner 可以使用 CNAME 方式接入域名
 
 使用 CNAME 接入，因为不用修改NS 所以可以同时其它的 DNS 服务提供商.
