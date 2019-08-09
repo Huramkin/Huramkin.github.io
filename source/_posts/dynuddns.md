@@ -34,9 +34,12 @@ URL='https://www.dynu.com/support/downloadfile/31'; FILE=`mktemp`; wget "$URL" -
 ```
 #### 配置
 
+配置文件位置
+
 ```
 vi /etc/dynuiuc/dynuiuc.conf 
 ```
+
 配置文件内容
 
 ```
@@ -63,17 +66,9 @@ debug false
 quiet true
 ```
 
-编辑并保存好配置文件后,需要重启服务,命令为:         
+编辑并保存好配置文件后,需要重启服务,命令为 ``systemctl restart dynuiuc.service``         
 
-```
-systemctl restart dynuiuc.service
-```
-
-配置定时执行,以便及时更新IP地址
-
-```
-crontab -e
-```
+配置定时执行,以便及时更新IP地址,运行命令 ``crontab -e``
 
 在输入界面写入下面这行并保存,这里是每十分钟重启一次服务,以更新IP地址
 
@@ -83,19 +78,21 @@ crontab -e
 
 管理服务使用的命令
 
-````
+```
 systemctl start dynuiuc.service   #启动服务
 systemctl stop dynuiuc.service    #停止服务
 systemctl restart dynuiuc.service #重启服务
 systemctl status dynuiuc.service  #服务状态
-````
+```
 
 #### 查看和截断日志文件的方法
 
+```
 查看实时日志: tail -f /var/log/dynuiuc.log
 查看日志文件: cat /var/log/dynuiuc.log
 截断日志文件: cat /dev/null > /var/log/dynuiuc.log
 查看服务状态: systemctl status dynuiuc.service -l
+```
 
 ### 方法2
 Debian 系统安装 DDClient
