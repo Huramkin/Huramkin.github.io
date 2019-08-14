@@ -7,21 +7,21 @@ menu:
 # SubNav
 subnav:
   github: "https://github.com/Huramkin"
-  #weibo: "https://www.weibo.com/2582507167/profile?rightmod=1&wvr=6&mod=personinfo"
+  #weibo: "#"
   rss: "/atom.xml"
-  #zhihu: "https://www.zhihu.com/people/hu-jing-dong/activities"
+  #zhihu: "#"
   #qq: "#"
   #weixin: "#"
-  #jianshu: "https://www.jianshu.com/users/315ab389c221/timeline"
+  #jianshu: "#"
   #douban: "#"
-  #segmentfault: "https://segmentfault.com/u/hujindong"
+  #segmentfault: "#"
   #bilibili: "#"
   #acfun: "#"
-  mail: "mailto:1s@moha.tn"
-  #facebook: "https://www.facebook.com/profile.php?id=100013158099826"
-  google: "https://plus.google.com/u/0/114433072998585185221"
-  twitter: "https://twitter.com/Huramkin"
-  linkedin: "http://www.linkedin.com/in/huramkin/"
+  #mail: "mailto:1s@moha.tn"
+  #facebook: "#"
+  #google: "#"
+  #twitter: "#"
+  #linkedin: "#"
 
 rss: /atom.xml
 
@@ -102,7 +102,7 @@ style:
 # slider的设置
 slider:
   # 是否默认展开tags板块
-  showTags: false
+  showTags: true
 
 # 智能菜单
 # 如不需要，将该对应项置为false
@@ -119,7 +119,7 @@ friends:
   翰林的小站: https://ihcr.top/
   
 
-aboutme: +1s
+aboutme: 摸鱼中
 
 sitemap:
     path: sitemap.xml

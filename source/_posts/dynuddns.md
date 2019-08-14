@@ -23,12 +23,15 @@ tags:
 ### 方法1
 
 #### 安装
+
 Red Hat 系列系统
+
 ```
 rpm -ivh https://www.dynu.com/support/downloadfile/30 
 ```
 
 Ubuntu 16
+
 ```
 URL='https://www.dynu.com/support/downloadfile/31'; FILE=`mktemp`; wget "$URL" -qO $FILE && sudo dpkg -i $FILE; rm $FILE
 ```
@@ -94,6 +97,7 @@ systemctl status dynuiuc.service  #服务状态
 Debian 系统安装 DDClient
 
 更换时区并对时
+
 ```
 echo "y" |cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
 apt-get install -y ntpdate;ntpdate cn.pool.ntp.org
@@ -138,6 +142,7 @@ curl "http://api.dynu.com/nic/update?hostname=example.ddnsfree.com&password=pass
 直到输出 ``good xxx.xxx.xxx.xxx``,ddns更新成功
 
 输入命令 ``crontab -e``
+
 在接下来的界面输入下面的配置并保存
 
 ```
@@ -145,7 +150,9 @@ curl "http://api.dynu.com/nic/update?hostname=example.ddnsfree.com&password=pass
 ```
 
 ## 提示
+
 安装crontab
+
 ```
 # centos
 yum install vixie-cron
@@ -154,6 +161,7 @@ yum install crontabs
 # Ubuntu
 apt-get install cron
 ```
+
 查看计划任务状态,出现``Active Running``说明定时任务设置成功
 
 ```

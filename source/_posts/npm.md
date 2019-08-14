@@ -69,4 +69,13 @@ services:
 docker-compose up -d
 ```
 成功运行之后访问``http://[ip地址]:81``
+
+> 默认账号信息:
+> Email:    admin@example.com
+> Password: changeme
+
 即可开始设置面板
+
+## 提示
+
+> docker-compose安装 https://github.com/docker/compose/releases https://docs.docker.com/compose/install/
