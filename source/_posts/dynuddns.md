@@ -52,9 +52,9 @@ debug false            # Can be true or false
 quiet true             # Can be true or false
 ```         
 
+示例配置
 
-```
-# 示例配置
+``` 
 username webtester
 password somepassword
 location Work
@@ -94,6 +94,7 @@ systemctl status dynuiuc.service  #服务状态
 ```
 
 ### 方法2
+
 Debian 系统安装 DDClient
 
 更换时区并对时

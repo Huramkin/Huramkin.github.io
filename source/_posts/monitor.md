@@ -87,3 +87,5 @@ https://github.com/smartping/smartping
 ### Torch-Web
 
 https://github.com/TorchPing/Torch-Web
+https://github.com/TorchPing/Torch
+https://github.com/TorchPing

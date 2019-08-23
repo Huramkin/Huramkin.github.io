@@ -16,9 +16,8 @@ tags:
 ## DNS服务的网站及服务器信息
 |详细信息站点|服务器IP|
 |------|-------|
-|[FUN DNS](https://www.fundns.cn/) |119.23.248.241 |
-|[PDOMO DNS](https://pdomo.me/)|主DNS:101.132.183.99 辅DNS:193.112.15.186 |
-|[BAI DNS](https://baidns.cn/) |223.113.97.99 |
+|[GeekDNS](https://www.233py.com/) |https://ndns.233py.com/dns-query |
+|[红鱼DNS](https://www.rubyfish.cn/docs) |dns.rubyfish.cn|
 |[ONE DNS](https://www.onedns.net/personal)|117.50.11.11;117.50.22.22 |
 |[北京教育网](http://ip.yqie.com/dns_jiaoyu.htm)| 58.132.8.1 |
 |[AIXYZ DNS](http://aixyz.com/) |南方：115.159.146.99 北方：123.206.21.48 |

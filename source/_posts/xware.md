@@ -46,6 +46,7 @@ apt install curl -y                            #debian等系统安装curl
 yum install curl -y                            #centos等系统安装curl
 curl -sSL https://get.docker.com/ | sh         #docker安装脚本
 curl -sSL https://get.daocloud.io/docker | sh  #适合国内网络的docker安装脚本
+https://www.daocloud.io/mirror                 #docker加速器
 ```
 
 由于docker内存不会定期回收，可能导致服务器占用过多内存进而崩溃,运行下面的命令每日定时重启
