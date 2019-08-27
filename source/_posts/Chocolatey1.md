@@ -9,6 +9,10 @@ tags:
     - 随笔
 ---
 
+Chocolatey 是用在Windows上的包管理器
+
+<!--more-->
+
 
 ## 安装
 

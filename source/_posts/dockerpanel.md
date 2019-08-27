@@ -2,6 +2,7 @@
 title: Docker面板的介绍与简单使用
 date: 2018-10-05 3:08:20
 categories: Tools
+toc: true
 tags:
     - Docker
     - 集群
@@ -49,3 +50,25 @@ chmod +x /usr/local/bin/docker-compose
 需要在docker节点上开启远程管理端口：2375或2376（建议使用2376端口,开通步骤参考:https://docs.docker.com/engine/security/https/）
 
 点击``Add Endportainer``添加节点,写入相应信息
+
+## Seagull
+
+> https://github.com/tobegit3hub/seagull
+
+安装 ``docker run -d -p 10086:10086 -v /var/run/docker.sock:/var/run/docker.sock tobegit3hub/seagull``
+
+- 非常简单,基本不需要特殊配置
+- 功能少,无法在这面板上新建运行
+- 没有登录系统,只能靠网站配置文件加密码
+
+## EasyDockerWeb
+
+> https://github.com/qfdk/EasyDockerWeb
+
+- 安装简单
+- 功能齐全
+- 访问控制需要自己做
+
+## Rancher
+
+> https://rancher.com/
