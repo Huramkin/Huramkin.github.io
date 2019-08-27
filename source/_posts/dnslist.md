@@ -32,9 +32,12 @@ tags:
 
 ### Windows/Linux/macOS
 在系统中直接设置DNS服务器地址或者尝试使用下面的软件来进一步保障上网的速度与安全
->[Dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy)
+> [Dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy)
 >
->[ChinaDNS](https://github.com/shadowsocks/ChinaDNS)
+> [ChinaDNS](https://github.com/shadowsocks/ChinaDNS)
+>
+> [AuroraDNS](https://github.com/mili-tan/AuroraDNS.GUI)
+> ``AuroraDNS`` 是一个纯净、简单、面向普通用户的图形化的本地 DoH 客户端。它在本地将 ``DNS over HTTPS`` 转换为传统的 ``DNS`` 协议。
 
 ### 移动设备
 由于一些移动设备用户无法通过系统自行修改DNS配置
