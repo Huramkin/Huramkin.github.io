@@ -9,6 +9,10 @@ tags:
     - 脚本
 ---
 
+在一些特殊的环境,BBR原版并不能发挥出最佳作用,这里是部署bbrplus的脚本
+
+<!--more-->
+
 ```
 wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ```
