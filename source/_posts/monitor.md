@@ -18,25 +18,48 @@ tags:
 
 https://uptimerobot.com/
 
-- 最多50个节点
+- 免费最多50个节点
 - 不需要安装软件
 - 免费仅有宕机监控
+- 支持 http,tcp 等
 
 ### NodeQuery
 
 https://nodequery.com/
 
-- 最多10个节点
+- 免费最多10个节点
 - 需要在被监控节点安装软件
 - 信息全面(网络,IO,进程,资源使用)
+
+### FreshPing
+
+https://www.freshworks.com/website-monitoring/
+
+- 免费最多50个节点
+- 不需要安装软件
+- 免费仅有宕机监控
+- 支持 http,tcp 等
 
 ### 阿里云监控
 
 https://www.aliyun.com/product/jiankong
 
-- 最多10个节点
+- 免费最多10个节点
 - 可选多机房监控
 - 与阿里云服务无缝衔接
+
+### Wachete
+
+https://www.wachete.com/
+
+- 可以监控指定网页内容的变动,如价格、是否有货等数据
+
+### Downtime Monkey
+
+https://downtimemonkey.com/index.php
+
+- 免费最多60个节点
+- 只能监控http/https
 
 ## 自建面板
 
@@ -56,6 +79,7 @@ docker run -d --restart=always --name=serverstatus -v {$path}/config.json:/Serve
 wget --no-check-certificate -qO client-linux.py 'https://raw.githubusercontent.com/cppla/ServerStatus/master/clients/client-linux.py' && nohup python client-linux.py SERVER={$SERVER} USER={$USER} PASSWORD={$PASSWORD} >/dev/null 2>&1 &
 
 ```
+> 更好看的Serverstatus面板主题 https://github.com/krwu/ServerStatus-web 
 
 ### Smokeping
 
@@ -76,6 +100,7 @@ docker run \
     linuxserver/smokeping
 ```
 Docker安装方式需要通过修改``/data/smokeping/config/Targets``然后重启容器来添加监控节点
+
 ### Smartping
 
 官方提供编译好的二进制文件,可以直接运行,并且支持正向PING与反向Ping绘图
