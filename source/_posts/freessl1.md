@@ -11,7 +11,10 @@ tags:
     - docker
 ---
 
+购买ssl证书价格不菲,但是也有很多免费的证书,足够个人站长使用
+
 <!--more-->
+
 ## Let’s Encrypt
 
 https://gethttpsforfree.com/
