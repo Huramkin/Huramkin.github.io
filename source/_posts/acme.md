@@ -10,6 +10,11 @@ tags:
     - 隐私保护
 ---
 
+用acme.sh获取免费SSL证书
+
+<!--more-->
+
+
 ## 脚本部署
 
 ```
@@ -20,6 +25,8 @@ export CF_Email="example@aa.aa"
 acme.sh --issue --dns dns_cf -d aa.aa -d *.aa.aa
 ```
 成功运行后,证书会自动生成到用户目录下的 ``.acme.sh`` 文件夹,续签证书 ``acme.sh  --renew   -d aa.com -d *.aa.com``
+
+## docker部署
 
 ```
 docker run --rm  -itd  \
@@ -38,6 +45,7 @@ docker run --rm  -itd  \
 ```
 docker exec acme.sh --issue --dns dns_cf -d *.aa.aa -d aa.aa
 ```
+## 参考
 
 - https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker
 - https://github.com/Neilpang/acme.sh/wiki/dnsapi
