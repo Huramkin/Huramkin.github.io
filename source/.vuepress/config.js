@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'title',
+  title: 'Huramkin-intl',
   description: 'description',
   head: [
     ['link', { rel: 'icon', href: `/favicon.ico` }],
