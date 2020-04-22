@@ -7,8 +7,8 @@ module.exports = {
   ],
   theme: 'cherry',
   themeConfig: {
-    hostname: '*',
-    docsRepo: '*/*.github.io',
+    hostname: 'https://intl.huramkin.com',
+    docsRepo: 'Huramkin/Huramkin.github.io',
     docsDir: 'source',
     docsBranch: 'writing',
     editLinks: true,
