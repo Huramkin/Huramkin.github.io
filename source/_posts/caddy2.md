@@ -62,7 +62,7 @@ docker-compose up -d
  https://www.lowol.top {
  gzip
  tls email@email.email
- basicauth
+ basicauth / user passwd
  proxy / https://huramkin.me
  }
 ```
@@ -71,7 +71,7 @@ docker-compose up -d
 
 ```
  huramkin.me www.huramkin.me {
-  tls a@example.com
+  tls /root/xxx.crt /root/xxx.key
   root /home/huramkin
   index index.html index.htm
   gzip
