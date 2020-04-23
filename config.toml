@@ -1,7 +1,7 @@
 baseURL = "https://intl.huramkin.com/"
 title   = "Hello Friend NG"
 
-DefaultContentLanguage = "cn"
+DefaultContentLanguage = "en"
 
 theme = "hello-friend-ng"
 
