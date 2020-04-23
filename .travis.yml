@@ -18,7 +18,7 @@ install:
 
 script:
   # 运行hugo命令
-  - hugo server -t hello-friend-ng
+  - hugo
 
 after_script:
   # 部署
