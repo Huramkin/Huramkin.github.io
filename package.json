@@ -1,8 +1,8 @@
 {
-  "name": "zthxxx-blog",
+  "name": "vuepress",
   "version": "0.2.0",
   "private": true,
-  "description": "blog by zthxxx",
+  "description": "vuepress",
   "scripts": {
     "dev": "npx --node-arg '--require ./inject.js' vuepress dev source --open",
     "build": "npx --node-arg '--require ./inject.js' vuepress build source --dest dist",
@@ -16,16 +16,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zthxxx/zthxxx.github.io.git"
+    "url": ""
   },
   "keywords": [
     "vue",
     "vuepress",
     "blog"
   ],
-  "author": "zthxxx",
+  "author": "vuepress",
   "license": "MIT",
-  "homepage": "https://blog.zthxxx.me",
+  "homepage": "vuepress",
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",

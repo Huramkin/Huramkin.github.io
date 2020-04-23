@@ -8,4 +8,4 @@ Allow: /about/
 Disallow: /content.json
 Disallow: /404.html
 
-Sitemap: http://*/sitemap.xml
+Sitemap: https://intl.huramkin.com/sitemap.xml
