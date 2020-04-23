@@ -1,7 +1,7 @@
-baseURL = "https://example.com"
+baseURL = "https://intl.huramkin.com/"
 title   = "Hello Friend NG"
 
-DefaultContentLanguage = "en"
+DefaultContentLanguage = "cn"
 
 theme = "hello-friend-ng"
 
@@ -38,7 +38,7 @@ disableHugoGeneratorInject = false
   posts = "/posts/:year/:month/:title/"
 
 [author]
-  name = "Jane Doe"
+  name = "Huramkin"
 
 [blackfriday]
   hrefTargetBlank = true
