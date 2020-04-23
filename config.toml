@@ -7,7 +7,7 @@ defaultContentLanguage = "en"
 theme = "LoveIt"
 # themes directory
 # 主题目录
-themesDir = "../.."
+themesDir = "./themes"
 
 # whether to use robots.txt
 # 是否使用 robots.txt
