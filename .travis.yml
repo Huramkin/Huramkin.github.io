@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - 12
+dist: trusty
+
+branches:
+  only:
+  - source
+
+install:
+  - npm ci
+  - npm i --no-save source/.vuepress/theme
+
+script:
+  - npm run build
+
+deploy:
+  provider: pages
+  local_dir: dist
+  skip_cleanup: true
+  keep_history: true
+  github_token: ${GH_TOKEN}
+  target_branch: master
+  on:
+    branch: source
+
+notifications:
+  email: true
+  on_success: always
+  on_failure: always

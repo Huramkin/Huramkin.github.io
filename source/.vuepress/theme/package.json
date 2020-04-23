@@ -1,0 +1,36 @@
+{
+  "name": "vuepress-theme-cherry",
+  "version": "0.0.1",
+  "description": "Inspired by Honkai 3rd Rozaliya - Molotov Cherry",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "zthxxx/zthxxx.github",
+  "keywords": [
+    "vue",
+    "vuepress",
+    "vuepress-theme",
+    "blog",
+    "vuepress-blog",
+    "cherry"
+  ],
+  "author": "zthxxx",
+  "license": "MIT",
+  "homepage": "https://blog.zthxxx.me",
+  "dependencies": {
+    "@commitlint/config-conventional": "^7.5.0",
+    "@types/node": "^13.9.1",
+    "@vuepress/plugin-back-to-top": "^1.4.0",
+    "@vuepress/plugin-blog": "^1.9.2",
+    "@vuepress/plugin-medium-zoom": "^1.4.0",
+    "@vuepress/theme-default": "^1.4.0",
+    "dayjs": "^1.8.23",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3",
+    "vue-feather-icons": "^5.0.0",
+    "vuepress-plugin-sitemap": "^2.1.2",
+    "vuepress-plugin-typescript": "^0.2.0",
+    "vuepress-types": "^0.9.0"
+  }
+}
