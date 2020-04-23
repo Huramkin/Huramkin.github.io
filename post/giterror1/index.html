@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Git提示error setting certificate verify locations解决办法 | Huramkin-intl</title>
+    <meta name="description" content="description">
+    <meta name="generator" content="VuePress 1.4.0">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="theme-color" content="#b19693">
+    
+    <link rel="preload" href="/assets/css/0.styles.e5fbe832.css" as="style"><link rel="preload" href="/assets/js/app.f4bd1723.js" as="script"><link rel="preload" href="/assets/js/1.c441dcc6.js" as="script"><link rel="preload" href="/assets/js/41.1dd8b225.js" as="script"><link rel="prefetch" href="/assets/js/10.2c5235c3.js"><link rel="prefetch" href="/assets/js/11.11337571.js"><link rel="prefetch" href="/assets/js/12.cb8e609b.js"><link rel="prefetch" href="/assets/js/13.e9269143.js"><link rel="prefetch" href="/assets/js/14.7cbb4320.js"><link rel="prefetch" href="/assets/js/15.b07d74b9.js"><link rel="prefetch" href="/assets/js/16.3a85775a.js"><link rel="prefetch" href="/assets/js/17.bde8be17.js"><link rel="prefetch" href="/assets/js/18.2124d597.js"><link rel="prefetch" href="/assets/js/19.7600404c.js"><link rel="prefetch" href="/assets/js/20.104ceb2a.js"><link rel="prefetch" href="/assets/js/21.fce6ed87.js"><link rel="prefetch" href="/assets/js/22.3cca2acf.js"><link rel="prefetch" href="/assets/js/23.daefeb88.js"><link rel="prefetch" href="/assets/js/24.596e6472.js"><link rel="prefetch" href="/assets/js/25.b0659066.js"><link rel="prefetch" href="/assets/js/26.eb2aeb17.js"><link rel="prefetch" href="/assets/js/27.71256071.js"><link rel="prefetch" href="/assets/js/28.9e33947f.js"><link rel="prefetch" href="/assets/js/29.f25a3ba4.js"><link rel="prefetch" href="/assets/js/30.87a476bf.js"><link rel="prefetch" href="/assets/js/31.31a4a6a4.js"><link rel="prefetch" href="/assets/js/32.fa0dfecf.js"><link rel="prefetch" href="/assets/js/33.2f964080.js"><link rel="prefetch" href="/assets/js/34.ddb41dde.js"><link rel="prefetch" href="/assets/js/35.242b87ea.js"><link rel="prefetch" href="/assets/js/36.fe309f50.js"><link rel="prefetch" href="/assets/js/37.a52b90bd.js"><link rel="prefetch" href="/assets/js/38.56341fc6.js"><link rel="prefetch" href="/assets/js/39.5ba03b94.js"><link rel="prefetch" href="/assets/js/4.1cdf2902.js"><link rel="prefetch" href="/assets/js/40.6d4e308d.js"><link rel="prefetch" href="/assets/js/42.1cfefed7.js"><link rel="prefetch" href="/assets/js/43.7b0d2221.js"><link rel="prefetch" href="/assets/js/44.cf5b6d20.js"><link rel="prefetch" href="/assets/js/45.4fbf6dbc.js"><link rel="prefetch" href="/assets/js/46.ac163137.js"><link rel="prefetch" href="/assets/js/47.7579333d.js"><link rel="prefetch" href="/assets/js/48.5b1d8d1d.js"><link rel="prefetch" href="/assets/js/49.b28fa845.js"><link rel="prefetch" href="/assets/js/5.bc4c94ae.js"><link rel="prefetch" href="/assets/js/50.a95cbd2a.js"><link rel="prefetch" href="/assets/js/51.513c212a.js"><link rel="prefetch" href="/assets/js/52.579a3c1d.js"><link rel="prefetch" href="/assets/js/53.a9cd95d2.js"><link rel="prefetch" href="/assets/js/54.a23ec312.js"><link rel="prefetch" href="/assets/js/55.91712b5d.js"><link rel="prefetch" href="/assets/js/56.edf7e88e.js"><link rel="prefetch" href="/assets/js/57.b04ca3c8.js"><link rel="prefetch" href="/assets/js/58.3dcdaf16.js"><link rel="prefetch" href="/assets/js/59.b90008a0.js"><link rel="prefetch" href="/assets/js/6.5fb917e3.js"><link rel="prefetch" href="/assets/js/60.3f206cbd.js"><link rel="prefetch" href="/assets/js/61.b7d93b44.js"><link rel="prefetch" href="/assets/js/62.c6c81296.js"><link rel="prefetch" href="/assets/js/63.98d324aa.js"><link rel="prefetch" href="/assets/js/64.cec92732.js"><link rel="prefetch" href="/assets/js/7.94c5af00.js"><link rel="prefetch" href="/assets/js/8.a1fa1de8.js"><link rel="prefetch" href="/assets/js/9.52a314c5.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.c17bdfc0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e5fbe832.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Huramkin-intl</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/post/" class="nav-link router-link-active">
+  归档
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link">
+  标签
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/post/" class="nav-link router-link-active">
+  归档
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link">
+  标签
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div> <!----></nav>  <!----> </aside> <main class="page"><div class="content head"><h1 id="Git提示error setting certificate verify locations解决办法">
+        Git提示error setting certificate verify locations解决办法
+      </h1> <div class="tag-links">
+  tags:
+  <a href="/tag/#Git" class="tag">
+    Git
+  </a><a href="/tag/#error" class="tag">
+    error
+  </a><a href="/tag/#随笔" class="tag">
+    随笔
+  </a></div></div> <div class="theme-default-content content__default"><h2 id="问题描述"><a href="#问题描述" class="header-anchor">#</a> 问题描述</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>C:\Users\admin&gt;git clone https://github.com/Kiterepo/dns-over-https
+Cloning into 'clojure-getting-started'...
+fatal: unable to access 'https://github.com/Kiterepo/dns-over-https': error setting certificate verify locations:
+  CAfile: D:/ProgramFlie/Git/mingw64/libexec/ssl/certs/ca-bundle.crt
+  CApath: none
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="解决方案"><a href="#解决方案" class="header-anchor">#</a> 解决方案</h2> <ul><li>方案1
+git config --system http.sslcainfo &quot;C:\Program Files (x86)\git\bin\curl-ca-bundle.crt&quot;</li> <li>方案2 git config --system http.sslverify false</li> <li>方案3 顺着报错信息在文件树里找,发现<code>D:/Git/mingw64/libexec</code>没有<code>ssl</code>目录。
+但在<code>D:\Git\mingw64</code>目录下有<code>ssl/certs/ca-bundle.crt</code>这个路径。
+将<code>ssl</code>目录复制到<code>D:/Git/mingw64/libexec</code>下</li></ul> <blockquote><p>我使用方案3解决了问题</p></blockquote></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Huramkin/Huramkin.github.io/edit/writing/source/_posts/giterror1.md" target="_blank" rel="noopener noreferrer">Edit on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2020-04-23 04:27</span></div></footer> <!----> <footer class="content comment"><!----></footer></main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.f4bd1723.js" defer></script><script src="/assets/js/1.c441dcc6.js" defer></script><script src="/assets/js/41.1dd8b225.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PHP301跳转代码 | Huramkin-intl</title>
+    <meta name="description" content="description">
+    <meta name="generator" content="VuePress 1.4.0">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="theme-color" content="#b19693">
+    
+    <link rel="preload" href="/assets/css/0.styles.e5fbe832.css" as="style"><link rel="preload" href="/assets/js/app.f4bd1723.js" as="script"><link rel="preload" href="/assets/js/1.c441dcc6.js" as="script"><link rel="preload" href="/assets/js/12.cb8e609b.js" as="script"><link rel="prefetch" href="/assets/js/10.2c5235c3.js"><link rel="prefetch" href="/assets/js/11.11337571.js"><link rel="prefetch" href="/assets/js/13.e9269143.js"><link rel="prefetch" href="/assets/js/14.7cbb4320.js"><link rel="prefetch" href="/assets/js/15.b07d74b9.js"><link rel="prefetch" href="/assets/js/16.3a85775a.js"><link rel="prefetch" href="/assets/js/17.bde8be17.js"><link rel="prefetch" href="/assets/js/18.2124d597.js"><link rel="prefetch" href="/assets/js/19.7600404c.js"><link rel="prefetch" href="/assets/js/20.104ceb2a.js"><link rel="prefetch" href="/assets/js/21.fce6ed87.js"><link rel="prefetch" href="/assets/js/22.3cca2acf.js"><link rel="prefetch" href="/assets/js/23.daefeb88.js"><link rel="prefetch" href="/assets/js/24.596e6472.js"><link rel="prefetch" href="/assets/js/25.b0659066.js"><link rel="prefetch" href="/assets/js/26.eb2aeb17.js"><link rel="prefetch" href="/assets/js/27.71256071.js"><link rel="prefetch" href="/assets/js/28.9e33947f.js"><link rel="prefetch" href="/assets/js/29.f25a3ba4.js"><link rel="prefetch" href="/assets/js/30.87a476bf.js"><link rel="prefetch" href="/assets/js/31.31a4a6a4.js"><link rel="prefetch" href="/assets/js/32.fa0dfecf.js"><link rel="prefetch" href="/assets/js/33.2f964080.js"><link rel="prefetch" href="/assets/js/34.ddb41dde.js"><link rel="prefetch" href="/assets/js/35.242b87ea.js"><link rel="prefetch" href="/assets/js/36.fe309f50.js"><link rel="prefetch" href="/assets/js/37.a52b90bd.js"><link rel="prefetch" href="/assets/js/38.56341fc6.js"><link rel="prefetch" href="/assets/js/39.5ba03b94.js"><link rel="prefetch" href="/assets/js/4.1cdf2902.js"><link rel="prefetch" href="/assets/js/40.6d4e308d.js"><link rel="prefetch" href="/assets/js/41.1dd8b225.js"><link rel="prefetch" href="/assets/js/42.1cfefed7.js"><link rel="prefetch" href="/assets/js/43.7b0d2221.js"><link rel="prefetch" href="/assets/js/44.cf5b6d20.js"><link rel="prefetch" href="/assets/js/45.4fbf6dbc.js"><link rel="prefetch" href="/assets/js/46.ac163137.js"><link rel="prefetch" href="/assets/js/47.7579333d.js"><link rel="prefetch" href="/assets/js/48.5b1d8d1d.js"><link rel="prefetch" href="/assets/js/49.b28fa845.js"><link rel="prefetch" href="/assets/js/5.bc4c94ae.js"><link rel="prefetch" href="/assets/js/50.a95cbd2a.js"><link rel="prefetch" href="/assets/js/51.513c212a.js"><link rel="prefetch" href="/assets/js/52.579a3c1d.js"><link rel="prefetch" href="/assets/js/53.a9cd95d2.js"><link rel="prefetch" href="/assets/js/54.a23ec312.js"><link rel="prefetch" href="/assets/js/55.91712b5d.js"><link rel="prefetch" href="/assets/js/56.edf7e88e.js"><link rel="prefetch" href="/assets/js/57.b04ca3c8.js"><link rel="prefetch" href="/assets/js/58.3dcdaf16.js"><link rel="prefetch" href="/assets/js/59.b90008a0.js"><link rel="prefetch" href="/assets/js/6.5fb917e3.js"><link rel="prefetch" href="/assets/js/60.3f206cbd.js"><link rel="prefetch" href="/assets/js/61.b7d93b44.js"><link rel="prefetch" href="/assets/js/62.c6c81296.js"><link rel="prefetch" href="/assets/js/63.98d324aa.js"><link rel="prefetch" href="/assets/js/64.cec92732.js"><link rel="prefetch" href="/assets/js/7.94c5af00.js"><link rel="prefetch" href="/assets/js/8.a1fa1de8.js"><link rel="prefetch" href="/assets/js/9.52a314c5.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.c17bdfc0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e5fbe832.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Huramkin-intl</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/post/" class="nav-link router-link-active">
+  归档
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link">
+  标签
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/post/" class="nav-link router-link-active">
+  归档
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link">
+  标签
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div> <!----></nav>  <!----> </aside> <main class="page"><div class="content head"><h1 id="PHP301跳转代码">
+        PHP301跳转代码
+      </h1> <div class="tag-links">
+  tags:
+  <a href="/tag/#Web" class="tag">
+    Web
+  </a><a href="/tag/#PHP" class="tag">
+    PHP
+  </a><a href="/tag/#Server" class="tag">
+    Server
+  </a><a href="/tag/#随笔" class="tag">
+    随笔
+  </a></div></div> <div class="theme-default-content content__default"><p>301跳转代码,还有使用方法
+</p> <h2 id="不带www的域名301转向到带www域名上"><a href="#不带www的域名301转向到带www域名上" class="header-anchor">#</a> 不带www的域名301转向到带www域名上</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>Options +FollowSymlinks
+RewriteEngine on
+rewritecond %{http_host} ^111cn.net [nc]
+rewriterule ^(.*)$ https://domain.com /$1 [r=301,nc]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="不同域名301跳转方法"><a href="#不同域名301跳转方法" class="header-anchor">#</a> 不同域名301跳转方法</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>Options +FollowSymlinks
+RewriteEngine on
+rewritecond %{http_host} ^www.domain1.com [nc]
+rewriterule ^(.*)$ http://www.domain2.com/$1 [r=301,nc]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="对某个单页面进行301跳转"><a href="#对某个单页面进行301跳转" class="header-anchor">#</a> 对某个单页面进行301跳转</h2> <p>只需在PHP网页顶部输入下面的代码</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;?php
+Header(&quot;HTTP/1.1 301 Moved Permanently&quot;);
+Header(&quot;Location: https://domain.com &quot;);
+?&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="针对全站页面进行301跳转解决方法"><a href="#针对全站页面进行301跳转解决方法" class="header-anchor">#</a> 针对全站页面进行301跳转解决方法</h2> <p>1、建立301.php文件</p> <h3 id="代码一"><a href="#代码一" class="header-anchor">#</a> 代码一</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>?php
+$the_host = $_SERVER['HTTP_HOST'];//取得当前域名
+$the_url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';//判断地址后面部分
+$the_url = strtolower($the_url);//将英文字母转成小写
+if($the_url==&quot;/index.php&quot;)//判断是不是首页
+{
+$the_url=&quot;&quot;;//如果是首页，赋值为空
+}
+if($the_host !== 'https://domain.com')//如果域名不是带www的网址那么进行下面的301跳转
+{
+header('HTTP/1.1 301 Moved Permanently');//发出301头部
+header('Location:https://domain.com '.$the_url);//跳转到带www的网址
+}
+?&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="代码二"><a href="#代码二" class="header-anchor">#</a> 代码二</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;    
+&lt;head&gt;
+    &lt;meta charset=&quot;gb2312&quot;&gt;
+    &lt;title&gt;正在跳转中&lt;/title&gt;
+    &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=https://domain.com&quot; /&gt;
+    &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-transform&quot; /&gt;
+ &lt;/head&gt;    
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>这里 content=&quot;0; 的0代表时间，可以自己设置。</p> <h3 id="代码三"><a href="#代码三" class="header-anchor">#</a> 代码三</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;    
+&lt;head&gt;
+    &lt;meta charset=&quot;gb2312&quot;&gt;
+    &lt;title&gt;正在跳转中&lt;/title&gt;
+&lt;/head&gt;    
+&lt;body&gt;
+&lt;form name=loading&gt;
+　&lt;p align=center&gt; &lt;font color=&quot;#0066ff&quot; size=&quot;2&quot;&gt;正在进入，请稍等&lt;/font&gt;&lt;font color=&quot;#0066ff&quot; size=&quot;2&quot; face=&quot;Arial&quot;&gt;...&lt;/font&gt;
+　　&lt;input type=text name=chart size=46 style=&quot;font-family:Arial; font-weight:bolder; color:#0066ff; background-color:#fef4d9; padding:0px; border-style:none;&quot;&gt;　　
+　　&lt;input type=text name=percent size=47 style=&quot;color:#0066ff; text-align:center; border-width:medium; border-style:none;&quot;&gt;
+　　&lt;script&gt;　
+var bar=0　
+var line=&quot;||&quot;　
+var amount=&quot;||&quot;　
+count()　
+function count(){　
+bar=bar+2　
+amount =amount + line　
+document.loading.chart.value=amount　
+document.loading.percent.value=bar+&quot;%&quot;　
+if (bar&lt;99)　
+{setTimeout(&quot;count()&quot;,100);}　
+else　
+{window.location = &quot;https://domain.com&quot;;}　
+}&lt;/script&gt;
+　&lt;/p&gt;
+&lt;/form&gt;
+&lt;p align=&quot;center&quot;&gt; 如果您的浏览器不支持跳转,&lt;a style=&quot;text-decoration: none&quot; href=&quot;https://domain.com&quot;&gt;&lt;font color=&quot;#FF0000&quot;&gt;请点这里&lt;/font&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><h3 id="代码四"><a href="#代码四" class="header-anchor">#</a> 代码四</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+    &lt;title&gt;正在进入&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script language='javascript'&gt;document.location = https://domain.com''&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>2、在网页文件中调用301.php</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;?php include(&quot;301.php&quot;);?&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>将这个代码放到你所有网页的最前面。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Huramkin/Huramkin.github.io/edit/writing/source/_posts/301.md" target="_blank" rel="noopener noreferrer">Edit on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2020-04-23 04:27</span></div></footer> <!----> <footer class="content comment"><!----></footer></main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.f4bd1723.js" defer></script><script src="/assets/js/1.c441dcc6.js" defer></script><script src="/assets/js/12.cb8e609b.js" defer></script>
+  </body>
+</html>

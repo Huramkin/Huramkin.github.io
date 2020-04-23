@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>使用 Minio 建立对象存储 | Huramkin-intl</title>
+    <meta name="description" content="description">
+    <meta name="generator" content="VuePress 1.4.0">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="theme-color" content="#b19693">
+    
+    <link rel="preload" href="/assets/css/0.styles.e5fbe832.css" as="style"><link rel="preload" href="/assets/js/app.f4bd1723.js" as="script"><link rel="preload" href="/assets/js/1.c441dcc6.js" as="script"><link rel="preload" href="/assets/js/45.4fbf6dbc.js" as="script"><link rel="prefetch" href="/assets/js/10.2c5235c3.js"><link rel="prefetch" href="/assets/js/11.11337571.js"><link rel="prefetch" href="/assets/js/12.cb8e609b.js"><link rel="prefetch" href="/assets/js/13.e9269143.js"><link rel="prefetch" href="/assets/js/14.7cbb4320.js"><link rel="prefetch" href="/assets/js/15.b07d74b9.js"><link rel="prefetch" href="/assets/js/16.3a85775a.js"><link rel="prefetch" href="/assets/js/17.bde8be17.js"><link rel="prefetch" href="/assets/js/18.2124d597.js"><link rel="prefetch" href="/assets/js/19.7600404c.js"><link rel="prefetch" href="/assets/js/20.104ceb2a.js"><link rel="prefetch" href="/assets/js/21.fce6ed87.js"><link rel="prefetch" href="/assets/js/22.3cca2acf.js"><link rel="prefetch" href="/assets/js/23.daefeb88.js"><link rel="prefetch" href="/assets/js/24.596e6472.js"><link rel="prefetch" href="/assets/js/25.b0659066.js"><link rel="prefetch" href="/assets/js/26.eb2aeb17.js"><link rel="prefetch" href="/assets/js/27.71256071.js"><link rel="prefetch" href="/assets/js/28.9e33947f.js"><link rel="prefetch" href="/assets/js/29.f25a3ba4.js"><link rel="prefetch" href="/assets/js/30.87a476bf.js"><link rel="prefetch" href="/assets/js/31.31a4a6a4.js"><link rel="prefetch" href="/assets/js/32.fa0dfecf.js"><link rel="prefetch" href="/assets/js/33.2f964080.js"><link rel="prefetch" href="/assets/js/34.ddb41dde.js"><link rel="prefetch" href="/assets/js/35.242b87ea.js"><link rel="prefetch" href="/assets/js/36.fe309f50.js"><link rel="prefetch" href="/assets/js/37.a52b90bd.js"><link rel="prefetch" href="/assets/js/38.56341fc6.js"><link rel="prefetch" href="/assets/js/39.5ba03b94.js"><link rel="prefetch" href="/assets/js/4.1cdf2902.js"><link rel="prefetch" href="/assets/js/40.6d4e308d.js"><link rel="prefetch" href="/assets/js/41.1dd8b225.js"><link rel="prefetch" href="/assets/js/42.1cfefed7.js"><link rel="prefetch" href="/assets/js/43.7b0d2221.js"><link rel="prefetch" href="/assets/js/44.cf5b6d20.js"><link rel="prefetch" href="/assets/js/46.ac163137.js"><link rel="prefetch" href="/assets/js/47.7579333d.js"><link rel="prefetch" href="/assets/js/48.5b1d8d1d.js"><link rel="prefetch" href="/assets/js/49.b28fa845.js"><link rel="prefetch" href="/assets/js/5.bc4c94ae.js"><link rel="prefetch" href="/assets/js/50.a95cbd2a.js"><link rel="prefetch" href="/assets/js/51.513c212a.js"><link rel="prefetch" href="/assets/js/52.579a3c1d.js"><link rel="prefetch" href="/assets/js/53.a9cd95d2.js"><link rel="prefetch" href="/assets/js/54.a23ec312.js"><link rel="prefetch" href="/assets/js/55.91712b5d.js"><link rel="prefetch" href="/assets/js/56.edf7e88e.js"><link rel="prefetch" href="/assets/js/57.b04ca3c8.js"><link rel="prefetch" href="/assets/js/58.3dcdaf16.js"><link rel="prefetch" href="/assets/js/59.b90008a0.js"><link rel="prefetch" href="/assets/js/6.5fb917e3.js"><link rel="prefetch" href="/assets/js/60.3f206cbd.js"><link rel="prefetch" href="/assets/js/61.b7d93b44.js"><link rel="prefetch" href="/assets/js/62.c6c81296.js"><link rel="prefetch" href="/assets/js/63.98d324aa.js"><link rel="prefetch" href="/assets/js/64.cec92732.js"><link rel="prefetch" href="/assets/js/7.94c5af00.js"><link rel="prefetch" href="/assets/js/8.a1fa1de8.js"><link rel="prefetch" href="/assets/js/9.52a314c5.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.c17bdfc0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e5fbe832.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Huramkin-intl</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/post/" class="nav-link router-link-active">
+  归档
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link">
+  标签
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/post/" class="nav-link router-link-active">
+  归档
+</a></div><div class="nav-item"><a href="/tag/" class="nav-link">
+  标签
+</a></div><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div> <!----></nav>  <!----> </aside> <main class="page"><div class="content head"><h1 id="使用 Minio 建立对象存储">
+        使用 Minio 建立对象存储
+      </h1> <div class="tag-links">
+  tags:
+  <a href="/tag/#软件" class="tag">
+    软件
+  </a><a href="/tag/#服务器" class="tag">
+    服务器
+  </a><a href="/tag/#web" class="tag">
+    web
+  </a><a href="/tag/#docker" class="tag">
+    docker
+  </a><a href="/tag/#对象存储" class="tag">
+    对象存储
+  </a><a href="/tag/#Minio" class="tag">
+    Minio
+  </a></div></div> <div class="theme-default-content content__default"><p>MinIO 是一个开源对象存储服务,兼容亚马逊S3云存储服务接口，非常适合于存储如图片、备份数据和虚拟机镜像等大容量非结构化的数据，一个对象文件可以是任意大小，从几kb到最大5T不等。</p> <p>MinIO是一个非常轻量的服务,可以很简单的和其他应用的结合.</p> <h2 id="服务端的使用"><a href="#服务端的使用" class="header-anchor">#</a> 服务端的使用</h2> <h3 id="对接对象存储"><a href="#对接对象存储" class="header-anchor">#</a> 对接对象存储</h3> <p>minio可以对接azure,gcp,aws s3,阿里云,还有b2 cloud.</p> <p>这里以对接 b2 cloud 为例 , 在部署完成后即可访问 <code>http://[IP地址]:9000</code> 进行查看,上传等操作.</p> <p>登录网页的Access和Secret密钥,就是docker运行输入时的<code>MINIO_ACCESS_KEY</code> 和 <code>MINIO_SECRET_KEY</code> 的值</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>docker run -p 9000:9000 --name b2-s3 -e &quot;MINIO_ACCESS_KEY=b2_account_id&quot; -e &quot;MINIO_SECRET_KEY=b2_application_key&quot; minio/minio gateway b2
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code># 使用二进制文件进行对接
+export MINIO_ACCESS_KEY=b2_account_id
+export MINIO_SECRET_KEY=b2_application_key
+minio gateway b2
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="使用服务器空间作为存储"><a href="#使用服务器空间作为存储" class="header-anchor">#</a> 使用服务器空间作为存储</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>docker run -p 9000:9000 --name minio1 -v /mnt/data:/data -v /mnt/config:/root/.minio minio/minio server /data
+#Access和Secret密钥可以在容器日志中找到
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>docker run -p 9000:9000 --name minio1 -e &quot;MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE&quot; -e &quot;MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot; -v /mnt/data:/data -v /mnt/config:/root/.minio minio/minio server /data
+#可以将Access和Secret密钥设置为环境变量
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="客户端的使用"><a href="#客户端的使用" class="header-anchor">#</a> 客户端的使用</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>docker run -it --entrypoint=/bin/sh minio/mc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>客户端通过 docker 运行后即可使用 <code>mc config</code> 等命令</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>mc config host add &lt;ALIAS&gt; &lt;YOUR-S3-ENDPOINT&gt; &lt;YOUR-ACCESS-KEY&gt; &lt;YOUR-SECRET-KEY&gt; &lt;API-SIGNATURE&gt;  #&lt;ALIAS&gt;就是给你的云存储服务起了一个名字,类似于docker中的 ``--name=`` ,S3 endpoint,access key和secret key是你的云存储服务提供的。API签名是可选参数，默认情况下，它被设置为&quot;S3v4&quot;。
+mc config host add myb2 http://gateway-ip:9000 b2_account_id b2_application_key  #接入示例中的服务端
+mc config host add minio http://192.168.1.51 BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 S3v4 #接入minio服务端
+mc config host add s3 https://s3.amazonaws.com BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 S3v4 #接入aws s3
+mc config host add gcs  https://storage.googleapis.com BKIKJAA5BMMU2RHO6IBB V8f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 S3v2 #接入gcp Google云存储只支持旧版签名版本V2所以此处选择 S3v2
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>可用命令</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>ls       列出文件和文件夹。
+mb       创建一个存储桶或一个文件夹。
+cat      显示文件和对象内容。
+pipe     将一个STDIN重定向到一个对象或者文件或者STDOUT。
+share    生成用于共享的URL。
+cp       拷贝文件和对象。
+mirror   给存储桶和文件夹做镜像。
+find     基于参数查找文件。
+diff     对两个文件夹或者存储桶比较差异。
+rm       删除文件和对象。
+events   管理对象通知。
+watch    监听文件和对象的事件。
+policy   管理访问策略。
+session  为cp命令管理保存的会话。
+config   管理mc配置文件。
+update   检查软件更新。
+version  输出版本信息。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h2 id="参考"><a href="#参考" class="header-anchor">#</a> 参考</h2> <blockquote><p>https://docs.min.io/cn/minio-docker-quickstart-guide.html
+https://www.moerats.com/archives/643/
+https://theo.im/blog/2017/10/17/use-minio-with-aliyun-oss/ https://archive.fo/AFGbN
+https://github.com/minio/minio/pull/5103
+https://github.com/minio/minio/blob/master/docs/gateway/b2.md</p></blockquote></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Huramkin/Huramkin.github.io/edit/writing/source/_posts/minio1.md" target="_blank" rel="noopener noreferrer">Edit on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2020-04-23 04:27</span></div></footer> <!----> <footer class="content comment"><!----></footer></main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.f4bd1723.js" defer></script><script src="/assets/js/1.c441dcc6.js" defer></script><script src="/assets/js/45.4fbf6dbc.js" defer></script>
+  </body>
+</html>
