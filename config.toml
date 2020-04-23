@@ -11,7 +11,7 @@ PygmentsStyle = "monokai"
 rssLimit  = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 
-# googleAnalytics = ""
+ googleAnalytics = "UA-104376500-1"
 # disqusShortname = ""
 
 archetypeDir = "archetypes"
@@ -58,7 +58,7 @@ disableHugoGeneratorInject = false
   keywords = ""
   images = [""]
 
-  homeSubtitle = "Hello Friend NG"
+  homeSubtitle = "A simple log"
 
   # Prefix of link to the git commit detail page. GitInfo must be enabled.
   # gitUrl = ""
@@ -93,30 +93,30 @@ disableHugoGeneratorInject = false
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
     # Set to a valid CSS color to change the cursor in the logo.
-    # logoCursorColor    = "#67a2c9"
+    # logoCursorColor    = "#55ff55"
     # Set to a valid CSS time value to change the animation duration, "0s" to disable.
     # logoCursorAnimate  = "2s"
 
   # Social icons
-  [[params.social]]
-    name = "twitter"
-    url  = "https://twitter.com/"
+  #[[params.social]]
+  #  name = "twitter"
+  #  url  = "https://twitter.com/"
 
-  [[params.social]]
-    name = "email"
-    url  = "mailto:nobody@example.com"
+  #[[params.social]]
+  #  name = "email"
+  #  url  = "mailto:nobody@example.com"
 
-  [[params.social]]
-    name = "github"
-    url  = "https://github.com/"
+  #[[params.social]]
+  #  name = "github"
+  #  url  = "https://github.com/"
 
-  [[params.social]]
-    name = "linkedin"
-    url  = "https://www.linkedin.com/"
+  #[[params.social]]
+  #  name = "linkedin"
+  #  url  = "https://www.linkedin.com/"
 
-  [[params.social]]
-    name = "stackoverflow"
-    url  = "https://www.stackoverflow.com/"
+  #[[params.social]]
+  #  name = "stackoverflow"
+  #  url  = "https://www.stackoverflow.com/"
 
 [languages]
   [languages.en]
