@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"intl.huramkin.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="301跳转代码,还有使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP301跳转代码">
+<meta property="og:url" content="https://intl.huramkin.com/2018/08/20/301/index.html">
+<meta property="og:site_name" content="Huramkin Recording">
+<meta property="og:description" content="301跳转代码,还有使用方法">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-16T21:22:11.629Z">
+<meta property="article:author" content="Huramkin">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Server">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://intl.huramkin.com/2018/08/20/301/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'cn'
+  };
+</script>
+
+  <title>PHP301跳转代码 | Huramkin Recording</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Huramkin Recording</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2018/08/20/301/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP301跳转代码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-20 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-20T00:00:00+08:00">2018-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-17 05:22:11" itemprop="dateModified" datetime="2020-08-17T05:22:11+08:00">2020-08-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>301跳转代码,还有使用方法</p>
+<a id="more"></a>
+
+
+<h2 id="不带www的域名301转向到带www域名上"><a href="#不带www的域名301转向到带www域名上" class="headerlink" title="不带www的域名301转向到带www域名上"></a>不带www的域名301转向到带www域名上</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Options +FollowSymlinks</span><br><span class="line">RewriteEngine on</span><br><span class="line">rewritecond %&#123;http_host&#125; ^111cn.net [nc]</span><br><span class="line">rewriterule ^(.*)$ https:&#x2F;&#x2F;domain.com &#x2F;$1 [r&#x3D;301,nc]</span><br></pre></td></tr></table></figure>
+<h2 id="不同域名301跳转方法"><a href="#不同域名301跳转方法" class="headerlink" title="不同域名301跳转方法"></a>不同域名301跳转方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Options +FollowSymlinks</span><br><span class="line">RewriteEngine on</span><br><span class="line">rewritecond %&#123;http_host&#125; ^www.domain1.com [nc]</span><br><span class="line">rewriterule ^(.*)$ http:&#x2F;&#x2F;www.domain2.com&#x2F;$1 [r&#x3D;301,nc]</span><br></pre></td></tr></table></figure>
+
+<h2 id="对某个单页面进行301跳转"><a href="#对某个单页面进行301跳转" class="headerlink" title="对某个单页面进行301跳转"></a>对某个单页面进行301跳转</h2><p>只需在PHP网页顶部输入下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">Header(&quot;HTTP&#x2F;1.1 301 Moved Permanently&quot;);</span><br><span class="line">Header(&quot;Location: https:&#x2F;&#x2F;domain.com &quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="针对全站页面进行301跳转解决方法"><a href="#针对全站页面进行301跳转解决方法" class="headerlink" title="针对全站页面进行301跳转解决方法"></a>针对全站页面进行301跳转解决方法</h2><p>1、建立301.php文件</p>
+<h3 id="代码一"><a href="#代码一" class="headerlink" title="代码一"></a>代码一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">?php</span><br><span class="line">$the_host &#x3D; $_SERVER[&#39;HTTP_HOST&#39;];&#x2F;&#x2F;取得当前域名</span><br><span class="line">$the_url &#x3D; isset($_SERVER[&#39;REQUEST_URI&#39;]) ? $_SERVER[&#39;REQUEST_URI&#39;] : &#39;&#39;;&#x2F;&#x2F;判断地址后面部分</span><br><span class="line">$the_url &#x3D; strtolower($the_url);&#x2F;&#x2F;将英文字母转成小写</span><br><span class="line">if($the_url&#x3D;&#x3D;&quot;&#x2F;index.php&quot;)&#x2F;&#x2F;判断是不是首页</span><br><span class="line">&#123;</span><br><span class="line">$the_url&#x3D;&quot;&quot;;&#x2F;&#x2F;如果是首页，赋值为空</span><br><span class="line">&#125;</span><br><span class="line">if($the_host !&#x3D;&#x3D; &#39;https:&#x2F;&#x2F;domain.com&#39;)&#x2F;&#x2F;如果域名不是带www的网址那么进行下面的301跳转</span><br><span class="line">&#123;</span><br><span class="line">header(&#39;HTTP&#x2F;1.1 301 Moved Permanently&#39;);&#x2F;&#x2F;发出301头部</span><br><span class="line">header(&#39;Location:https:&#x2F;&#x2F;domain.com &#39;.$the_url);&#x2F;&#x2F;跳转到带www的网址</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;    </span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;gb2312&quot;&gt;</span><br><span class="line">    &lt;title&gt;正在跳转中&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;refresh&quot; content&#x3D;&quot;0;url&#x3D;https:&#x2F;&#x2F;domain.com&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;Cache-Control&quot; content&#x3D;&quot;no-transform&quot; &#x2F;&gt;</span><br><span class="line"> &lt;&#x2F;head&gt;    </span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>这里 content=”0; 的0代表时间，可以自己设置。</p>
+<h3 id="代码三"><a href="#代码三" class="headerlink" title="代码三"></a>代码三</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;    </span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;gb2312&quot;&gt;</span><br><span class="line">    &lt;title&gt;正在跳转中&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;    </span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form name&#x3D;loading&gt;</span><br><span class="line">　&lt;p align&#x3D;center&gt; &lt;font color&#x3D;&quot;#0066ff&quot; size&#x3D;&quot;2&quot;&gt;正在进入，请稍等&lt;&#x2F;font&gt;&lt;font color&#x3D;&quot;#0066ff&quot; size&#x3D;&quot;2&quot; face&#x3D;&quot;Arial&quot;&gt;...&lt;&#x2F;font&gt;</span><br><span class="line">　　&lt;input type&#x3D;text name&#x3D;chart size&#x3D;46 style&#x3D;&quot;font-family:Arial; font-weight:bolder; color:#0066ff; background-color:#fef4d9; padding:0px; border-style:none;&quot;&gt;　　</span><br><span class="line">　　&lt;input type&#x3D;text name&#x3D;percent size&#x3D;47 style&#x3D;&quot;color:#0066ff; text-align:center; border-width:medium; border-style:none;&quot;&gt;</span><br><span class="line">　　&lt;script&gt;　</span><br><span class="line">var bar&#x3D;0　</span><br><span class="line">var line&#x3D;&quot;||&quot;　</span><br><span class="line">var amount&#x3D;&quot;||&quot;　</span><br><span class="line">count()　</span><br><span class="line">function count()&#123;　</span><br><span class="line">bar&#x3D;bar+2　</span><br><span class="line">amount &#x3D;amount + line　</span><br><span class="line">document.loading.chart.value&#x3D;amount　</span><br><span class="line">document.loading.percent.value&#x3D;bar+&quot;%&quot;　</span><br><span class="line">if (bar&lt;99)　</span><br><span class="line">&#123;setTimeout(&quot;count()&quot;,100);&#125;　</span><br><span class="line">else　</span><br><span class="line">&#123;window.location &#x3D; &quot;https:&#x2F;&#x2F;domain.com&quot;;&#125;　</span><br><span class="line">&#125;&lt;&#x2F;script&gt;</span><br><span class="line">　&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;p align&#x3D;&quot;center&quot;&gt; 如果您的浏览器不支持跳转,&lt;a style&#x3D;&quot;text-decoration: none&quot; href&#x3D;&quot;https:&#x2F;&#x2F;domain.com&quot;&gt;&lt;font color&#x3D;&quot;#FF0000&quot;&gt;请点这里&lt;&#x2F;font&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码四"><a href="#代码四" class="headerlink" title="代码四"></a>代码四</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;正在进入&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script language&#x3D;&#39;javascript&#39;&gt;document.location &#x3D; https:&#x2F;&#x2F;domain.com&#39;&#39;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2、在网页文件中调用301.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php include(&quot;301.php&quot;);?&gt;</span><br></pre></td></tr></table></figure>
+<p>将这个代码放到你所有网页的最前面。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/Server/" rel="tag"># Server</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/18/pl1/" rel="prev" title="主机面板推荐">
+      <i class="fa fa-chevron-left"></i> 主机面板推荐
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/01/ps1/" rel="next" title="ps命令常见用法">
+      ps命令常见用法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%B8%A6www%E7%9A%84%E5%9F%9F%E5%90%8D301%E8%BD%AC%E5%90%91%E5%88%B0%E5%B8%A6www%E5%9F%9F%E5%90%8D%E4%B8%8A"><span class="nav-number">1.</span> <span class="nav-text">不带www的域名301转向到带www域名上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E5%9F%9F%E5%90%8D301%E8%B7%B3%E8%BD%AC%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">不同域名301跳转方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%9F%90%E4%B8%AA%E5%8D%95%E9%A1%B5%E9%9D%A2%E8%BF%9B%E8%A1%8C301%E8%B7%B3%E8%BD%AC"><span class="nav-number">3.</span> <span class="nav-text">对某个单页面进行301跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E5%85%A8%E7%AB%99%E9%A1%B5%E9%9D%A2%E8%BF%9B%E8%A1%8C301%E8%B7%B3%E8%BD%AC%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">针对全站页面进行301跳转解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%B8%80"><span class="nav-number">4.1.</span> <span class="nav-text">代码一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BA%8C"><span class="nav-number">4.2.</span> <span class="nav-text">代码二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%B8%89"><span class="nav-number">4.3.</span> <span class="nav-text">代码三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9B%9B"><span class="nav-number">4.4.</span> <span class="nav-text">代码四</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Huramkin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Huramkin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

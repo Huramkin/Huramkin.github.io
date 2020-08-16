@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"intl.huramkin.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="平时会使用到一些动态ip主机,或者是有自己的NAS,都需要使用DDNS 设置DDNS如果有自己的域名就很容易,国内的阿里腾讯的云服务,海外有CF和HE等的解析服务,都可以用简单的脚本实现ddns 但是有些时候没有充裕的域名资源进行ddns设置,这时就需要用到免费的ddns服务了,这里记录的是dynu.com ddns的使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用dynu免费ddns的教程">
+<meta property="og:url" content="https://intl.huramkin.com/2019/04/28/dynuddns/index.html">
+<meta property="og:site_name" content="Huramkin Recording">
+<meta property="og:description" content="平时会使用到一些动态ip主机,或者是有自己的NAS,都需要使用DDNS 设置DDNS如果有自己的域名就很容易,国内的阿里腾讯的云服务,海外有CF和HE等的解析服务,都可以用简单的脚本实现ddns 但是有些时候没有充裕的域名资源进行ddns设置,这时就需要用到免费的ddns服务了,这里记录的是dynu.com ddns的使用方法">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-04-28T15:50:10.000Z">
+<meta property="article:modified_time" content="2020-08-16T21:22:11.629Z">
+<meta property="article:author" content="Huramkin">
+<meta property="article:tag" content="软件">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="dns">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://intl.huramkin.com/2019/04/28/dynuddns/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'cn'
+  };
+</script>
+
+  <title>使用dynu免费ddns的教程 | Huramkin Recording</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Huramkin Recording</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/04/28/dynuddns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用dynu免费ddns的教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-28 23:50:10" itemprop="dateCreated datePublished" datetime="2019-04-28T23:50:10+08:00">2019-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-17 05:22:11" itemprop="dateModified" datetime="2020-08-17T05:22:11+08:00">2020-08-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>平时会使用到一些动态ip主机,或者是有自己的NAS,都需要使用DDNS</p>
+<p>设置DDNS如果有自己的域名就很容易,国内的阿里腾讯的云服务,海外有CF和HE等的解析服务,都可以用简单的脚本实现ddns</p>
+<p>但是有些时候没有充裕的域名资源进行ddns设置,这时就需要用到免费的ddns服务了,这里记录的是dynu.com ddns的使用方法</p>
+<a id="more"></a>
+
+
+<h2 id="DDNS使用方法"><a href="#DDNS使用方法" class="headerlink" title="DDNS使用方法"></a>DDNS使用方法</h2><p>首先需要注册一个<a target="_blank" rel="noopener" href="https://www.dynu.com/en-US/">https://www.dynu.com/en-US/</a> 的账号,打开动态域名解析服务添加一个域名,此时ipv4地址和位置名(Location)</p>
+<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>Red Hat 系列系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh https:&#x2F;&#x2F;www.dynu.com&#x2F;support&#x2F;downloadfile&#x2F;30 </span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu 16</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL&#x3D;&#39;https:&#x2F;&#x2F;www.dynu.com&#x2F;support&#x2F;downloadfile&#x2F;31&#39;; FILE&#x3D;&#96;mktemp&#96;; wget &quot;$URL&quot; -qO $FILE &amp;&amp; sudo dpkg -i $FILE; rm $FILE</span><br></pre></td></tr></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>配置文件位置 <code>vi /etc/dynuiuc/dynuiuc.conf</code></p>
+<p>配置文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">username YOURUSERNAME  # Your account username.(你的用户名)</span><br><span class="line">password YOURPASSWORD  # Your account password or IP update password. (你的用户密码或者IP更新密码)</span><br><span class="line">location LOCATIONNAME  # Can be left empty. Location name can be assigned to hostnames in the control panel.(所使用域名的位置名,这里的位置名就是面板中的 Location )</span><br><span class="line">ipv4 true              # Can be true or false.(开启更新ipv4地址)</span><br><span class="line">ipv6 false             # Can be true or false.(关闭更新ipv6地址)</span><br><span class="line">pollinterval 300       # IP update interval in seconds. Minimum is 120.(IP更新时间,最小120秒)</span><br><span class="line">debug false            # Can be true or false</span><br><span class="line">quiet true             # Can be true or false</span><br><span class="line">&#96;&#96;&#96;         </span><br><span class="line"></span><br><span class="line">示例配置</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">username webtester</span><br><span class="line">password somepassword</span><br><span class="line">location Work</span><br><span class="line">ipv4 true</span><br><span class="line">ipv6 false</span><br><span class="line">pollinterval 300</span><br><span class="line">debug false</span><br><span class="line">quiet true</span><br></pre></td></tr></table></figure>
+
+<p>编辑并保存好配置文件后,需要重启服务,命令为 <code>systemctl restart dynuiuc.service</code>         </p>
+<p>配置定时执行,以便及时更新IP地址,运行命令 <code>crontab -e</code></p>
+<p>在输入界面写入下面这行并保存,这里是每十分钟重启一次服务,以更新IP地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;10 * * * * systemctl restart dynuiuc.service</span><br></pre></td></tr></table></figure>
+
+<p>管理服务使用的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start dynuiuc.service   #启动服务</span><br><span class="line">systemctl stop dynuiuc.service    #停止服务</span><br><span class="line">systemctl restart dynuiuc.service #重启服务</span><br><span class="line">systemctl status dynuiuc.service  #服务状态</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看和截断日志文件的方法"><a href="#查看和截断日志文件的方法" class="headerlink" title="查看和截断日志文件的方法"></a>查看和截断日志文件的方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看实时日志: tail -f &#x2F;var&#x2F;log&#x2F;dynuiuc.log</span><br><span class="line">查看日志文件: cat &#x2F;var&#x2F;log&#x2F;dynuiuc.log</span><br><span class="line">截断日志文件: cat &#x2F;dev&#x2F;null &gt; &#x2F;var&#x2F;log&#x2F;dynuiuc.log</span><br><span class="line">查看服务状态: systemctl status dynuiuc.service -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><p>Debian 系统安装 DDClient</p>
+<p>更换时区并对时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;y&quot; |cp &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime </span><br><span class="line">apt-get install -y ntpdate;ntpdate cn.pool.ntp.org</span><br><span class="line">date</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install ddclient</span><br></pre></td></tr></table></figure>
+
+<p>跟随安装提示,一步一步输入信息</p>
+<p>如果需要修改可以直接修改配置文件</p>
+<p>DDClient配置文件位于 <code>/etc/ddclient.conf</code></p>
+<p>测试(检查输出的公网IP是否正确):<code>ddclient -daemon=0 -debug -verbose -noquiet</code></p>
+<p>开启进程守护:<code>/usr/sbin/ddclient -daemon 120 -syslog</code></p>
+<p>默认情况下,本机记录文件中的IP不变,软件就不会更新IP,可以通过自己设置定时任务的方式修改更新时间<br>设置定时任务,运行命令 <code>crontab -e</code>,输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;5 * * * * rm &#x2F;var&#x2F;cache&#x2F;ddclient&#x2F;*.* # 每5分钟删除IP更新缓存记录</span><br><span class="line">*&#x2F;5 * * * * ddclient # 每5分钟更新并同步IP记录</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法3"><a href="#方法3" class="headerlink" title="方法3"></a>方法3</h3><p>首先,需要安装curl</p>
+<p>然后运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;http:&#x2F;&#x2F;api.dynu.com&#x2F;nic&#x2F;update?hostname&#x3D;example.ddnsfree.com&amp;password&#x3D;passwd&quot;</span><br></pre></td></tr></table></figure>
+
+<p>把 <code>example.ddnsfree.com</code> 改为刚申请的域名，<code>passwd</code> 改为你账户的密码,然后执行。运行需要一点时间,需要等待.</p>
+<p>直到输出 <code>good xxx.xxx.xxx.xxx</code>,ddns更新成功</p>
+<p>输入命令 <code>crontab -e</code></p>
+<p>在接下来的界面输入下面的配置并保存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;1 * * * * curl &quot;http:&#x2F;&#x2F;api.dynu.com&#x2F;nic&#x2F;update?hostname&#x3D;example.ddnsfree.com&amp;password&#x3D;passwd&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>安装crontab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># centos</span><br><span class="line">yum install vixie-cron</span><br><span class="line">yum install crontabs</span><br><span class="line">-----------------</span><br><span class="line"># Ubuntu</span><br><span class="line">apt-get install cron</span><br></pre></td></tr></table></figure>
+
+<p>查看计划任务状态,出现<code>Active Running</code>说明定时任务设置成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Ubuntu</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;cron status</span><br><span class="line"># centos</span><br><span class="line">&#x2F;bin&#x2F;systemctl status crond.service </span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.dynu.com/DynamicDNS/IPUpdateClient/Linux">https://www.dynu.com/DynamicDNS/IPUpdateClient/Linux</a><br><a target="_blank" rel="noopener" href="https://www.dynu.com/DynamicDNS/IPUpdateClient/DDClient">https://www.dynu.com/DynamicDNS/IPUpdateClient/DDClient</a><br><a target="_blank" rel="noopener" href="https://www.pqs.pw/knowledgebase/9/DDNSdynuTTL30.html">https://www.pqs.pw/knowledgebase/9/DDNSdynuTTL30.html</a><br><a target="_blank" rel="noopener" href="https://archive.fo/2Utuw">https://archive.fo/2Utuw</a><br><a target="_blank" rel="noopener" href="https://www.eaavps.com/253.html">https://www.eaavps.com/253.html</a><br><a target="_blank" rel="noopener" href="https://archive.fo/ZtEOE">https://archive.fo/ZtEOE</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E4%BB%B6/" rel="tag"># 软件</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+              <a href="/tags/dns/" rel="tag"># dns</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/16/xware/" rel="prev" title="在服务器上部署迅雷远程下载">
+      <i class="fa fa-chevron-left"></i> 在服务器上部署迅雷远程下载
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/02/lsfree/" rel="next" title="LiteSpeed Web Server 免费企业版">
+      LiteSpeed Web Server 免费企业版 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDNS%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">DDNS使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951"><span class="nav-number">1.1.</span> <span class="nav-text">方法1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%92%8C%E6%88%AA%E6%96%AD%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">查看和截断日志文件的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%952"><span class="nav-number">1.2.</span> <span class="nav-text">方法2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%953"><span class="nav-number">1.3.</span> <span class="nav-text">方法3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Huramkin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Huramkin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
