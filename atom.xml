@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Huramkin Recording</title>
+  <icon>https://intl.huramkin.com/icon.png</icon>
+  
+  <link href="https://intl.huramkin.com/atom.xml" rel="self"/>
+  
+  <link href="https://intl.huramkin.com/"/>
+  <updated>2020-08-16T22:24:30.642Z</updated>
+  <id>https://intl.huramkin.com/</id>
+  
+  <author>
+    <name>Huramkin</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RouterOS 基础问题</title>
+    <link href="https://intl.huramkin.com/2019/10/02/rosstart/"/>
+    <id>https://intl.huramkin.com/2019/10/02/rosstart/</id>
+    <published>2019-10-01T16:00:00.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;RouterOS是一种路由操作系统,带有配套的GUI操作软件,也可以使用命令直接操作,功能齐全,使用方便.由于功能繁多需要从最基本的连接到互联网开始做起,这里记录了使用过程中的一些基础问题&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Server" scheme="https://intl.huramkin.com/categories/Server/"/>
+    
+    
+    <category term="Server" scheme="https://intl.huramkin.com/tags/Server/"/>
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="Linux" scheme="https://intl.huramkin.com/tags/Linux/"/>
+    
+    <category term="软路由" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/"/>
+    
+    <category term="RouterOS" scheme="https://intl.huramkin.com/tags/RouterOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>轻量好用的笔记软件</title>
+    <link href="https://intl.huramkin.com/2019/09/19/note1/"/>
+    <id>https://intl.huramkin.com/2019/09/19/note1/</id>
+    <published>2019-09-19T11:21:45.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;除去常用的OneNote,EverNote等热门的笔记应用外,还有轻量好用各具特色的笔记软件,比如可以将数据掌握在自己手中,自己定制主题,Markdown支持,好用的代码片段功能等&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="免费" scheme="https://intl.huramkin.com/tags/%E5%85%8D%E8%B4%B9/"/>
+    
+    <category term="隐私保护" scheme="https://intl.huramkin.com/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/"/>
+    
+    <category term="记录" scheme="https://intl.huramkin.com/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+    <category term="服务" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1/"/>
+    
+    <category term="笔记软件" scheme="https://intl.huramkin.com/tags/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>局域网文件传输软件</title>
+    <link href="https://intl.huramkin.com/2019/09/12/btr/"/>
+    <id>https://intl.huramkin.com/2019/09/12/btr/</id>
+    <published>2019-09-12T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;平时会遇到内网设备间传输数据的需求,搜了许多的软件,记录以下这些&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="局域网" scheme="https://intl.huramkin.com/tags/%E5%B1%80%E5%9F%9F%E7%BD%91/"/>
+    
+    <category term="文件传输" scheme="https://intl.huramkin.com/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/"/>
+    
+    <category term="记录" scheme="https://intl.huramkin.com/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用docker运行安卓虚拟机</title>
+    <link href="https://intl.huramkin.com/2019/09/08/androidocker/"/>
+    <id>https://intl.huramkin.com/2019/09/08/androidocker/</id>
+    <published>2019-09-08T11:21:45.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;也许可以拿来搞云手机…&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="安卓" scheme="https://intl.huramkin.com/tags/%E5%AE%89%E5%8D%93/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="虚拟机" scheme="https://intl.huramkin.com/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>acme.sh 的 docker 部署使用方法</title>
+    <link href="https://intl.huramkin.com/2019/09/05/acme/"/>
+    <id>https://intl.huramkin.com/2019/09/05/acme/</id>
+    <published>2019-09-05T11:21:45.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;用acme.sh获取免费SSL证书&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="SSL" scheme="https://intl.huramkin.com/tags/SSL/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="域名" scheme="https://intl.huramkin.com/tags/%E5%9F%9F%E5%90%8D/"/>
+    
+    <category term="免费" scheme="https://intl.huramkin.com/tags/%E5%85%8D%E8%B4%B9/"/>
+    
+    <category term="隐私保护" scheme="https://intl.huramkin.com/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>免费的SSL证书申请</title>
+    <link href="https://intl.huramkin.com/2019/08/22/freessl1/"/>
+    <id>https://intl.huramkin.com/2019/08/22/freessl1/</id>
+    <published>2019-08-22T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;购买ssl证书价格不菲,但是也有很多免费的证书,足够个人站长使用&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="SSL" scheme="https://intl.huramkin.com/tags/SSL/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网盘程序</title>
+    <link href="https://intl.huramkin.com/2019/08/21/cloudstpr/"/>
+    <id>https://intl.huramkin.com/2019/08/21/cloudstpr/</id>
+    <published>2019-08-21T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;一些简单好用的自建网盘程序&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>连接或本地挂载网盘的工具</title>
+    <link href="https://intl.huramkin.com/2019/08/20/mount1/"/>
+    <id>https://intl.huramkin.com/2019/08/20/mount1/</id>
+    <published>2019-08-20T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;使用支持挂载或连接多个网盘的第三方程序可以避免同时安装多个网盘客户端的情况&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="对象存储" scheme="https://intl.huramkin.com/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="存储" scheme="https://intl.huramkin.com/tags/%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="网盘" scheme="https://intl.huramkin.com/tags/%E7%BD%91%E7%9B%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用docker部署caddy</title>
+    <link href="https://intl.huramkin.com/2019/08/19/caddy2/"/>
+    <id>https://intl.huramkin.com/2019/08/19/caddy2/</id>
+    <published>2019-08-19T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;使用官网脚本和docker两种方式部署caddy服务&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+    <category term="caddy" scheme="https://intl.huramkin.com/tags/caddy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 Minio 建立对象存储</title>
+    <link href="https://intl.huramkin.com/2019/08/18/minio1/"/>
+    <id>https://intl.huramkin.com/2019/08/18/minio1/</id>
+    <published>2019-08-18T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;MinIO 是一个开源对象存储服务,兼容亚马逊S3云存储服务接口，非常适合于存储如图片、备份数据和虚拟机镜像等大容量非结构化的数据，一个对象文件可以是任意大小，从几kb到最大5T不等。&lt;/p&gt;
+&lt;p&gt;MinIO是一个非常轻量的服务,可以很简单的和其他应用的结合.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+    <category term="对象存储" scheme="https://intl.huramkin.com/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    <category term="Minio" scheme="https://intl.huramkin.com/tags/Minio/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BBR脚本汇总</title>
+    <link href="https://intl.huramkin.com/2019/08/17/bbr1/"/>
+    <id>https://intl.huramkin.com/2019/08/17/bbr1/</id>
+    <published>2019-08-17T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在一些特殊的环境,BBR原版并不能发挥出最佳作用,这里是部署bbrplus的脚本&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="拥塞控制" scheme="https://intl.huramkin.com/tags/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/"/>
+    
+    <category term="脚本" scheme="https://intl.huramkin.com/tags/%E8%84%9A%E6%9C%AC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chocolatey 包管理器的安装与使用</title>
+    <link href="https://intl.huramkin.com/2019/08/16/Chocolatey1/"/>
+    <id>https://intl.huramkin.com/2019/08/16/Chocolatey1/</id>
+    <published>2019-08-16T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Chocolatey 是用在Windows上的包管理器&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="Windows" scheme="https://intl.huramkin.com/tags/Windows/"/>
+    
+    <category term="包管理器" scheme="https://intl.huramkin.com/tags/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>静态博客网站生成框架</title>
+    <link href="https://intl.huramkin.com/2019/08/16/blogf1/"/>
+    <id>https://intl.huramkin.com/2019/08/16/blogf1/</id>
+    <published>2019-08-16T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;因为使用hexo作为博客,对其他的框架不是很了解,这里仅做记录准备以后换个人网站框架时候用&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+    <category term="静态网页" scheme="https://intl.huramkin.com/tags/%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Crontab</title>
+    <link href="https://intl.huramkin.com/2019/08/15/cron1/"/>
+    <id>https://intl.huramkin.com/2019/08/15/cron1/</id>
+    <published>2019-08-14T20:00:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;记录一下常用的crontab命令,如果实在搞不明白可以使用cron表达式生成工具&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="定时任务" scheme="https://intl.huramkin.com/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用Dropbox等云存储搭建网站</title>
+    <link href="https://intl.huramkin.com/2019/08/11/dr4hs/"/>
+    <id>https://intl.huramkin.com/2019/08/11/dr4hs/</id>
+    <published>2019-08-10T18:22:01.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;低成本搭建网站有很多方法,比如gitpage或者云服务商提供免费福利,这里列出一些利用同步盘建站的服务&lt;/p&gt;
+&lt;p&gt;还有一些其他的免费架站方案&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Service" scheme="https://intl.huramkin.com/categories/Service/"/>
+    
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+    <category term="Dropbox" scheme="https://intl.huramkin.com/tags/Dropbox/"/>
+    
+    <category term="建站" scheme="https://intl.huramkin.com/tags/%E5%BB%BA%E7%AB%99/"/>
+    
+    <category term="云存储" scheme="https://intl.huramkin.com/tags/%E4%BA%91%E5%AD%98%E5%82%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>免费使用 IBM Cloud Lite</title>
+    <link href="https://intl.huramkin.com/2019/08/10/freeibm/"/>
+    <id>https://intl.huramkin.com/2019/08/10/freeibm/</id>
+    <published>2019-08-10T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;免费提供的云服务很多,比如GCP,这里介绍的是IBM Cloud&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Cloud" scheme="https://intl.huramkin.com/categories/Cloud/"/>
+    
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+    <category term="云服务" scheme="https://intl.huramkin.com/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows 好用的终端工具</title>
+    <link href="https://intl.huramkin.com/2019/08/10/term1/"/>
+    <id>https://intl.huramkin.com/2019/08/10/term1/</id>
+    <published>2019-08-10T13:27:10.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Windows 已经原生支持 OpenSSH 但是第三方的软件功能更多或者更加美观&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="docker" scheme="https://intl.huramkin.com/tags/docker/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="web" scheme="https://intl.huramkin.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tcping的使用</title>
+    <link href="https://intl.huramkin.com/2019/07/21/tcping1/"/>
+    <id>https://intl.huramkin.com/2019/07/21/tcping1/</id>
+    <published>2019-07-21T11:21:45.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;有些服务器禁止ping,比如&lt;code&gt;AWS&lt;/code&gt;的&lt;code&gt;LightSail&lt;/code&gt;.或者是网络出现了某些奇妙的问题,比如&lt;code&gt;ping&lt;/code&gt;得通但就是连不上&lt;code&gt;tcp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;为了能够正常测试服务器的可用性需要一种替代方案,这种方案就是使用&lt;code&gt;tcping&lt;/code&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="随笔" scheme="https://intl.huramkin.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="测试" scheme="https://intl.huramkin.com/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+    <category term="ping" scheme="https://intl.huramkin.com/tags/ping/"/>
+    
+    <category term="tcping" scheme="https://intl.huramkin.com/tags/tcping/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gmail 别名的使用</title>
+    <link href="https://intl.huramkin.com/2019/06/02/gamil1/"/>
+    <id>https://intl.huramkin.com/2019/06/02/gamil1/</id>
+    <published>2019-06-02T06:29:13.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;使用Gmail的时候,如果能利用好过滤器和别名,就可以把不重要的邮件筛选到指定的分类,避免不重要的邮件推送通知&lt;/p&gt;
+&lt;p&gt;还可以在不同网站注册用不同的别名,还可以在同一网站用不同的别名注册小号&lt;/p&gt;
+&lt;p&gt;如果你发现某个别名经常收到垃圾邮件,也就证明你的信息被使用这个别名注册网站卖掉或者泄露了&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="免费" scheme="https://intl.huramkin.com/tags/%E5%85%8D%E8%B4%B9/"/>
+    
+    <category term="隐私保护" scheme="https://intl.huramkin.com/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/"/>
+    
+    <category term="Gmail" scheme="https://intl.huramkin.com/tags/Gmail/"/>
+    
+    <category term="服务" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1/"/>
+    
+    <category term="电子邮件" scheme="https://intl.huramkin.com/tags/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LiteSpeed Web Server 免费企业版</title>
+    <link href="https://intl.huramkin.com/2019/05/02/lsfree/"/>
+    <id>https://intl.huramkin.com/2019/05/02/lsfree/</id>
+    <published>2019-05-02T03:25:53.000Z</published>
+    <updated>2020-08-16T22:24:30.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;免费并且开源的 OpenLiteSpeed 对于个人用户已经足够，企业版的 LiteSpeed Web Server 功能更多,官方提供了试用机会并且还是长期免费,虽然有一些限制,但是对于尝试已经足够&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://intl.huramkin.com/categories/Tools/"/>
+    
+    
+    <category term="Web" scheme="https://intl.huramkin.com/tags/Web/"/>
+    
+    <category term="软件" scheme="https://intl.huramkin.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+    <category term="免费" scheme="https://intl.huramkin.com/tags/%E5%85%8D%E8%B4%B9/"/>
+    
+    <category term="服务器" scheme="https://intl.huramkin.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,3269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>PHP301跳转代码</title>
+    <url>/2018/08/20/301/</url>
+    <content><![CDATA[<p>301跳转代码,还有使用方法</p>
+<a id="more"></a>
+
+
+<h2 id="不带www的域名301转向到带www域名上"><a href="#不带www的域名301转向到带www域名上" class="headerlink" title="不带www的域名301转向到带www域名上"></a>不带www的域名301转向到带www域名上</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Options +FollowSymlinks</span><br><span class="line">RewriteEngine on</span><br><span class="line">rewritecond %&#123;http_host&#125; ^111cn.net [nc]</span><br><span class="line">rewriterule ^(.*)$ https:&#x2F;&#x2F;domain.com &#x2F;$1 [r&#x3D;301,nc]</span><br></pre></td></tr></table></figure>
+<h2 id="不同域名301跳转方法"><a href="#不同域名301跳转方法" class="headerlink" title="不同域名301跳转方法"></a>不同域名301跳转方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Options +FollowSymlinks</span><br><span class="line">RewriteEngine on</span><br><span class="line">rewritecond %&#123;http_host&#125; ^www.domain1.com [nc]</span><br><span class="line">rewriterule ^(.*)$ http:&#x2F;&#x2F;www.domain2.com&#x2F;$1 [r&#x3D;301,nc]</span><br></pre></td></tr></table></figure>
+
+<h2 id="对某个单页面进行301跳转"><a href="#对某个单页面进行301跳转" class="headerlink" title="对某个单页面进行301跳转"></a>对某个单页面进行301跳转</h2><p>只需在PHP网页顶部输入下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">Header(&quot;HTTP&#x2F;1.1 301 Moved Permanently&quot;);</span><br><span class="line">Header(&quot;Location: https:&#x2F;&#x2F;domain.com &quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="针对全站页面进行301跳转解决方法"><a href="#针对全站页面进行301跳转解决方法" class="headerlink" title="针对全站页面进行301跳转解决方法"></a>针对全站页面进行301跳转解决方法</h2><p>1、建立301.php文件</p>
+<h3 id="代码一"><a href="#代码一" class="headerlink" title="代码一"></a>代码一</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?php</span><br><span class="line">$the_host &#x3D; $_SERVER[&#39;HTTP_HOST&#39;];&#x2F;&#x2F;取得当前域名</span><br><span class="line">$the_url &#x3D; isset($_SERVER[&#39;REQUEST_URI&#39;]) ? $_SERVER[&#39;REQUEST_URI&#39;] : &#39;&#39;;&#x2F;&#x2F;判断地址后面部分</span><br><span class="line">$the_url &#x3D; strtolower($the_url);&#x2F;&#x2F;将英文字母转成小写</span><br><span class="line">if($the_url&#x3D;&#x3D;&quot;&#x2F;index.php&quot;)&#x2F;&#x2F;判断是不是首页</span><br><span class="line">&#123;</span><br><span class="line">$the_url&#x3D;&quot;&quot;;&#x2F;&#x2F;如果是首页，赋值为空</span><br><span class="line">&#125;</span><br><span class="line">if($the_host !&#x3D;&#x3D; &#39;https:&#x2F;&#x2F;domain.com&#39;)&#x2F;&#x2F;如果域名不是带www的网址那么进行下面的301跳转</span><br><span class="line">&#123;</span><br><span class="line">header(&#39;HTTP&#x2F;1.1 301 Moved Permanently&#39;);&#x2F;&#x2F;发出301头部</span><br><span class="line">header(&#39;Location:https:&#x2F;&#x2F;domain.com &#39;.$the_url);&#x2F;&#x2F;跳转到带www的网址</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;    </span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;gb2312&quot;&gt;</span><br><span class="line">    &lt;title&gt;正在跳转中&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;refresh&quot; content&#x3D;&quot;0;url&#x3D;https:&#x2F;&#x2F;domain.com&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;Cache-Control&quot; content&#x3D;&quot;no-transform&quot; &#x2F;&gt;</span><br><span class="line"> &lt;&#x2F;head&gt;    </span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>这里 content=”0; 的0代表时间，可以自己设置。</p>
+<h3 id="代码三"><a href="#代码三" class="headerlink" title="代码三"></a>代码三</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;    </span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;gb2312&quot;&gt;</span><br><span class="line">    &lt;title&gt;正在跳转中&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;    </span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form name&#x3D;loading&gt;</span><br><span class="line">　&lt;p align&#x3D;center&gt; &lt;font color&#x3D;&quot;#0066ff&quot; size&#x3D;&quot;2&quot;&gt;正在进入，请稍等&lt;&#x2F;font&gt;&lt;font color&#x3D;&quot;#0066ff&quot; size&#x3D;&quot;2&quot; face&#x3D;&quot;Arial&quot;&gt;...&lt;&#x2F;font&gt;</span><br><span class="line">　　&lt;input type&#x3D;text name&#x3D;chart size&#x3D;46 style&#x3D;&quot;font-family:Arial; font-weight:bolder; color:#0066ff; background-color:#fef4d9; padding:0px; border-style:none;&quot;&gt;　　</span><br><span class="line">　　&lt;input type&#x3D;text name&#x3D;percent size&#x3D;47 style&#x3D;&quot;color:#0066ff; text-align:center; border-width:medium; border-style:none;&quot;&gt;</span><br><span class="line">　　&lt;script&gt;　</span><br><span class="line">var bar&#x3D;0　</span><br><span class="line">var line&#x3D;&quot;||&quot;　</span><br><span class="line">var amount&#x3D;&quot;||&quot;　</span><br><span class="line">count()　</span><br><span class="line">function count()&#123;　</span><br><span class="line">bar&#x3D;bar+2　</span><br><span class="line">amount &#x3D;amount + line　</span><br><span class="line">document.loading.chart.value&#x3D;amount　</span><br><span class="line">document.loading.percent.value&#x3D;bar+&quot;%&quot;　</span><br><span class="line">if (bar&lt;99)　</span><br><span class="line">&#123;setTimeout(&quot;count()&quot;,100);&#125;　</span><br><span class="line">else　</span><br><span class="line">&#123;window.location &#x3D; &quot;https:&#x2F;&#x2F;domain.com&quot;;&#125;　</span><br><span class="line">&#125;&lt;&#x2F;script&gt;</span><br><span class="line">　&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;p align&#x3D;&quot;center&quot;&gt; 如果您的浏览器不支持跳转,&lt;a style&#x3D;&quot;text-decoration: none&quot; href&#x3D;&quot;https:&#x2F;&#x2F;domain.com&quot;&gt;&lt;font color&#x3D;&quot;#FF0000&quot;&gt;请点这里&lt;&#x2F;font&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码四"><a href="#代码四" class="headerlink" title="代码四"></a>代码四</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;正在进入&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script language&#x3D;&#39;javascript&#39;&gt;document.location &#x3D; https:&#x2F;&#x2F;domain.com&#39;&#39;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2、在网页文件中调用301.php</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php include(&quot;301.php&quot;);?&gt;</span><br></pre></td></tr></table></figure>
+<p>将这个代码放到你所有网页的最前面。</p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>PHP</tag>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于网站和我</title>
+    <url>/2017/08/16/AboutMe/</url>
+    <content><![CDATA[<p><img src="https://github.com/Huramkin/libpic/blob/master/malisa%20%E6%98%9F.jpg?raw=true" alt="友人赠图"></p>
+<a id="more"></a>
+
+<h2 id="关于网站"><a href="#关于网站" class="headerlink" title="关于网站"></a>关于网站</h2><ul>
+<li>用的HEXO,网站代码在<a href="https://github.com/Huramkin/Huramkin.github.io">GitHub</a>,在Travis CI自动部署,未来几个月内争取出一篇教程从头说清。</li>
+<li>主题是yilia,<a href="https://github.com/litten/hexo-theme-yilia">https://github.com/litten/hexo-theme-yilia</a></li>
+</ul>
+<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><ul>
+<li>算是个准码农</li>
+<li>喜欢看冻鳗</li>
+<li>极度讨厌GFW</li>
+<li>喜欢喜+1</li>
+<li>懒癌患者</li>
+</ul>
+<h2 id="DN42"><a href="#DN42" class="headerlink" title="DN42"></a>DN42</h2><h3 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h3><ul>
+<li>ASN : 4242423821</li>
+<li>IPv4 地址池 : 172.20.165.8/29</li>
+<li>IPv6 地址池 : fdfc:44e4:146e:8f69::/64</li>
+</ul>
+<h3 id="服务器列表"><a href="#服务器列表" class="headerlink" title="服务器列表"></a>服务器列表</h3><h4 id="服务器1-美国洛杉矶-VirMach"><a href="#服务器1-美国洛杉矶-VirMach" class="headerlink" title="服务器1 美国洛杉矶 VirMach"></a>服务器1 美国洛杉矶 VirMach</h4><blockquote>
+<p>公网 IPv4：107.175.215.27<br>公网 IPv6：2001:470:c:16fb::2（HE.NET 隧道）<br>DN42 IPv4：172.20.165.9<br>DN42 IPv6：fdfc:44e4:146e:8f69:0:4b:a1bb:47ee<br>Link-local IPv6：fe80::216:3cff:fe92:bec0<br>可用的 VPN：ZeroTier One</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>关于</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Caddy的简单应用（一）</title>
+    <url>/2017/09/02/Caddy1/</url>
+    <content><![CDATA[<h2 id="Caddy获取以及安装"><a href="#Caddy获取以及安装" class="headerlink" title="Caddy获取以及安装"></a>Caddy获取以及安装</h2><p>Caddy项目的<a href="https://github.com/mholt/caddy">GitHub</a>地址。按照指南可以快速安装完毕。也有一些一键安装脚本可以使用。在此不过多赘述。</p>
+<a id="more"></a>
+
+<h2 id="基本操作与重要文件位置"><a href="#基本操作与重要文件位置" class="headerlink" title="基本操作与重要文件位置"></a>基本操作与重要文件位置</h2><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>指令与位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动</td>
+<td>service caddy start</td>
+</tr>
+<tr>
+<td>停止</td>
+<td>service caddy stop</td>
+</tr>
+<tr>
+<td>重启</td>
+<td>service caddy restart</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>service caddy status</td>
+</tr>
+<tr>
+<td>配置文件</td>
+<td>/usr/local/caddy/Caddyfile</td>
+</tr>
+<tr>
+<td>日志</td>
+<td>tail -f /tmp/caddy.log</td>
+</tr>
+</tbody></table>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><h4 id="多网站配置"><a href="#多网站配置" class="headerlink" title="多网站配置"></a>多网站配置</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;huramkin.me &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">https:&#x2F;&#x2F;www.lowol.top&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="一些简单功能"><a href="#一些简单功能" class="headerlink" title="一些简单功能"></a>一些简单功能</h4><h5 id="私人云盘"><a href="#私人云盘" class="headerlink" title="私人云盘"></a>私人云盘</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;huramkin.me &#123;</span><br><span class="line"> root &#x2F;usr&#x2F;local&#x2F;caddy&#x2F;www&#x2F;file # 网盘根目录</span><br><span class="line"> timeouts none # 避免下载超时的问题</span><br><span class="line"> tls email@123.com #自动用邮箱签证书也可以输入证书路径来使用</span><br><span class="line"> gzip</span><br><span class="line"> basicauth &#x2F; user passwd #网页加密 因为网盘有登录界面，所以不是很有必要</span><br><span class="line"> filemanager &#x2F; &#x2F;usr&#x2F;local&#x2F;caddy&#x2F;www&#x2F;file &#123;  #网站url 网盘根目录</span><br><span class="line">  database &#x2F;usr&#x2F;local&#x2F;caddy&#x2F;filemanager.db  #数据库地址</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h5> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.lowol.top &#123;</span><br><span class="line">gzip</span><br><span class="line">tls email</span><br><span class="line">basicauth</span><br><span class="line">proxy &#x2F; https:&#x2F;&#x2F;huramkin.me</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p> q:Caddy邮件自签SSL证书文件位置<br> a:/.caddy/acme/acme-v01.api.letsencrypt.org/sites/域名/</p>
+<p> q:caddy启动失败，但访问IP地址显示It works<br> a:使用 <code>netstat -lntp</code>查看80端口占用</p>
+]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Chocolatey 包管理器的安装与使用</title>
+    <url>/2019/08/16/Chocolatey1/</url>
+    <content><![CDATA[<p>Chocolatey 是用在Windows上的包管理器</p>
+<a id="more"></a>
+
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在以管理员模式运行的 <code>CMD</code> 中运行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString(&#39;https:&#x2F;&#x2F;chocolatey.org&#x2F;install.ps1&#39;))&quot; &amp;&amp; SET &quot;PATH&#x3D;%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</span><br><span class="line"></span><br><span class="line"># https:&#x2F;&#x2F;chocolatey.org&#x2F;install 查看最新的安装命令还有在powershell中的安装命令</span><br><span class="line"># GUI安装方式在参考中,或者使用 &#96;&#96; choco install chocolateygui&#96;&#96;</span><br></pre></td></tr></table></figure>
+
+<p>在以管理员模式运行的 <code>PowerShell</code> 中运行命令<code>iwr https://cin.st | iex</code>也可以进行安装</p>
+<p>安装完成后输入命令<code>choco</code>,若显示版本号则安装成功</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">choco install [软件包名称]   # 安装指定软件</span><br><span class="line">choco uninstall [软件包名称] # 卸载指定软件</span><br><span class="line">choco search [关键字]        # 搜索关键字,查找软件包名称 (也可以在 https:&#x2F;&#x2F;chocolatey.org&#x2F;packages&#x2F; 直接查找)</span><br><span class="line">choco upgrade [软件包名称]   # 升级指定软件</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://chocolatey.org/">https://chocolatey.org</a></li>
+<li><a href="https://chocolatey.org/docs">https://chocolatey.org/docs</a></li>
+<li><a href="https://chocolatey.org/packages/ChocolateyGUI">https://chocolatey.org/packages/ChocolateyGUI</a> GUI安装说明</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>软件</tag>
+        <tag>Windows</tag>
+        <tag>包管理器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Latex笔记（一)</title>
+    <url>/2017/08/26/LaTeX1/</url>
+    <content><![CDATA[<h2 id="本文章的内容有"><a href="#本文章的内容有" class="headerlink" title="本文章的内容有"></a>本文章的内容有</h2><ol>
+<li>Tex基本使用方法</li>
+<li>中英文混合输入</li>
+<li>基本文章结构</li>
+<li>在Tex中插入数学公式/化学式</li>
+<li>在Tex中插入表格/图片</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="Tex基本使用方法"><a href="#Tex基本使用方法" class="headerlink" title="Tex基本使用方法"></a>Tex基本使用方法</h2><p><img src="https://github.com/Huramkin/libpic/blob/master/X5BX%25%7D5D08%5DIO$%5DK379%5B8IX.png?raw=true" alt="gui"><br>安装了Tex后，一般会携带一个编辑器，如上图<br><img src="https://github.com/Huramkin/libpic/blob/master/36539747.jpg?raw=true" alt="cmd"><br>也可以使用Cmd编辑Tex文件，当然也可以使用其他文本编辑器来编辑Tex文件，这里为了方便起见，使用自带的编辑器TeXworks。</p>
+<h3 id="Hello，world"><a href="#Hello，world" class="headerlink" title="Hello，world"></a>Hello，world</h3><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">&#123;article&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;document&#125;</span></span></span><br><span class="line"> Hello,<span class="tag">\<span class="name">LaTeX</span></span> world</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;document&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>第一行中，表示使用article文档类型格式排版<br>按排版按钮，输出结果<br><img src="https://github.com/Huramkin/libpic/blob/master/57394525.jpg?raw=true"></p>
+<h2 id="中日英混合输入"><a href="#中日英混合输入" class="headerlink" title="中日英混合输入"></a>中日英混合输入</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[UTF8]</span><span class="string">&#123;ctexart&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;document&#125;</span></span></span><br><span class="line">こんにちは,Latex世界</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;document&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>使用UTF8编码可以很好的支持多国语言<br>输入结果如下图<br><img src="https://github.com/Huramkin/libpic/blob/master/61775740.jpg?raw=true"></p>
+<h2 id="文章结构"><a href="#文章结构" class="headerlink" title="文章结构"></a>文章结构</h2><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[UTF8]</span><span class="string">&#123;ctexart&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">title</span><span class="string">&#123;你们吼啊&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">author</span><span class="string">&#123;Huramkin&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;document&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">maketitle</span></span></span><br><span class="line"><span class="tag">\<span class="name">section</span><span class="string">&#123;NAIVE&#125;</span></span></span><br><span class="line">年轻人，too young too simple</span><br><span class="line"><span class="tag">\<span class="name">subsection</span><span class="string">&#123;你们有一个好&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">paragraph</span><span class="string">&#123;跑的快&#125;</span></span></span><br><span class="line">跑的比谁都快</span><br><span class="line"><span class="tag">\<span class="name">subparagraph</span><span class="string">&#123;天天&#125;</span></span></span><br><span class="line">天天想搞个大新闻</span><br><span class="line"><span class="tag">\<span class="name">subparagraph</span><span class="string">&#123;Excited!&#125;</span></span></span><br><span class="line">一颗赛艇</span><br><span class="line"><span class="tag">\<span class="name">subsubsection</span><span class="string">&#123;谈笑风生&#125;</span></span></span><br><span class="line">曰。。曰</span><br><span class="line"><span class="tag">\<span class="name">subsection</span><span class="string">&#123;LaTeX&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">paragraph</span><span class="string">&#123;坠吼&#125;</span></span></span><br><span class="line">LaTeX是坠吼的</span><br><span class="line"><span class="tag">\<span class="name">subparagraph</span><span class="string">&#123;滋磁八国语言&#125;</span></span></span><br><span class="line">こんにちは,Latex世界</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;document&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/Huramkin/libpic/blob/master/50164223.jpg?raw=true"></p>
+<h2 id="数学公式-化学式"><a href="#数学公式-化学式" class="headerlink" title="数学公式/化学式"></a>数学公式/化学式</h2><h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">&#123;article&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;amsmath&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;document&#125;</span></span></span><br><span class="line"><span class="comment">%三种方式插入公式</span></span><br><span class="line"><span class="formula">$S=<span class="tag">\<span class="name">pi</span></span> r^2$</span>.</span><br><span class="line"><span class="tag">\<span class="name">[</span></span> S=<span class="tag">\<span class="name">pi</span></span> r^2 <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;equation&#125;</span></span></span><br><span class="line">S=<span class="tag">\<span class="name">pi</span></span> r^2</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;equation&#125;</span></span></span><br><span class="line"><span class="comment">%根式和分式</span></span><br><span class="line"><span class="formula">$<span class="tag">\<span class="name">sqrt</span><span class="string">&#123;x_2&#125;</span></span>$</span>, <span class="formula">$<span class="tag">\<span class="name">frac</span><span class="string">&#123;1&#125;</span><span class="string">&#123;4&#125;</span></span>$</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">sqrt</span><span class="string">&#123;x_3&#125;</span></span>, <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">frac</span><span class="string">&#123;1&#125;</span><span class="string">&#123;4&#125;</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%数学常用运算符</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">pm</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">times</span></span> <span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">div</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">cdot</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">cap</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">cup</span></span><span class="tag">\<span class="name">;</span></span></span><br><span class="line"><span class="tag">\<span class="name">geq</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">leq</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">neq</span></span><span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">approx</span></span> <span class="tag">\<span class="name">;</span></span> <span class="tag">\<span class="name">equiv</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%求和与极限</span></span><br><span class="line"><span class="formula">$ <span class="tag">\<span class="name">sum</span></span>_&#123;i=1&#125;^n i<span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">prod</span></span>_&#123;i=1&#125;^n $</span></span><br><span class="line"><span class="formula">$ <span class="tag">\<span class="name">sum</span></span><span class="tag">\<span class="name">limits</span></span> _&#123;i=1&#125;^n i<span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">prod</span></span><span class="tag">\<span class="name">limits</span></span> _&#123;i=1&#125;^n $</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">lim</span></span>_&#123;x<span class="tag">\<span class="name">to</span></span>0&#125;x^2 <span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">int</span></span>_a^b x^2 dx <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">lim</span></span><span class="tag">\<span class="name">nolimits</span></span> _&#123;x<span class="tag">\<span class="name">to</span></span>0&#125;x^2<span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">int</span></span><span class="tag">\<span class="name">nolimits</span></span>_a^b x^2 dx <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%积分符号</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">iint</span></span><span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">iiint</span></span><span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">iiiint</span></span><span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">idotsint</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%括号</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">Biggl</span></span>(<span class="tag">\<span class="name">biggl</span></span>(<span class="tag">\<span class="name">Bigl</span></span>(<span class="tag">\<span class="name">bigl</span></span>((x)<span class="tag">\<span class="name">bigr</span></span>)<span class="tag">\<span class="name">Bigr</span></span>)<span class="tag">\<span class="name">biggr</span></span>)<span class="tag">\<span class="name">Biggr</span></span>) <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">Biggl</span><span class="string">[\biggl[\Bigl[\bigl[[x]</span></span><span class="tag">\<span class="name">bigr</span></span>]<span class="tag">\<span class="name">Bigr</span></span>]<span class="tag">\<span class="name">biggr</span></span>]<span class="tag">\<span class="name">Biggr</span></span>] <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">Biggl</span></span> <span class="tag">\<span class="name">&#123;</span></span><span class="tag">\<span class="name">biggl</span></span> <span class="tag">\<span class="name">&#123;</span></span><span class="tag">\<span class="name">Bigl</span></span> <span class="tag">\<span class="name">&#123;</span></span><span class="tag">\<span class="name">bigl</span></span> <span class="tag">\<span class="name">&#123;</span></span><span class="tag">\<span class="name">&#123;</span></span>x<span class="tag">\<span class="name">&#125;</span></span><span class="tag">\<span class="name">bigr</span></span> <span class="tag">\<span class="name">&#125;</span></span><span class="tag">\<span class="name">Bigr</span></span> <span class="tag">\<span class="name">&#125;</span></span><span class="tag">\<span class="name">biggr</span></span> <span class="tag">\<span class="name">&#125;</span></span><span class="tag">\<span class="name">Biggr</span></span><span class="tag">\<span class="name">&#125;</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">Biggl</span></span><span class="tag">\<span class="name">langle</span></span><span class="tag">\<span class="name">biggl</span></span><span class="tag">\<span class="name">langle</span></span><span class="tag">\<span class="name">Bigl</span></span><span class="tag">\<span class="name">langle</span></span><span class="tag">\<span class="name">bigl</span></span><span class="tag">\<span class="name">langle</span></span><span class="tag">\<span class="name">langle</span></span> x</span><br><span class="line"><span class="tag">\<span class="name">rangle</span></span><span class="tag">\<span class="name">bigr</span></span><span class="tag">\<span class="name">rangle</span></span><span class="tag">\<span class="name">Bigr</span></span><span class="tag">\<span class="name">rangle</span></span><span class="tag">\<span class="name">biggr</span></span><span class="tag">\<span class="name">rangle</span></span><span class="tag">\<span class="name">Biggr</span></span><span class="tag">\<span class="name">rangle</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">Biggl</span></span><span class="tag">\<span class="name">lvert</span></span><span class="tag">\<span class="name">biggl</span></span><span class="tag">\<span class="name">lvert</span></span><span class="tag">\<span class="name">Bigl</span></span><span class="tag">\<span class="name">lvert</span></span><span class="tag">\<span class="name">bigl</span></span><span class="tag">\<span class="name">lvert</span></span><span class="tag">\<span class="name">lvert</span></span> x</span><br><span class="line"><span class="tag">\<span class="name">rvert</span></span><span class="tag">\<span class="name">bigr</span></span><span class="tag">\<span class="name">rvert</span></span><span class="tag">\<span class="name">Bigr</span></span><span class="tag">\<span class="name">rvert</span></span><span class="tag">\<span class="name">biggr</span></span><span class="tag">\<span class="name">rvert</span></span><span class="tag">\<span class="name">Biggr</span></span><span class="tag">\<span class="name">rvert</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">Biggl</span></span><span class="tag">\<span class="name">lVert</span></span><span class="tag">\<span class="name">biggl</span></span><span class="tag">\<span class="name">lVert</span></span><span class="tag">\<span class="name">Bigl</span></span><span class="tag">\<span class="name">lVert</span></span><span class="tag">\<span class="name">bigl</span></span><span class="tag">\<span class="name">lVert</span></span><span class="tag">\<span class="name">lVert</span></span> x</span><br><span class="line"><span class="tag">\<span class="name">rVert</span></span><span class="tag">\<span class="name">bigr</span></span><span class="tag">\<span class="name">rVert</span></span><span class="tag">\<span class="name">Bigr</span></span><span class="tag">\<span class="name">rVert</span></span><span class="tag">\<span class="name">biggr</span></span><span class="tag">\<span class="name">rVert</span></span><span class="tag">\<span class="name">Biggr</span></span><span class="tag">\<span class="name">rVert</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%省略号</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> x_1,x_2,<span class="tag">\<span class="name">dots</span></span> ,x_n<span class="tag">\<span class="name">quad</span></span> 1,2,<span class="tag">\<span class="name">cdots</span></span> ,n<span class="tag">\<span class="name">quad</span></span></span><br><span class="line"><span class="tag">\<span class="name">vdots</span></span><span class="tag">\<span class="name">quad</span></span> <span class="tag">\<span class="name">ddots</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%矩阵</span></span><br><span class="line"><span class="tag">\<span class="name">[</span></span> <span class="tag">\<span class="name">begin</span><span class="string">&#123;pmatrix&#125;</span></span> a&amp;b<span class="tag">\<span class="name">\</span></span>c&amp;d <span class="tag">\<span class="name">end</span><span class="string">&#123;pmatrix&#125;</span></span> <span class="tag">\<span class="name">quad</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;bmatrix&#125;</span></span> a&amp;b<span class="tag">\<span class="name">\</span></span>c&amp;d <span class="tag">\<span class="name">end</span><span class="string">&#123;bmatrix&#125;</span></span> <span class="tag">\<span class="name">quad</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;Bmatrix&#125;</span></span> a&amp;b<span class="tag">\<span class="name">\</span></span>c&amp;d <span class="tag">\<span class="name">end</span><span class="string">&#123;Bmatrix&#125;</span></span> <span class="tag">\<span class="name">quad</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;vmatrix&#125;</span></span> a&amp;b<span class="tag">\<span class="name">\</span></span>c&amp;d <span class="tag">\<span class="name">end</span><span class="string">&#123;vmatrix&#125;</span></span> <span class="tag">\<span class="name">quad</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;Vmatrix&#125;</span></span> a&amp;b<span class="tag">\<span class="name">\</span></span>c&amp;d <span class="tag">\<span class="name">end</span><span class="string">&#123;Vmatrix&#125;</span></span> <span class="tag">\<span class="name">]</span></span></span><br><span class="line"><span class="comment">%小矩阵</span></span><br><span class="line">A little matrix <span class="formula">$ ( <span class="tag">\<span class="name">begin</span><span class="string">&#123;smallmatrix&#125;</span></span> a&amp;b<span class="tag">\<span class="name">\</span></span>c&amp;d <span class="tag">\<span class="name">end</span><span class="string">&#123;smallmatrix&#125;</span></span> ) $</span>.</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;document&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>排版结果<br><img src="https://github.com/Huramkin/libpic/blob/master/43899600.jpg?raw=true"></p>
+<h3 id="化学式"><a href="#化学式" class="headerlink" title="化学式"></a>化学式</h3><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">&#123;article&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;mhchem&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;chemfig&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;document&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">ce</span><span class="string">&#123;Fe^&#123;II&#125;</span></span>Fe^&#123;III&#125;2O4&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">ce</span><span class="string">&#123;Hg^2+ -&gt;[I-] HgI2</span></span></span><br><span class="line"><span class="tag"><span class="string">          -&gt;[I-] [Hg^&#123;II&#125;</span></span>I4]^2-&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">chemfig</span><span class="string">&#123;*5(-=--=)&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">chemfig</span><span class="string">&#123;A-B(-[1]W-X)(-[6]Y-[7]Z)-C&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;document&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>排版结果</p>
+<p><img src="https://github.com/Huramkin/libpic/blob/master/67925193.jpg?raw=true"></p>
+<p>这里用到了mhchem和chemfig两个宏包，下面附有文件的链接</p>
+<blockquote>
+<p><a href="https://mirrors.ctan.org/macros/generic/chemfig/chemfig-en.pdf">chemfig说明文档</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://mirrors.ctan.org/macros/latex/contrib/mhchem/mhchem.pdf">mhchem说明文档</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Latex</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vim入门</title>
+    <url>/2017/08/28/Vim/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>Vim是坠吼的编辑器，是最适合软件开发使用的，但是使用Vim需要的命令成为了劝退的重要因素。</p>
+<p>所以这篇文章主要介绍基本的Vim命令，以达到正常使用的目的。</p>
+<a id="more"></a>
+
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>启动Vim后，vim在Normal模式下。</p>
+<p>按下键i即可进入Insert模式，这时候可以看到vim下方出现–insert–</p>
+<p>这时候就可以输入了</p>
+<p>按ESC键返回Normal模式</p>
+<p>然后输入:wq+enter 退出并保存</p>
+<p>下面的命令学会了会更好用</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i</td>
+<td>Insert模式 按ESC回到Normal模式</td>
+</tr>
+<tr>
+<td>x</td>
+<td>删除当前光标所在的字符。</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>存盘并且退出 (:q 退出)</td>
+</tr>
+<tr>
+<td>:w</td>
+<td>存盘</td>
+</tr>
+<tr>
+<td>:saveas &lt;path/to/file&gt;</td>
+<td>另存为 &lt;path/to/file&gt;</td>
+</tr>
+<tr>
+<td>:x， ZZ 或 :wq</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td>:q!</td>
+<td>退出不保存 :qa! 强行退出所有的正在编辑的文件.</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除当前行 并把删除的行存入剪贴板</td>
+</tr>
+<tr>
+<td>:help <command></td>
+<td>显示相关命令的帮助。你也可以就输入:help而不跟命令。若需要退出帮助则输入:q</td>
+</tr>
+<tr>
+<td>a</td>
+<td>在光标后插入</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在当前行后插入一个新行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在当前行前插入一个新行</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>替换从光标所在位置后到一个单词结尾的字符</td>
+</tr>
+<tr>
+<td>0</td>
+<td>到行头</td>
+</tr>
+<tr>
+<td>^</td>
+<td>到本行第一个不是空白字符的位置</td>
+</tr>
+<tr>
+<td>$</td>
+<td>到本行行尾</td>
+</tr>
+<tr>
+<td>g_</td>
+<td>到本行最后一个不是空白字符的位置。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>可以重复上一次的命令</td>
+</tr>
+<tr>
+<td>N&lt;command&gt;</td>
+<td>重复某个命令N次</td>
+</tr>
+<tr>
+<td>NG</td>
+<td>到第N行 一般使用:N到第N行</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>到第一行。</td>
+</tr>
+<tr>
+<td>G</td>
+<td>到最后一行。</td>
+</tr>
+<tr>
+<td>w</td>
+<td>到下一个单词的开头。</td>
+</tr>
+<tr>
+<td>e</td>
+<td>到下一个单词的结尾。</td>
+</tr>
+<tr>
+<td>hjkl</td>
+<td>移动光标 你也可以使用光标键 (←↓↑→)</td>
+</tr>
+<tr>
+<td>/ggez</td>
+<td>搜索ggez的字符串 如果出现多个匹配 可按n键到下一个</td>
+</tr>
+<tr>
+<td>P</td>
+<td>粘贴 p/P都可以 p是表示粘贴在当前位置之后，P表示粘贴在当前位置之前</td>
+</tr>
+<tr>
+<td>u</td>
+<td>undo</td>
+</tr>
+<tr>
+<td>Ctrl+r</td>
+<td>redo</td>
+</tr>
+<tr>
+<td>:e &lt;path/to/file&gt;</td>
+<td>打开一个文件</td>
+</tr>
+<tr>
+<td>:bn 和 :bp</td>
+<td>你在同时打开很多文件的时候，可以使用使用这两个命令来切换下一个或上一个文件。</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>Vim</tag>
+        <tag>文本编辑器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>acme.sh 的 docker 部署使用方法</title>
+    <url>/2019/09/05/acme/</url>
+    <content><![CDATA[<p>用acme.sh获取免费SSL证书</p>
+<a id="more"></a>
+
+
+<h2 id="脚本部署"><a href="#脚本部署" class="headerlink" title="脚本部署"></a>脚本部署</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;get.acme.sh | sh</span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">export CF_Key&#x3D;&quot;asasasasasadasasas&quot;</span><br><span class="line">export CF_Email&#x3D;&quot;example@aa.aa&quot;</span><br><span class="line">acme.sh --issue --dns dns_cf -d aa.aa -d *.aa.aa</span><br></pre></td></tr></table></figure>
+<p>成功运行后,证书会自动生成到用户目录下的 <code>.acme.sh</code> 文件夹,续签证书 <code>acme.sh  --renew   -d aa.com -d *.aa.com</code></p>
+<h2 id="docker部署"><a href="#docker部署" class="headerlink" title="docker部署"></a>docker部署</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --rm  -itd  \</span><br><span class="line">  -v &quot;$(pwd)&#x2F;out&quot;:&#x2F;acme.sh  \</span><br><span class="line">  -e CF_Email&#x3D;&quot;example@aa.aa&quot; \</span><br><span class="line">  -e CF_Key&#x3D;&quot;asasasasasadasasas&quot; \</span><br><span class="line">  --net&#x3D;host \</span><br><span class="line">  --name&#x3D;acme.sh \</span><br><span class="line">  neilpang&#x2F;acme.sh daemon</span><br></pre></td></tr></table></figure>
+
+<p>这样配置容器可以自动续签证书</p>
+<p>容器启动后开始获取证书</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker exec acme.sh --issue --dns dns_cf -d *.aa.aa -d aa.aa</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker">https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker</a></li>
+<li><a href="https://github.com/Neilpang/acme.sh/wiki/dnsapi">https://github.com/Neilpang/acme.sh/wiki/dnsapi</a></li>
+<li><a href="https://hub.docker.com/r/neilpang/acme.sh">https://hub.docker.com/r/neilpang/acme.sh</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>SSL</tag>
+        <tag>docker</tag>
+        <tag>域名</tag>
+        <tag>免费</tag>
+        <tag>隐私保护</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用docker运行安卓虚拟机</title>
+    <url>/2019/09/08/androidocker/</url>
+    <content><![CDATA[<p>也许可以拿来搞云手机…</p>
+<a id="more"></a>
+
+<p>docker run –privileged -d -p 6080:6080 -p 5554:5554 -p 5555:5555 -e DEVICE=”Samsung Galaxy S6” –name android-container budtmo/docker-android-x86-8.1</p>
+<p><a href="http://docker-host-ip-address:6080/">http://docker-host-ip-address:6080</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://medium.com/@AndreSand/android-emulator-on-docker-container-f20c49b129ef">https://medium.com/@AndreSand/android-emulator-on-docker-container-f20c49b129ef</a> <a href="https://archive.fo/ATpcf">https://archive.fo/ATpcf</a></li>
+<li><a href="https://hub.docker.com/r/ksoichiro/android-emulator">https://hub.docker.com/r/ksoichiro/android-emulator</a></li>
+<li><a href="https://github.com/thyrlian/AndroidSDK">https://github.com/thyrlian/AndroidSDK</a></li>
+<li><a href="https://hub.docker.com/r/thyrlian/android-sdk">https://hub.docker.com/r/thyrlian/android-sdk</a></li>
+<li><a href="https://github.com/budtmo/docker-android">https://github.com/budtmo/docker-android</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>docker</tag>
+        <tag>安卓</tag>
+        <tag>服务器</tag>
+        <tag>虚拟机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BBR脚本汇总</title>
+    <url>/2019/08/17/bbr1/</url>
+    <content><![CDATA[<p>在一些特殊的环境,BBR原版并不能发挥出最佳作用,这里是部署bbrplus的脚本</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate &quot;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;chiakge&#x2F;Linux-NetSpeed&#x2F;master&#x2F;tcp.sh&quot; &amp;&amp; chmod +x tcp.sh &amp;&amp; .&#x2F;tcp.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate https:&#x2F;&#x2F;github.com&#x2F;teddysun&#x2F;across&#x2F;raw&#x2F;master&#x2F;bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; .&#x2F;bbr.sh</span><br></pre></td></tr></table></figure>
+
+<p>检测bbr服务是否开启 <code>lsmod | grep bbr</code> 返回值有<code>tcp_bbr</code>就说明<code>bbr</code>已经启动,如果没有显示也有可能bbr服务正常</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://www.94ish.me/1635.html">https://www.94ish.me/1635.html</a><br><a href="https://www.hostloc.com/thread-372277-1-2.html">https://www.hostloc.com/thread-372277-1-2.html</a><br><a href="https://51.ruyo.net/4415.html">https://51.ruyo.net/4415.html</a> <a href="https://archive.fo/aLk5o">https://archive.fo/aLk5o</a><br><a href="https://teddysun.com/489.html">https://teddysun.com/489.html</a> <a href="https://archive.fo/sqyyC">https://archive.fo/sqyyC</a><br><a href="https://www.hostloc.com/thread-507165-1-1.html">https://www.hostloc.com/thread-507165-1-1.html</a><br><a href="https://www.zhujiboke.com/2017/07/589.html">https://www.zhujiboke.com/2017/07/589.html</a><br><a href="https://www.moerats.com/archives/387/">https://www.moerats.com/archives/387/</a><br><a href="https://www.moerats.com/archives/382/">https://www.moerats.com/archives/382/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>拥塞控制</tag>
+        <tag>脚本</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>静态博客网站生成框架</title>
+    <url>/2019/08/16/blogf1/</url>
+    <content><![CDATA[<p>因为使用hexo作为博客,对其他的框架不是很了解,这里仅做记录准备以后换个人网站框架时候用</p>
+<a id="more"></a>
+
+
+<h2 id="jekyll"><a href="#jekyll" class="headerlink" title="jekyll"></a>jekyll</h2><p><a href="https://jekyllrb.com/">https://jekyllrb.com/</a></p>
+<h2 id="hugo"><a href="#hugo" class="headerlink" title="hugo"></a>hugo</h2><p><a href="https://gohugo.io/">https://gohugo.io/</a></p>
+<h2 id="VuePress"><a href="#VuePress" class="headerlink" title="VuePress"></a>VuePress</h2><p><a href="https://github.com/vuejs/vuepress">https://github.com/vuejs/vuepress</a></p>
+<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p><a href="https://hexo.io/">https://hexo.io</a></p>
+<h2 id="Next-js"><a href="#Next-js" class="headerlink" title="Next.js"></a>Next.js</h2><p><a href="https://nextjs.org/">https://nextjs.org/</a></p>
+<h2 id="Gatsby"><a href="#Gatsby" class="headerlink" title="Gatsby"></a>Gatsby</h2><p><a href="https://www.gatsbyjs.org/">https://www.gatsbyjs.org/</a></p>
+<h2 id="Nuxt"><a href="#Nuxt" class="headerlink" title="Nuxt"></a>Nuxt</h2><p><a href="https://nuxtjs.org/">https://nuxtjs.org/</a></p>
+<h2 id="Girdsome"><a href="#Girdsome" class="headerlink" title="Girdsome"></a>Girdsome</h2><p><a href="https://gridsome.org/">https://gridsome.org/</a></p>
+<h2 id="11ty"><a href="#11ty" class="headerlink" title="11ty"></a>11ty</h2><p><a href="https://www.11ty.io/">https://www.11ty.io/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://blog.zthxxx.me/post/build-hexo-blog-by-travis-ci/#github-access-token">https://blog.zthxxx.me/post/build-hexo-blog-by-travis-ci/#github-access-token</a><br><a href="https://bejamas.io/blog/static-site-generators/#what-are-the-best-static-site-generators-for-2019">https://bejamas.io/blog/static-site-generators/#what-are-the-best-static-site-generators-for-2019</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>web</tag>
+        <tag>静态网页</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>局域网文件传输软件</title>
+    <url>/2019/09/12/btr/</url>
+    <content><![CDATA[<p>平时会遇到内网设备间传输数据的需求,搜了许多的软件,记录以下这些</p>
+<a id="more"></a>
+
+<h2 id="多平台"><a href="#多平台" class="headerlink" title="多平台"></a>多平台</h2><ul>
+<li><a href="https://feem.io/">Feem</a></li>
+<li><a href="https://www.airdroid.com/zh-cn/">AirDroid</a></li>
+</ul>
+<h2 id="手机端"><a href="#手机端" class="headerlink" title="手机端"></a>手机端</h2><ul>
+<li><a href="https://www.coolapk.com/apk/com.xchat.stevenzack.langenius">局域网精灵(com.xchat.stevenzack.langenius) - 5.1.2 - 应用 - 酷安网</a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.lonelycatgames.Xplore&hl=en_US">X-plore File Manager - Apps on Google Play</a></li>
+</ul>
+<h2 id="小型文件服务器"><a href="#小型文件服务器" class="headerlink" title="小型文件服务器"></a>小型文件服务器</h2><ul>
+<li><a href="https://www.rejetto.com/hfs/?f=dl">HFS ~ HTTP File Server</a></li>
+<li><a href="https://code.google.com/archive/p/madfish-webtoolkit/downloads">File Server</a></li>
+</ul>
+<h2 id="FTP服务器"><a href="#FTP服务器" class="headerlink" title="FTP服务器"></a>FTP服务器</h2><ul>
+<li><a href="https://filezilla-project.org/download.php?type=server">FileZilla Server</a></li>
+<li><a href="https://www.xlightftpd.com/download.htm">Xlight FTP Server</a></li>
+<li><a href="https://enterprisedt.com/products/completeftp/free/">Complete FTP</a></li>
+<li><a href="http://www.coreftp.com/server/">Core FTP Server</a> 这款在局域网环境下用起来比较方便</li>
+<li><a href="https://security.appspot.com/vsftpd.html#download">vsftpd</a></li>
+<li><a href="http://www.proftpd.org/">proFTPD</a></li>
+<li><a href="https://labs.rebex.net/tiny-sftp-server">Rebex Tiny SFTP Server</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.lifewire.com/windows-ftp-servers-free-817577">https://www.lifewire.com/windows-ftp-servers-free-817577</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>软件</tag>
+        <tag>局域网</tag>
+        <tag>文件传输</tag>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用docker部署caddy</title>
+    <url>/2019/08/19/caddy2/</url>
+    <content><![CDATA[<p>使用官网脚本和docker两种方式部署caddy服务</p>
+<a id="more"></a>
+
+<h2 id="使用脚本安装"><a href="#使用脚本安装" class="headerlink" title="使用脚本安装"></a>使用脚本安装</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;getcaddy.com | bash</span><br></pre></td></tr></table></figure>
+<p>运行直接输入 <code>caddy</code> 即可</p>
+<p>可以使用screen 或者 hop,upstart,systemd,supervisor等使其后台运行</p>
+<h2 id="使用docker部署caddy服务"><a href="#使用docker部署caddy服务" class="headerlink" title="使用docker部署caddy服务"></a>使用docker部署caddy服务</h2><h3 id="docker-compose-yml-文件配置"><a href="#docker-compose-yml-文件配置" class="headerlink" title="docker-compose.yml 文件配置"></a>docker-compose.yml 文件配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">version: &#39;2&#39;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  caddy:</span><br><span class="line">    container_name: caddy</span><br><span class="line">    image: abiosoft&#x2F;caddy</span><br><span class="line">    volumes:</span><br><span class="line">      - &quot;&#x2F;etc&#x2F;caddy&#x2F;certs:&#x2F;etc&#x2F;caddycerts&quot;</span><br><span class="line">      - &quot;&#x2F;etc&#x2F;caddy&#x2F;Caddyfile:&#x2F;etc&#x2F;Caddyfile&quot;</span><br><span class="line">      - &quot;&#x2F;home:&#x2F;home&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    network_mode: &quot;host&quot;</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      CADDYPATH: &#x2F;etc&#x2F;caddycerts</span><br></pre></td></tr></table></figure>
+
+<p>编写<code>docker-compose.yml</code>文件,把宿主机上的<code>Caddyfile</code>挂载到<code>Caddy Server</code>的容器,同时挂载用来存放SSL证书的目录,让容器直接使用宿主机器的网络,把<code>/home</code>目录映射到<code>Caddy Server</code>中可以直接host站点</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h2 id="Caddyfile配置"><a href="#Caddyfile配置" class="headerlink" title="Caddyfile配置"></a>Caddyfile配置</h2><h3 id="反向代理配置"><a href="#反向代理配置" class="headerlink" title="反向代理配置"></a>反向代理配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.lowol.top &#123;</span><br><span class="line">gzip</span><br><span class="line">tls email@email.email</span><br><span class="line">basicauth &#x2F; user passwd</span><br><span class="line">proxy &#x2F; https:&#x2F;&#x2F;huramkin.me</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用本地文件建立网页的配置"><a href="#使用本地文件建立网页的配置" class="headerlink" title="使用本地文件建立网页的配置"></a>使用本地文件建立网页的配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> huramkin.me www.huramkin.me &#123;</span><br><span class="line">  tls &#x2F;root&#x2F;xxx.crt &#x2F;root&#x2F;xxx.key</span><br><span class="line">  root &#x2F;home&#x2F;huramkin</span><br><span class="line">  index index.html index.htm</span><br><span class="line">  gzip</span><br><span class="line">  log &#x2F;home&#x2F;logs&#x2F;huramkin.log</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://hub.docker.com/r/abiosoft/caddy/">https://hub.docker.com/r/abiosoft/caddy/</a><br><a href="https://caddyserver.com/tutorial">https://caddyserver.com/tutorial</a><br><a href="https://caddyserver.com/download">https://caddyserver.com/download</a><br><a href="https://dengxiaolong.com/caddy/zh/">https://dengxiaolong.com/caddy/zh/</a><br><a href="https://dengxiaolong.com/caddy/zh/caddyfile.html">https://dengxiaolong.com/caddy/zh/caddyfile.html</a><br><a href="https://www.moerats.com/archives/404/">https://www.moerats.com/archives/404/</a><br><a href="https://xiaozhou.net/experience-of-caddy-server-2017-11-29.html">https://xiaozhou.net/experience-of-caddy-server-2017-11-29.html</a><br><a href="https://doubibackup.com/l-en8vwt-2.html">https://doubibackup.com/l-en8vwt-2.html</a> <a href="https://archive.fo/qEUc7">https://archive.fo/qEUc7</a><br><a href="https://intl.huramkin.com/2017/09/01/Caddy1/">https://intl.huramkin.com/2017/09/01/Caddy1/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>docker</tag>
+        <tag>服务器</tag>
+        <tag>web</tag>
+        <tag>caddy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CF Partner 面板</title>
+    <url>/2019/02/15/cfp/</url>
+    <content><![CDATA[<p>作为普通用户，接入域名只能在 Cloudflare 官网用修改 NS 的方式接入域名，但是作为 CF Partner 可以使用 CNAME 方式接入域名</p>
+<p>使用 CNAME 接入，因为不用修改NS 所以可以同时其它的 DNS 服务提供商.</p>
+<a id="more"></a>
+
+<h2 id="几种接入方式介绍"><a href="#几种接入方式介绍" class="headerlink" title="几种接入方式介绍"></a>几种接入方式介绍</h2><h3 id="WHMCS"><a href="#WHMCS" class="headerlink" title="WHMCS"></a>WHMCS</h3><p>这里可以参考官方文档: </p>
+<p><a href="https://www.cloudflare.com/media/downloads/Cloudflare-Training-WHMCS-Installation-Guide.pdf">https://www.cloudflare.com/media/downloads/Cloudflare-Training-WHMCS-Installation-Guide.pdf</a></p>
+<h3 id="SonicBreaker"><a href="#SonicBreaker" class="headerlink" title="SonicBreaker"></a>SonicBreaker</h3><p><a href="https://github.com/AxelPanda/SonicBreaker/">https://github.com/AxelPanda/SonicBreaker/</a></p>
+<p>首次使用需要编辑 <code>Application/Home/Controller/CFController.class.php</code>文件中的<code>’your_Cloudflare_Partner_host_key’</code></p>
+<p>然后使用浏览器访问进行下一步安装</p>
+<h3 id="CFPMP"><a href="#CFPMP" class="headerlink" title="CFPMP"></a>CFPMP</h3><p><a href="https://github.com/Netrvin/CFPMP">https://github.com/Netrvin/CFPMP</a></p>
+<ul>
+<li>可以接入 <code>reCAPTCHA(v2)</code></li>
+<li>可以加入A记录</li>
+<li>CNAME接入</li>
+</ul>
+<h3 id="Python-CLI"><a href="#Python-CLI" class="headerlink" title="Python CLI"></a>Python CLI</h3><p><a href="https://github.com/fffonion/cloudflare-partner-cli">https://github.com/fffonion/cloudflare-partner-cli</a></p>
+<h3 id="Cloudflare-CNAME-Setup"><a href="#Cloudflare-CNAME-Setup" class="headerlink" title="Cloudflare-CNAME-Setup"></a>Cloudflare-CNAME-Setup</h3><p><a href="https://github.com/ZE3kr/Cloudflare-CNAME-Setup">https://github.com/ZE3kr/Cloudflare-CNAME-Setup</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">           -e HOST_KEY&#x3D;填写你自己的 Partner API Key \</span><br><span class="line">           -e HOST_MAIL&#x3D;填写你自己的 Partner 邮箱    \</span><br><span class="line">           -e TITLE&#x3D;填写自定义标题                   \</span><br><span class="line">           -p 端口号:80                             \</span><br><span class="line">           ze3kr&#x2F;cloudflare</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>面板</tag>
+        <tag>云服务</tag>
+        <tag>cloudflare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决Please check that your locale settings问题</title>
+    <url>/2018/05/23/chacklocal/</url>
+    <content><![CDATA[<h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">perl: warning: Setting locale failed.</span><br><span class="line"></span><br><span class="line">perl: warning: Please check that your locale settings:</span><br><span class="line"></span><br><span class="line">LANGUAGE &#x3D; &quot;en_US:en&quot;,</span><br><span class="line"></span><br><span class="line">LC_ALL &#x3D; (unset),</span><br><span class="line"></span><br><span class="line">LC_CTYPE &#x3D; &quot;zh_CN.UTF-8&quot;,</span><br><span class="line"></span><br><span class="line">LANG &#x3D; &quot;en_US.UTF-8&quot;</span><br><span class="line"></span><br><span class="line">are supported and installed on your system.</span><br><span class="line"></span><br><span class="line">perl: warning: Falling back to a fallback locale (&quot;en_US.UTF-8&quot;).</span><br><span class="line"></span><br><span class="line">perl: warning: Setting locale failed.</span><br><span class="line"></span><br><span class="line">perl: warning: Please check that your locale settings:</span><br><span class="line"></span><br><span class="line">LANGUAGE &#x3D; &quot;en_US:en&quot;,</span><br><span class="line"></span><br><span class="line">LC_ALL &#x3D; (unset),</span><br><span class="line"></span><br><span class="line">LC_CTYPE &#x3D; &quot;zh_CN.UTF-8&quot;,</span><br><span class="line"></span><br><span class="line">LANG &#x3D; &quot;en_US.UTF-8&quot;</span><br><span class="line"></span><br><span class="line">are supported and installed on your system.</span><br><span class="line"></span><br><span class="line">perl: warning: Falling back to a fallback locale (&quot;en_US.UTF-8&quot;).</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><ul>
+<li>方案1</li>
+</ul>
+<p>编辑 .bashrc</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi &#x2F;root&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>在最底部加上</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export LC_ALL&#x3D;C</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方案2</li>
+</ul>
+<p>直接运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo &quot;export LC_ALL&#x3D;C&quot; &gt;&gt; &#x2F;root&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+<p> 然后执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source &#x2F;root&#x2F;.bashrc</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网盘程序</title>
+    <url>/2019/08/21/cloudstpr/</url>
+    <content><![CDATA[<p>一些简单好用的自建网盘程序</p>
+<a id="more"></a>
+
+<h2 id="Cloudreve"><a href="#Cloudreve" class="headerlink" title="Cloudreve"></a>Cloudreve</h2><p><a href="https://github.com/cloudreve/Cloudreve">https://github.com/cloudreve/Cloudreve</a></p>
+<p>除了使用安装包安装,还可用Composer和docker方式安装</p>
+<ol>
+<li><p>获取安装包<br>到<a href="https://cloudreve.org/download.php">https://cloudreve.org/download.php</a> 下载最新的安装包,文件部署好后,前往您的域名/CloudreveInstaller 的安装向导，根据提示检查环境、填写数据库信息并执行安装。</p>
+</li>
+<li><p>URL重写<br>对于Apache服务器，请确保</p>
+</li>
+</ol>
+<ul>
+<li><code>httpd.conf</code>配置文件中加载了<code>mod_rewrite.so</code>模块</li>
+<li><code>AllowOverride None </code>将 <code>None</code> 改为 <code>All</code></li>
+<li>项目目录下的.htaccess已经配置好重写规则，如有需求酌情修改.</li>
+</ul>
+<p>对于Nginx服务器，以下配置可供参考：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F; &#123;</span><br><span class="line">   if (!-e $request_filename) &#123;</span><br><span class="line">   rewrite  ^(.*)$  &#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">   break;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你的应用安装在二级目录，Nginx的伪静态方法设置如下，其中youdomain是所在的目录名称。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
+<ul>
+<li>登录后台（初始用户名<a href="mailto:&#x61;&#100;&#x6d;&#105;&#x6e;&#x40;&#99;&#x6c;&#111;&#117;&#100;&#114;&#x65;&#x76;&#101;&#x2e;&#x6f;&#114;&#103;">&#x61;&#100;&#x6d;&#105;&#x6e;&#x40;&#99;&#x6c;&#111;&#117;&#100;&#114;&#x65;&#x76;&#101;&#x2e;&#x6f;&#114;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>到用户管理页修改初始用户密码</li>
+<li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
+<li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
+<li>如果你打算使用本地上传策略并且不准备开启外链功能，请将public/uploads目录设置为禁止外部访问、禁止脚本执行</li>
+</ul>
+<h2 id="FileGator"><a href="#FileGator" class="headerlink" title="FileGator"></a>FileGator</h2><p><a href="https://github.com/filegator/filegator">https://github.com/filegator/filegator</a></p>
+<p><a href="https://www.file-gator.com/">https://www.file-gator.com/</a></p>
+<h2 id="naked-pages"><a href="#naked-pages" class="headerlink" title="naked-pages"></a>naked-pages</h2><p><a href="https://github.com/krisanalfa/naked-pages">https://github.com/krisanalfa/naked-pages</a></p>
+<h2 id="h5ai"><a href="#h5ai" class="headerlink" title="h5ai"></a>h5ai</h2><p><a href="https://larsjung.de/h5ai/">https://larsjung.de/h5ai/</a></p>
+<p>除去源码文件位置正确外,还需要改 <code>.htaccess</code>和<code>nginx.conf</code></p>
+<blockquote>
+<p> DirectoryIndex  index.html  index.php  /_h5ai/public/index.php #.htaccess<br> index  index.html  index.php  /_h5ai/public/index.php; #nginx.conf</p>
+</blockquote>
+<p>h5ai的结构</p>
+<blockquote>
+<p>DOC_ROOT<br>├─ _h5ai<br>├─ your files<br>└─ and folders</p>
+</blockquote>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><p>这里的配置是使用nginx建立的文件服务器, 访问<code>www.huramkin.ooo</code>等域名就可以直接查看<code>/var/lib/transmission-daemon/downloads</code>中的文件并下载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">listen 80;</span><br><span class="line">listen 443 ssl http2;</span><br><span class="line">server_name www.huramkin.ooo ww1.huramkin.pw ww2.huramkin.pw;</span><br><span class="line">charset utf-8;</span><br><span class="line">root &#x2F;var&#x2F;lib&#x2F;transmission-daemon&#x2F;downloads;</span><br><span class="line"> location &#x2F; &#123;</span><br><span class="line">       autoindex on; # 索引</span><br><span class="line">       autoindex_exact_size on; # 显示文件大小</span><br><span class="line">       autoindex_localtime on; # 显示文件时间</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">access_log  &#x2F;www&#x2F;wwwlogs&#x2F;www.huramkin.ooo.log;</span><br><span class="line">error_log  &#x2F;www&#x2F;wwwlogs&#x2F;www.huramkin.ooo.error.log;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://github.com/cloudreve/Cloudreve/wiki/%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E">https://github.com/cloudreve/Cloudreve/wiki/%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E</a><br><a href="https://github.com/vSense/docker-h5ai">https://github.com/vSense/docker-h5ai</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>docker</tag>
+        <tag>服务器</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Crontab</title>
+    <url>/2019/08/15/cron1/</url>
+    <content><![CDATA[<p>记录一下常用的crontab命令,如果实在搞不明白可以使用cron表达式生成工具</p>
+<a id="more"></a>
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># .---------------- minute (0 - 59) </span><br><span class="line"># |  .------------- hour (0 - 23)</span><br><span class="line"># |  |  .---------- day of month (1 - 31)</span><br><span class="line"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ... </span><br><span class="line"># |  |  |  |  .---- day of week (0 - 6) (Sunday&#x3D;0 or 7)  OR</span><br><span class="line">#sun,mon,tue,wed,thu,fri,sat </span><br><span class="line"># |  |  |  |  |</span><br><span class="line"># *  *  *  *  *  command to be executed</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>minute：代表一小时内的第几分，范围 0-59</li>
+<li>hour：代表一天中的第几小时，范围 0-23</li>
+<li>mday：代表一个月中的第几天，范围 1-31</li>
+<li>month：代表一年中第几个月，范围 1-12</li>
+<li>wday：代表星期几，范围 0-7 (0及7都是星期天)</li>
+<li>who：要使用什么身份执行该指令当使用 <code>crontab -e</code> 时，不必加此字段</li>
+<li>command：要执行的指令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo service crond [start&#x2F;stop&#x2F;restart&#x2F;reload&#x2F;status] #[启动&#x2F;关闭&#x2F;重启&#x2F;重载配置&#x2F;查看服务状态]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">crontab -l          # 列出crontab定时任务</span><br><span class="line">crontab -e          # 编辑crontab定时任务</span><br><span class="line">crontab $filepath   # 重新指定定时任务列表文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html</a> <a href="https://archive.fo/Xv96r">https://archive.fo/Xv96r</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>定时任务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>好用的批量扫米工具DomainMegaBot</title>
+    <url>/2018/08/15/dmb/</url>
+    <content><![CDATA[<p>项目地址<br><a href="https://github.com/Har-Kuun/DomainMegaBot">https://github.com/Har-Kuun/DomainMegaBot</a></p>
+<a id="more"></a>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;Har-Kuun&#x2F;DomainMegaBot&#x2F;archive&#x2F;master.zip #下载</span><br><span class="line">unzip master.zip  #解压</span><br><span class="line">cd DomainMegaBot-master #进入目录</span><br><span class="line">gcc -o DomainMegaBot DomainMegaBot.c #编译</span><br><span class="line">.&#x2F;DomainMegaBot 运行</span><br></pre></td></tr></table></figure>
+<p><code>PLEASE SPECIFY TLD</code> - 输入查询域名的后缀，如<code>com</code> <code>cc</code>等,注意不要在后缀前加点</p>
+<p><code>PLEASE SPECIFY DICTIONARY FILE</code> - 指定查询的字典，项目目录下放置了两个字典文件，分别是<code>DICT_1000_WORD</code>和<code>DICT_LLL</code>，这里直接输入你的字典文件名即可，如<code>DICT_LLL</code></p>
+<p>此外,在下面这个项目中也有词典可以拿来用</p>
+<blockquote>
+<p><a href="https://github.com/jekyllcao/BAT_Check_DomainName">https://github.com/jekyllcao/BAT_Check_DomainName</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>Domain</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DNSCrypt-Proxy的使用</title>
+    <url>/2018/04/11/dnscrypt/</url>
+    <content><![CDATA[<p><a href="https://zh.wikipedia.org/zh-hans/DNSCrypt">DNSCrypt</a>通过加密DNS服务器通信，来实现保护用户的目的。如防止运营商的DNS劫持，广告跟踪植入，保护个人隐私。</p>
+<p><a href="https://github.com/jedisct1/dnscrypt-proxy">DNSCrypt Proxy</a>可以让我们使用这项功能，并且支持非常多的平台</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> #macOS安装</span><br><span class="line"> brew install dnscrypt-proxy</span><br><span class="line"></span><br><span class="line">其他平台的[安装指南](https:&#x2F;&#x2F;github.com&#x2F;jedisct1&#x2F;dnscrypt-proxy&#x2F;wiki)</span><br><span class="line"></span><br><span class="line">[其他平台的安装包](https:&#x2F;&#x2F;github.com&#x2F;jedisct1&#x2F;dnscrypt-proxy&#x2F;releases)</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>此软件macOS版本的配置文件在<code>/usr/local/etc/dnscrypt-proxy.toml</code></p>
+<p>其他版本视解压位置而定,但名字同样是<code>dnscrypt-proxy.toml</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#软件的监听地址，如果机器不支持ipv6，就把ipv6监听部分删除，不然会报错</span><br><span class="line"></span><br><span class="line"> listen_addresses &#x3D; [&#39;127.0.0.1:53&#39;, &#39;[::1]:53&#39;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#macOS的启动命令</span><br><span class="line"> sudo brew services start dnscrypt-proxy</span><br><span class="line"></span><br><span class="line">#Linux的启动命令</span><br><span class="line"> sudo .&#x2F;dnscrypt-proxy -service install &#x2F;&#x2F;第一次启动要先安装</span><br><span class="line"></span><br><span class="line"> sudo .&#x2F;dnscrypt-proxy -service start &#x2F;&#x2F;安装后启动的命令</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p> 与DNSmaqs联用，DNSCrypt-proxy作为上级DNS,创建纯净的解析环境</p>
+<p> 添加这个配置文件<a href="https://github.com/CNMan/dnscrypt-proxy-config">dnscrypt-proxy-config</a>可以提高解析国内域名的速度</p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>隐私保护</tag>
+        <tag>DNS</tag>
+        <tag>基础服务</tag>
+        <tag>网络优化</tag>
+        <tag>Web开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在中国大陆好用的DNS</title>
+    <url>/2018/04/06/dnslist/</url>
+    <content><![CDATA[<h2 id="文章简介"><a href="#文章简介" class="headerlink" title="文章简介"></a>文章简介</h2><p>这里选择了一些在中国大陆好用的公共DNS服务<br>污染小，响应速度快<br>还有一些其他的使用技巧</p>
+<a id="more"></a>
+<h2 id="DNS服务的网站及服务器信息"><a href="#DNS服务的网站及服务器信息" class="headerlink" title="DNS服务的网站及服务器信息"></a>DNS服务的网站及服务器信息</h2><table>
+<thead>
+<tr>
+<th>详细信息站点</th>
+<th>服务器IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.233py.com/">GeekDNS</a></td>
+<td><a href="https://ndns.233py.com/dns-query">https://ndns.233py.com/dns-query</a></td>
+</tr>
+<tr>
+<td><a href="https://www.rubyfish.cn/docs">红鱼DNS</a></td>
+<td>dns.rubyfish.cn</td>
+</tr>
+<tr>
+<td><a href="https://www.onedns.net/personal">ONE DNS</a></td>
+<td>117.50.11.11;117.50.22.22</td>
+</tr>
+<tr>
+<td><a href="http://ip.yqie.com/dns_jiaoyu.htm">北京教育网</a></td>
+<td>58.132.8.1</td>
+</tr>
+<tr>
+<td><a href="http://aixyz.com/">AIXYZ DNS</a></td>
+<td>南方：115.159.146.99 北方：123.206.21.48</td>
+</tr>
+<tr>
+<td>中科大 DNS</td>
+<td>202.38.64.1;202.112.20.131;202.141.160.95;202.141.160.99;202.141.176.95 ;202.141.176.99</td>
+</tr>
+<tr>
+<td><a href="https://www.dnspod.cn/products/public.dns">PUBLIC DNS+</a></td>
+<td>119.29.29.29</td>
+</tr>
+<tr>
+<td><a href="http://www.sdns.cn/">sDNS(CNNIC)</a></td>
+<td>1.2.4.8; 210.2.4.8</td>
+</tr>
+<tr>
+<td><a href="http://www.alidns.com/">ALIDNS</a></td>
+<td>223.5.5.5; 223.6.6.6</td>
+</tr>
+<tr>
+<td>V2EX DNS</td>
+<td>199.91.73.222;178.79.131.110</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openertech/openerdns/wiki/OpenerDNS">OpenerDNS</a></td>
+<td>42.120.21.30</td>
+</tr>
+</tbody></table>
+<h2 id="针对不同设备的DNS设置推荐"><a href="#针对不同设备的DNS设置推荐" class="headerlink" title="针对不同设备的DNS设置推荐"></a>针对不同设备的DNS设置推荐</h2><h3 id="Windows-Linux-macOS"><a href="#Windows-Linux-macOS" class="headerlink" title="Windows/Linux/macOS"></a>Windows/Linux/macOS</h3><p>在系统中直接设置DNS服务器地址或者尝试使用下面的软件来进一步保障上网的速度与安全</p>
+<blockquote>
+<p><a href="https://github.com/jedisct1/dnscrypt-proxy">Dnscrypt-proxy</a></p>
+<p><a href="https://github.com/shadowsocks/ChinaDNS">ChinaDNS</a></p>
+<p><a href="https://github.com/mili-tan/AuroraDNS.GUI">AuroraDNS</a><br><code>AuroraDNS</code> 是一个纯净、简单、面向普通用户的图形化的本地 DoH 客户端。它在本地将 <code>DNS over HTTPS</code> 转换为传统的 <code>DNS</code> 协议。</p>
+</blockquote>
+<h3 id="移动设备"><a href="#移动设备" class="headerlink" title="移动设备"></a>移动设备</h3><p>由于一些移动设备用户无法通过系统自行修改DNS配置<br>比如iPhone只能修改Wi-Fi的DNS配置但无法修改4G网络DNS<br>所以我们需要一些第三方软件的帮助</p>
+<h4 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h4><p>通过Surge软件，就可以更改iOS设备的DNS，如果您觉得这款软件太昂贵了。<br>也可以使用DNS Override来进行修改，不过需要花费$2.99进行内购解锁<br>以上两款软件均可通过AppStore找到</p>
+<h4 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h4><p>在Google play商店搜索“daedalus“下载安装即可</p>
+]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>DNS</tag>
+        <tag>基础服务</tag>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DNSmasq的使用（一）</title>
+    <url>/2018/04/10/dnsmasq1/</url>
+    <content><![CDATA[<p>DNSmasq是一个用于配置DNS和DHCP的轻便工具，适合小型网络，利用得当可以防污染，防劫持，消除广告，还可以搭配其他软件实现更多功能</p>
+<a id="more"></a>
+
+<h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#CentOS&#x2F;Debian安装</span><br><span class="line">yum&#x2F;apt-get install dnsmasq</span><br><span class="line"></span><br><span class="line">#macOS安装</span><br><span class="line">brew install dnsmasq</span><br></pre></td></tr></table></figure>
+<p>Linux系统安装后的配置文件一般在 <code>/etc/dnsmasq.conf</code><br>macOS需要运行<code>brew info dnsmasq</code>来查找配置文件地址</p>
+<h4 id="配置文件部分说明"><a href="#配置文件部分说明" class="headerlink" title="配置文件部分说明"></a>配置文件部分说明</h4><p><code>strict-order</code> 意味着解析域名时，dnsmasq会按照<code>/etc/resolv.conf</code>文件中DNS服务器的顺序进行解析，直到解析成功为止。</p>
+<p><code>/etc/resolv.conf</code>是系统自带的文件。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 修改下面这个server字段，也可以添加上游DNS，而不需要修改 &#x2F;etc&#x2F;resolv.conf 使用no-resolv将此功能关闭</span><br><span class="line"># no-resolv 关闭上游dns</span><br><span class="line"># Add other name servers here, with domain specs if they are for</span><br><span class="line"># non-public domains.</span><br><span class="line">server&#x3D;上游DNSIP#port</span><br></pre></td></tr></table></figure>
+
+<p><code>listen-address</code> 表示DNS服务监听的地址。若仅本机使用，则使用<code>127.0.0.1</code>。如果想对局域网中的其他机器共同使用这个DNS服务器，还需要加上局域网中的地址<code>192.168.78.1,127.0.0.1</code>,同理，若想要建立公网DNS服务，则需要写入本机的公网IP。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#根据包管理器和系统的不同，使用的启动命令也不相同，以下三种是比较常用的</span><br><span class="line">sudo brew services start dnsmasq</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;dnsmasq start</span><br><span class="line">service dnsmasq start</span><br></pre></td></tr></table></figure>
+<h4 id="投入使用"><a href="#投入使用" class="headerlink" title="投入使用"></a>投入使用</h4><p>进入系统网络设置中将DNS修改为<code>127.0.0.1</code></p>
+<h4 id="测试服务"><a href="#测试服务" class="headerlink" title="测试服务"></a>测试服务</h4><p>测试DNS服务，一般常用dig命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dig @dns domain.com</span><br><span class="line"></span><br><span class="line"># 若显示找不到命令，可能是没有安装相关软件，下方命令供参考</span><br><span class="line"></span><br><span class="line">apt-get install dnsutils</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>防火墙开启53端口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;sysconfig&#x2F;iptables</span><br><span class="line"></span><br><span class="line">-A INPUT -p udp -m state --state NEW --dport 53 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW --dport 53 -j ACCEPT</span><br><span class="line">#重启iptables使修改生效</span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
+<p>因为使用了海外DNS服务，有可能会解析到无法访问的地址,使用<a href="https://github.com/felixonmars/dnsmasq-china-list">dnsmasq-china-list</a>可以解决这个问题</p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>隐私保护</tag>
+        <tag>DNS</tag>
+        <tag>基础服务</tag>
+        <tag>网络优化</tag>
+        <tag>Web开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker面板的介绍与简单使用</title>
+    <url>/2018/10/05/dockerpanel/</url>
+    <content><![CDATA[<p>关于docker的图形化管理有很多工具，这里介绍一下易用的一些工具</p>
+<a id="more"></a>
+
+<h2 id="Portainer"><a href="#Portainer" class="headerlink" title="Portainer"></a>Portainer</h2><p>Portainer是一个基于Docker API的轻量级Docker图形化界面</p>
+<p>功能十分全面,如显示状态、应用部署、显示日志、Swarm集群等功能</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="单机安装"><a href="#单机安装" class="headerlink" title="单机安装"></a>单机安装</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker volume create portainer_data</span><br><span class="line">docker run -d -p 9000:9000 --name portainer --restart always -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock -v portainer_data:&#x2F;data portainer&#x2F;portainer</span><br></pre></td></tr></table></figure>
+
+<p>安装完成之后,访问<code>http://[ip地址]:9000</code>,即可开始设置面版模式和管理员密码,在单机模式下应该选择<code>local</code></p>
+<h4 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -L https:&#x2F;&#x2F;portainer.io&#x2F;download&#x2F;portainer-agent-stack.yml -o portainer-agent-stack.yml</span><br><span class="line">docker stack deploy --compose-file&#x3D;portainer-agent-stack.yml portainer</span><br><span class="line"># 更多详细信息参考:https:&#x2F;&#x2F;portainer.readthedocs.io&#x2F;en&#x2F;stable&#x2F;index.html</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -L https:&#x2F;&#x2F;github.com&#x2F;docker&#x2F;compose&#x2F;releases&#x2F;download&#x2F;1.24.1&#x2F;docker-compose-&#96;uname -s&#96;-&#96;uname -m&#96; -o &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose</span><br><span class="line">chmod +x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose</span><br><span class="line"># 安装docker-compose</span><br></pre></td></tr></table></figure>
+
+<h5 id="加入节点"><a href="#加入节点" class="headerlink" title="加入节点"></a>加入节点</h5><p>需要在docker节点上开启远程管理端口：2375或2376（建议使用2376端口,开通步骤参考:<a href="https://docs.docker.com/engine/security/https/%EF%BC%89">https://docs.docker.com/engine/security/https/）</a></p>
+<p>点击<code>Add Endportainer</code>添加节点,写入相应信息</p>
+<h2 id="Seagull"><a href="#Seagull" class="headerlink" title="Seagull"></a>Seagull</h2><blockquote>
+<p><a href="https://github.com/tobegit3hub/seagull">https://github.com/tobegit3hub/seagull</a></p>
+</blockquote>
+<p>安装 <code>docker run -d -p 10086:10086 -v /var/run/docker.sock:/var/run/docker.sock tobegit3hub/seagull</code></p>
+<ul>
+<li>非常简单,基本不需要特殊配置</li>
+<li>功能少,无法在这面板上新建运行</li>
+<li>没有登录系统,只能靠网站配置文件加密码</li>
+</ul>
+<h2 id="EasyDockerWeb"><a href="#EasyDockerWeb" class="headerlink" title="EasyDockerWeb"></a>EasyDockerWeb</h2><blockquote>
+<p><a href="https://github.com/qfdk/EasyDockerWeb">https://github.com/qfdk/EasyDockerWeb</a></p>
+</blockquote>
+<ul>
+<li>安装简单</li>
+<li>功能齐全</li>
+<li>访问控制需要自己做</li>
+</ul>
+<h2 id="Rancher"><a href="#Rancher" class="headerlink" title="Rancher"></a>Rancher</h2><blockquote>
+<p><a href="https://rancher.com/">https://rancher.com/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>面板</tag>
+        <tag>Web开发</tag>
+        <tag>Docker</tag>
+        <tag>集群</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设置与查看Docker容器环境变量</title>
+    <url>/2018/06/04/dockerenv/</url>
+    <content><![CDATA[<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>通过ENV指令来为Docker容器设置环境变量.</p>
+<h3 id="Docker容器环境变量设置方法"><a href="#Docker容器环境变量设置方法" class="headerlink" title="Docker容器环境变量设置方法"></a>Docker容器环境变量设置方法</h3><p>使用ENV指令可以用于为docker容器设置环境变量。<br>在运行前修改环境变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --env &lt;key&gt;&#x3D;&lt;value&gt; &lt;IMAGE-ID&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>Linux系统下相关环境变量设置有以下几个文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~&#x2F;.bashrc</span><br><span class="line">~&#x2F;.profile</span><br><span class="line">~&#x2F;.bash_profile</span><br><span class="line">&#x2F;etc&#x2F;profile</span><br><span class="line">&#x2F;etc&#x2F;environment</span><br><span class="line">&#x2F;etc&#x2F;bash.bashrc</span><br></pre></td></tr></table></figure>
+<h2 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h2><p>如果我们需要查看ENV设置的环境变量，可通过以下方法进行查看。</p>
+<h3 id="使用docker-inspect查看"><a href="#使用docker-inspect查看" class="headerlink" title="使用docker inspect查看"></a>使用docker inspect查看</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker inspect &lt;CONTAINER-NAME&gt; OR &lt;CONTAINER-ID&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="使用docker-exec查看"><a href="#使用docker-exec查看" class="headerlink" title="使用docker exec查看"></a>使用docker exec查看</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker exec -it &lt;CONTAINER-NAME&gt; OR &lt;CONTAINER-ID&gt; env</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用Dropbox等云存储搭建网站</title>
+    <url>/2019/08/11/dr4hs/</url>
+    <content><![CDATA[<p>低成本搭建网站有很多方法,比如gitpage或者云服务商提供免费福利,这里列出一些利用同步盘建站的服务</p>
+<p>还有一些其他的免费架站方案</p>
+<a id="more"></a>
+
+<h2 id="KISSr"><a href="#KISSr" class="headerlink" title="KISSr"></a>KISSr</h2><ul>
+<li><a href="https://www.kissr.com/">https://www.kissr.com/</a></li>
+<li>详细教程: <a href="https://free.com.tw/kissr/">https://free.com.tw/kissr/</a> <a href="https://archive.fo/bL0ky">https://archive.fo/bL0ky</a></li>
+<li>有免费服务,付费是每月5美元</li>
+<li>付费后允许自定义域名、无限带宽、无限存储空间和无限个网站数</li>
+</ul>
+<h2 id="Cloud-Cannon"><a href="#Cloud-Cannon" class="headerlink" title="Cloud Cannon"></a>Cloud Cannon</h2><ul>
+<li><a href="https://cloudcannon.com/">https://cloudcannon.com/</a></li>
+<li>使用的是jekyll,可以用多种git服务部署比如GitHub和gitlab等等</li>
+<li>自带模板,可以直观的编辑网站,”所见即所得”</li>
+<li>有免费服务,付费每个月20.83美元起</li>
+</ul>
+<h2 id="DropPages"><a href="#DropPages" class="headerlink" title="DropPages"></a>DropPages</h2><ul>
+<li><a href="http://droppages.com/">http://droppages.com/</a></li>
+<li>详细教程: <a href="https://free.com.tw/droppages/">https://free.com.tw/droppages/</a> <a href="https://archive.fo/4E2rF">https://archive.fo/4E2rF</a></li>
+<li>有免费服务,付费每月5英镑起</li>
+</ul>
+<h2 id="UpDog"><a href="#UpDog" class="headerlink" title="UpDog"></a>UpDog</h2><ul>
+<li><a href="https://updog.co/">https://updog.co/</a></li>
+<li>详细教程: <a href="https://51.ruyo.net/3526.html">https://51.ruyo.net/3526.html</a> <a href="https://archive.fo/CZUW7">https://archive.fo/CZUW7</a> 这个大佬的博客中有个很好的示例代码</li>
+<li>详细教程: <a href="https://free.com.tw/updog-co/">https://free.com.tw/updog-co/</a> <a href="https://archive.fo/IJnJ0">https://archive.fo/IJnJ0</a></li>
+<li>支持Google Drive 和Dropbox</li>
+<li>有免费服务,付费每月3美元</li>
+<li>付费后,无限站点数，无限网站文件夹共享，自定义主页，支持markdown渲染，站点密码保护</li>
+<li>仅有订阅制付费,一次性付费计划已被取消</li>
+</ul>
+<h2 id="Site44"><a href="#Site44" class="headerlink" title="Site44"></a>Site44</h2><ul>
+<li><a href="http://www.site44.com/">http://www.site44.com/</a></li>
+<li>详细教程: <a href="https://free.com.tw/site44-turns-dropbox-into-web-hosting/">https://free.com.tw/site44-turns-dropbox-into-web-hosting/</a> <a href="https://archive.fo/SDP7w">https://archive.fo/SDP7w</a></li>
+<li>没有免费服务但是可以免费试用一个月,付费每月4.95美元起</li>
+</ul>
+<h2 id="Pancake-io"><a href="#Pancake-io" class="headerlink" title="Pancake.io"></a>Pancake.io</h2><ul>
+<li><a href="https://www.pancake.io/">https://www.pancake.io</a></li>
+<li>详细教程: <a href="https://free.com.tw/pancake/">https://free.com.tw/pancake/</a> <a href="https://archive.fo/Wbgyu">https://archive.fo/Wbgyu</a></li>
+<li>支持 Dropbox 和 git 方式部署</li>
+<li>没有免费服务但可以免费试用一个月,付费每月5美元</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="Neocities"><a href="#Neocities" class="headerlink" title="Neocities"></a>Neocities</h3><ul>
+<li><a href="https://neocities.org/">https://neocities.org/</a></li>
+<li><a href="https://free.com.tw/neocities/">https://free.com.tw/neocities/</a> <a href="https://archive.fo/VLtBK">https://archive.fo/VLtBK</a></li>
+<li>HTML/CSS空间,仅支持上传</li>
+<li>免费服务1 GB 空间、200 GB 月流量,付费服务每月5美元50GB空间、3000GB流量</li>
+</ul>
+<h3 id="Zymic"><a href="#Zymic" class="headerlink" title="Zymic"></a>Zymic</h3><ul>
+<li><a href="http://www.zymic.com/">http://www.zymic.com/</a></li>
+<li><a href="https://free.com.tw/free-web-hosting-zymic/">https://free.com.tw/free-web-hosting-zymic/</a> </li>
+<li>支持PHP5 / MySQL / FTP</li>
+<li>免费服务6 GB空间 50GB月流量,可以通过付费来提升配置</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Service</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>Dropbox</tag>
+        <tag>建站</tag>
+        <tag>云存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用dynu免费ddns的教程</title>
+    <url>/2019/04/28/dynuddns/</url>
+    <content><![CDATA[<p>平时会使用到一些动态ip主机,或者是有自己的NAS,都需要使用DDNS</p>
+<p>设置DDNS如果有自己的域名就很容易,国内的阿里腾讯的云服务,海外有CF和HE等的解析服务,都可以用简单的脚本实现ddns</p>
+<p>但是有些时候没有充裕的域名资源进行ddns设置,这时就需要用到免费的ddns服务了,这里记录的是dynu.com ddns的使用方法</p>
+<a id="more"></a>
+
+
+<h2 id="DDNS使用方法"><a href="#DDNS使用方法" class="headerlink" title="DDNS使用方法"></a>DDNS使用方法</h2><p>首先需要注册一个<a href="https://www.dynu.com/en-US/">https://www.dynu.com/en-US/</a> 的账号,打开动态域名解析服务添加一个域名,此时ipv4地址和位置名(Location)</p>
+<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>Red Hat 系列系统</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -ivh https:&#x2F;&#x2F;www.dynu.com&#x2F;support&#x2F;downloadfile&#x2F;30 </span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu 16</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">URL&#x3D;&#39;https:&#x2F;&#x2F;www.dynu.com&#x2F;support&#x2F;downloadfile&#x2F;31&#39;; FILE&#x3D;&#96;mktemp&#96;; wget &quot;$URL&quot; -qO $FILE &amp;&amp; sudo dpkg -i $FILE; rm $FILE</span><br></pre></td></tr></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>配置文件位置 <code>vi /etc/dynuiuc/dynuiuc.conf</code></p>
+<p>配置文件内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username YOURUSERNAME  # Your account username.(你的用户名)</span><br><span class="line">password YOURPASSWORD  # Your account password or IP update password. (你的用户密码或者IP更新密码)</span><br><span class="line">location LOCATIONNAME  # Can be left empty. Location name can be assigned to hostnames in the control panel.(所使用域名的位置名,这里的位置名就是面板中的 Location )</span><br><span class="line">ipv4 true              # Can be true or false.(开启更新ipv4地址)</span><br><span class="line">ipv6 false             # Can be true or false.(关闭更新ipv6地址)</span><br><span class="line">pollinterval 300       # IP update interval in seconds. Minimum is 120.(IP更新时间,最小120秒)</span><br><span class="line">debug false            # Can be true or false</span><br><span class="line">quiet true             # Can be true or false</span><br><span class="line">&#96;&#96;&#96;         </span><br><span class="line"></span><br><span class="line">示例配置</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">username webtester</span><br><span class="line">password somepassword</span><br><span class="line">location Work</span><br><span class="line">ipv4 true</span><br><span class="line">ipv6 false</span><br><span class="line">pollinterval 300</span><br><span class="line">debug false</span><br><span class="line">quiet true</span><br></pre></td></tr></table></figure>
+
+<p>编辑并保存好配置文件后,需要重启服务,命令为 <code>systemctl restart dynuiuc.service</code>         </p>
+<p>配置定时执行,以便及时更新IP地址,运行命令 <code>crontab -e</code></p>
+<p>在输入界面写入下面这行并保存,这里是每十分钟重启一次服务,以更新IP地址</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*&#x2F;10 * * * * systemctl restart dynuiuc.service</span><br></pre></td></tr></table></figure>
+
+<p>管理服务使用的命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start dynuiuc.service   #启动服务</span><br><span class="line">systemctl stop dynuiuc.service    #停止服务</span><br><span class="line">systemctl restart dynuiuc.service #重启服务</span><br><span class="line">systemctl status dynuiuc.service  #服务状态</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看和截断日志文件的方法"><a href="#查看和截断日志文件的方法" class="headerlink" title="查看和截断日志文件的方法"></a>查看和截断日志文件的方法</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看实时日志: tail -f &#x2F;var&#x2F;log&#x2F;dynuiuc.log</span><br><span class="line">查看日志文件: cat &#x2F;var&#x2F;log&#x2F;dynuiuc.log</span><br><span class="line">截断日志文件: cat &#x2F;dev&#x2F;null &gt; &#x2F;var&#x2F;log&#x2F;dynuiuc.log</span><br><span class="line">查看服务状态: systemctl status dynuiuc.service -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><p>Debian 系统安装 DDClient</p>
+<p>更换时区并对时</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo &quot;y&quot; |cp &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime </span><br><span class="line">apt-get install -y ntpdate;ntpdate cn.pool.ntp.org</span><br><span class="line">date</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-get install ddclient</span><br></pre></td></tr></table></figure>
+
+<p>跟随安装提示,一步一步输入信息</p>
+<p>如果需要修改可以直接修改配置文件</p>
+<p>DDClient配置文件位于 <code>/etc/ddclient.conf</code></p>
+<p>测试(检查输出的公网IP是否正确):<code>ddclient -daemon=0 -debug -verbose -noquiet</code></p>
+<p>开启进程守护:<code>/usr/sbin/ddclient -daemon 120 -syslog</code></p>
+<p>默认情况下,本机记录文件中的IP不变,软件就不会更新IP,可以通过自己设置定时任务的方式修改更新时间<br>设置定时任务,运行命令 <code>crontab -e</code>,输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*&#x2F;5 * * * * rm &#x2F;var&#x2F;cache&#x2F;ddclient&#x2F;*.* # 每5分钟删除IP更新缓存记录</span><br><span class="line">*&#x2F;5 * * * * ddclient # 每5分钟更新并同步IP记录</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法3"><a href="#方法3" class="headerlink" title="方法3"></a>方法3</h3><p>首先,需要安装curl</p>
+<p>然后运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl &quot;http:&#x2F;&#x2F;api.dynu.com&#x2F;nic&#x2F;update?hostname&#x3D;example.ddnsfree.com&amp;password&#x3D;passwd&quot;</span><br></pre></td></tr></table></figure>
+
+<p>把 <code>example.ddnsfree.com</code> 改为刚申请的域名，<code>passwd</code> 改为你账户的密码,然后执行。运行需要一点时间,需要等待.</p>
+<p>直到输出 <code>good xxx.xxx.xxx.xxx</code>,ddns更新成功</p>
+<p>输入命令 <code>crontab -e</code></p>
+<p>在接下来的界面输入下面的配置并保存</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*&#x2F;1 * * * * curl &quot;http:&#x2F;&#x2F;api.dynu.com&#x2F;nic&#x2F;update?hostname&#x3D;example.ddnsfree.com&amp;password&#x3D;passwd&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>安装crontab</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># centos</span><br><span class="line">yum install vixie-cron</span><br><span class="line">yum install crontabs</span><br><span class="line">-----------------</span><br><span class="line"># Ubuntu</span><br><span class="line">apt-get install cron</span><br></pre></td></tr></table></figure>
+
+<p>查看计划任务状态,出现<code>Active Running</code>说明定时任务设置成功</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Ubuntu</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;cron status</span><br><span class="line"># centos</span><br><span class="line">&#x2F;bin&#x2F;systemctl status crond.service </span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://www.dynu.com/DynamicDNS/IPUpdateClient/Linux">https://www.dynu.com/DynamicDNS/IPUpdateClient/Linux</a><br><a href="https://www.dynu.com/DynamicDNS/IPUpdateClient/DDClient">https://www.dynu.com/DynamicDNS/IPUpdateClient/DDClient</a><br><a href="https://www.pqs.pw/knowledgebase/9/DDNSdynuTTL30.html">https://www.pqs.pw/knowledgebase/9/DDNSdynuTTL30.html</a><br><a href="https://archive.fo/2Utuw">https://archive.fo/2Utuw</a><br><a href="https://www.eaavps.com/253.html">https://www.eaavps.com/253.html</a><br><a href="https://archive.fo/ZtEOE">https://archive.fo/ZtEOE</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>dns</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Firefox启用DNS Over HTTPS</title>
+    <url>/2018/07/08/ffdoh/</url>
+    <content><![CDATA[<p>DNS over HTTPS是一个进行安全化的域名解析的方案，目前尚处于实验性阶段。其意义在于以加密的HTTPS协议进行DNS解析请求，避免原始DNS协议中用户的DNS解析请求被窃听或者修改的问题（例如中间人攻击）来达到保护用户隐私的目的。现在主要是在 Google、Cloudflare 和 Mozilla 等科技公司在产品中进行使用,更多介绍点击这里<a href="https://zh.wikipedia.org/wiki/DNS_over_HTTPS">DNS-Over-HTTPS</a></p>
+<!----more---->
+<h2 id="Firefox启用DNS-Over-HTTPS"><a href="#Firefox启用DNS-Over-HTTPS" class="headerlink" title="Firefox启用DNS Over HTTPS"></a>Firefox启用DNS Over HTTPS</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>由于DNS-Over-HTTPS是一种新出现的实验性技术,所以需要新建一个Firefox的配置来启用该项功能</p>
+<p>在运行中输入<code>firefox.exe -p -no-remote</code>，新建一个Firefox的配置。</p>
+<p>关于Firefox如何管理配置文件请看<a href="https://support.mozilla.org/zh-CN/kb/%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">官方说明</a></p>
+<h2 id="开启DNS-Over-HTTPS"><a href="#开启DNS-Over-HTTPS" class="headerlink" title="开启DNS Over HTTPS"></a>开启DNS Over HTTPS</h2><p>打开 about:config 修改以下三处的相应值</p>
+<h3 id="network-trr-mode"><a href="#network-trr-mode" class="headerlink" title="network.trr.mode"></a>network.trr.mode</h3><ul>
+<li>0 : 禁用该功能</li>
+<li>1 :设置Firefox为更快的模式</li>
+<li>2 :使用DNS Over HTTPS，并配置常规DNS使用</li>
+<li>3 :仅仅使用TRR模式</li>
+</ul>
+<p>由于要尝试DNS-Over-HTTPS,这里推荐选择3</p>
+<h3 id="network-trr-uri"><a href="#network-trr-uri" class="headerlink" title="network.trr.uri"></a>network.trr.uri</h3><p>这里应写DNS提供商的网址,鉴于某些原因,更推荐使用Cloudflare的服务</p>
+<ul>
+<li><a href="https://cloudflare-dns.com/dns-query">https://cloudflare-dns.com/dns-query</a></li>
+<li><a href="https://mozilla.cloudflare-dns.com/dns-query">https://mozilla.cloudflare-dns.com/dns-query</a></li>
+<li><a href="https://1.1.1.1/dns-query">https://1.1.1.1/dns-query</a></li>
+<li><a href="https://dns.google.com/experimental">https://dns.google.com/experimental</a></li>
+</ul>
+<p>前三个是Cloudflare的服务,最后一个是Google的,如果你有个人服务器的话可以尝试<a href="https://github.com/m13253/dns-over-https">自建</a></p>
+<h3 id="network-trr-bootstrapAddress"><a href="#network-trr-bootstrapAddress" class="headerlink" title="network.trr.bootstrapAddress"></a>network.trr.bootstrapAddress</h3><p>推荐修改为<code>1.1.1.1</code>或是<code>1.0.0.1</code></p>
+<p>设置完成后重启浏览器</p>
+<h2 id="检查DNS-Over-HTTPS设置是否生效"><a href="#检查DNS-Over-HTTPS设置是否生效" class="headerlink" title="检查DNS Over HTTPS设置是否生效"></a>检查DNS Over HTTPS设置是否生效</h2><p>打开下面的网站进行检查</p>
+<blockquote>
+<p>ipleak <a href="https://www.ipleak.net/">https://www.ipleak.net/</a></p>
+</blockquote>
+<p>如果你把<code>network.trr.mode</code>改为<code>3</code>那么DNS Address后面内容应该为0 servers</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>Firefox <a href="https://www.mozilla.org/en-US/firefox/channel/desktop/">下载地址</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>DNS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>免费使用 IBM Cloud Lite</title>
+    <url>/2019/08/10/freeibm/</url>
+    <content><![CDATA[<p>免费提供的云服务很多,比如GCP,这里介绍的是IBM Cloud</p>
+<a id="more"></a>
+
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>注册链接 <a href="https://console.ng.bluemix.net/registration/free">https://console.ng.bluemix.net/registration/free</a><br>注册后不需要绑定银行卡等操作 因为是完全免费的</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>登录地址 <a href="https://cloud.ibm.com/login">https://cloud.ibm.com/login</a> </p>
+<p>点击创建资源,这里的资源很多,需要免费资源则选择轻量 (Cloud Foundry 应用程序) </p>
+<p>免费额度是256M内存,也就意味着可以创建4个64M内存、2个128M内存或者1个256M内存的程序</p>
+<p>免费应用的限制:超过 10 天没有开发活动，应用程序将进入休眠. 超过 30 天没有开发活动，将删除轻量套餐的服务实例.使用<a href="https://intl.huramkin.com/2019/01/20/monitor/#more">监控服务</a>来防止收回</p>
+<p>可以创建的应用类型有 <code>java/nodejs/php/go</code> 等,但是不支持使用root权限,看起来只能使用控制台网页里面的ssh进行控制,在”运行时”选项里就可以找到ssh</p>
+<p>代码部署的目录在 <code>/home/vcap/app</code> ,刚创建时会有一个示例页面,那个示例页面代码的所在位置应该就是代码部署的目录</p>
+<h2 id="绑定信用卡之后"><a href="#绑定信用卡之后" class="headerlink" title="绑定信用卡之后"></a>绑定信用卡之后</h2><p>绑定信用卡后除了已经拥有的访问权限,还能解锁更多的功能</p>
+<p>比如,免费 Cloud Foundry 内存额度增加到 512 MB还有可以获得一个月有效期的200美元赠金等等</p>
+<p>可以在 <a href="https://console.bluemix.net/containers-kubernetes/catalog/cluster/create">https://console.bluemix.net/containers-kubernetes/catalog/cluster/create</a> 启用免费的k8s集群容器</p>
+<p>如果不想绑定卡,还可以通过购买或者申请教育优惠码来使用,使用国内大学的邮箱即可通过</p>
+<p>免费的k8s集群的配置是 100G机械硬盘、共享G口带宽、共享IP、不限流量、支持所有数据中心、端口随机分配</p>
+<p>免费k8s开通后只能使用一个月到期会删除</p>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><ul>
+<li>在这里防止收回的方法同样适用于防止 <code>heroku</code> 收回免费资源</li>
+<li>同样支持这类免费服务的还有Red Hat的 <a href="https://www.openshift.com/">https://www.openshift.com/</a></li>
+<li>这篇文章仅是一个简单的记录,需要更多信息看参考中的网页</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://51.ruyo.net/12065.html#1">https://51.ruyo.net/12065.html#1</a><br><a href="https://51.ruyo.net/12084.html">https://51.ruyo.net/12084.html</a><br><a href="https://51.ruyo.net/3902.html">https://51.ruyo.net/3902.html</a><br><a href="https://cloud.ibm.com/docs/account?topic=account-accounts#accounts">https://cloud.ibm.com/docs/account?topic=account-accounts#accounts</a><br><a href="https://archive.fo/2cnEu">https://archive.fo/2cnEu</a><br><a href="https://archive.fo/WnCsj">https://archive.fo/WnCsj</a><br><a href="https://archive.fo/s7zcH">https://archive.fo/s7zcH</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Cloud</category>
+      </categories>
+      <tags>
+        <tag>服务器</tag>
+        <tag>web</tag>
+        <tag>云服务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>免费的SSL证书申请</title>
+    <url>/2019/08/22/freessl1/</url>
+    <content><![CDATA[<p>购买ssl证书价格不菲,但是也有很多免费的证书,足够个人站长使用</p>
+<a id="more"></a>
+
+<h2 id="Let’s-Encrypt"><a href="#Let’s-Encrypt" class="headerlink" title="Let’s Encrypt"></a>Let’s Encrypt</h2><p><a href="https://gethttpsforfree.com/">https://gethttpsforfree.com/</a></p>
+<p><a href="https://www.sslforfree.com/">https://www.sslforfree.com/</a></p>
+<p>除了使用网页工具,还可以使用 <code>certbot</code> 或 <code>acme.sh</code> 手动发行</p>
+<h2 id="ZeroSSL"><a href="#ZeroSSL" class="headerlink" title="ZeroSSL"></a>ZeroSSL</h2><p><a href="https://zerossl.com/">https://zerossl.com/</a></p>
+<h2 id="TrustAsia"><a href="#TrustAsia" class="headerlink" title="TrustAsia"></a>TrustAsia</h2><p><a href="https://freessl.cn/">https://freessl.cn/</a></p>
+<p>这网站不仅仅提供<code>TrustAsia</code>的证书,还提供 <code>Let’s Encrypt</code>证书</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p>CSR 在线生成工具 <a href="https://www.csr.sh/">https://www.csr.sh/</a><br><a href="https://teddysun.com/527.html">https://teddysun.com/527.html</a><br><a href="https://letsencrypt.org/getting-started/">https://letsencrypt.org/getting-started/</a><br><a href="https://free.com.tw/ssl-for-free/">https://free.com.tw/ssl-for-free/</a><br><a href="https://free.com.tw/zerossl/">https://free.com.tw/zerossl/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>软件</tag>
+        <tag>SSL</tag>
+        <tag>docker</tag>
+        <tag>服务器</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gmail 别名的使用</title>
+    <url>/2019/06/02/gamil1/</url>
+    <content><![CDATA[<p>使用Gmail的时候,如果能利用好过滤器和别名,就可以把不重要的邮件筛选到指定的分类,避免不重要的邮件推送通知</p>
+<p>还可以在不同网站注册用不同的别名,还可以在同一网站用不同的别名注册小号</p>
+<p>如果你发现某个别名经常收到垃圾邮件,也就证明你的信息被使用这个别名注册网站卖掉或者泄露了</p>
+<a id="more"></a>
+
+<p>Gmail没有传统的那种别名方式，Gmail的别名是在用户名后添加<code>+</code>号和其他合法字符构成的字符串</p>
+<blockquote>
+<p>例:<br>如果邮箱地址是 <code>example@gmail.com</code><br>那么别名地址是 <code>example+任意合法字符@gmail.com</code><br>例如 <code>example+123abc@gmail.com</code><br>例如 <code>example+google.com@gmail.com</code><br>例如 <code>example+google.com-2019-6@gmail.com</code></p>
+</blockquote>
+<p>另外在Gmail用户名中任意加上点也是可以的</p>
+<blockquote>
+<p>例：<br><code>example@gmail.com</code><br><code>ex.ample@gmail.com</code><br><code>exam.ple@gmail.com</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>免费</tag>
+        <tag>隐私保护</tag>
+        <tag>Gmail</tag>
+        <tag>服务</tag>
+        <tag>电子邮件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitHub使用（一）</title>
+    <url>/2017/11/11/git1/</url>
+    <content><![CDATA[<p>GitHub的版本控制系统，用来上传与管理代码非常方便，当然可以选择比如像<a href="https://www.sourcetreeapp.com/">SourceTree</a>这类GUI,但是Git可以使用更多的功能。</p>
+<a id="more"></a>
+
+<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><h4 id="Windows中的安装"><a href="#Windows中的安装" class="headerlink" title="Windows中的安装"></a>Windows中的安装</h4><p>首先<a href="https://git-for-windows.github.io/">下载Git</a><br>安装完成后在开始中找到“Git Bash”打开之后就是像终端一样的黑框然后在这个界面里面输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;Name&quot;</span><br><span class="line">git config --global user.email &quot;email&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="macOS和Linux中的安装"><a href="#macOS和Linux中的安装" class="headerlink" title="macOS和Linux中的安装"></a>macOS和Linux中的安装</h4><p>macOS首先需要安装<a href="https://brew.sh/">Homebrew</a>使用homebrew安装git</p>
+<p>Linux根据发行版的不同使用apt-get/yum来进行安装</p>
+<h2 id="常用简单命令"><a href="#常用简单命令" class="headerlink" title="常用简单命令"></a>常用简单命令</h2><p><img src="https://github.com/Huramkin/libpic/blob/master/git1.png?raw=true"></p>
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在当前目录新建repositories</td>
+<td>git init</td>
+</tr>
+<tr>
+<td>克隆项目</td>
+<td>git clone -b <branch></td>
+</tr>
+<tr>
+<td>显示git配置</td>
+<td>git config –list</td>
+</tr>
+<tr>
+<td>添加指定文件/目录到暂存区</td>
+<td>git add</td>
+</tr>
+<tr>
+<td>提交暂存到仓库</td>
+<td>git commit -m [message]</td>
+</tr>
+<tr>
+<td>切换到上一分支</td>
+<td>git checkout</td>
+</tr>
+<tr>
+<td>下载远程仓库变更</td>
+<td>git fetch</td>
+</tr>
+<tr>
+<td>取回远程仓库并合并</td>
+<td>git pull [remote] [branch]</td>
+</tr>
+<tr>
+<td>从本地上传到远程仓库</td>
+<td>git push [remote] [branch]</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Skill</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>Code</tag>
+        <tag>Tool</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git提示error setting certificate verify locations解决办法</title>
+    <url>/2018/07/29/giterror1/</url>
+    <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Users\admin&gt;git clone https:&#x2F;&#x2F;github.com&#x2F;Kiterepo&#x2F;dns-over-https</span><br><span class="line">Cloning into &#39;clojure-getting-started&#39;...</span><br><span class="line">fatal: unable to access &#39;https:&#x2F;&#x2F;github.com&#x2F;Kiterepo&#x2F;dns-over-https&#39;: error setting certificate verify locations:</span><br><span class="line">  CAfile: D:&#x2F;ProgramFlie&#x2F;Git&#x2F;mingw64&#x2F;libexec&#x2F;ssl&#x2F;certs&#x2F;ca-bundle.crt</span><br><span class="line">  CApath: none</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>方案1<br>git config –system http.sslcainfo “C:\Program Files (x86)\git\bin\curl-ca-bundle.crt”</li>
+<li>方案2 git config –system http.sslverify false</li>
+<li>方案3 顺着报错信息在文件树里找,发现<code>D:/Git/mingw64/libexec</code>没有<code>ssl</code>目录。<br>但在<code>D:\Git\mingw64</code>目录下有<code>ssl/certs/ca-bundle.crt</code>这个路径。<br>将<code>ssl</code>目录复制到<code>D:/Git/mingw64/libexec</code>下<blockquote>
+<p>我使用方案3解决了问题</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>Git</tag>
+        <tag>error</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GPG基本使用方法</title>
+    <url>/2018/02/15/gpg/</url>
+    <content><![CDATA[<h2 id="简介及安装方式"><a href="#简介及安装方式" class="headerlink" title="简介及安装方式"></a>简介及安装方式</h2><p>GnuPG是用于加密、数字签名及产生非对称匙对的软件。下载与安装方式：<a href="https://gpgtools.org/">gpgtools</a></p>
+<a id="more"></a>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>在安装完成后在终端输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --help</span><br></pre></td></tr></table></figure>
+<p>如果安装成功，就可以看到GPG的相关使用方法</p>
+<h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --gen-key</span><br></pre></td></tr></table></figure>
+<p>输入此命令后，跟随向导设置密钥种类、长度、有效期、个人信息以及私钥密码</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h4 id="加密与解密"><a href="#加密与解密" class="headerlink" title="加密与解密"></a>加密与解密</h4><h5 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --recipient [SUBID] --output testen.txt --encrypt test.txt</span><br></pre></td></tr></table></figure>
+<h5 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --output testde.txt --decrypt testen.txt</span><br></pre></td></tr></table></figure>
+<p>recipient 指定接收者<br>output 指定加密后文件的名称<br>encrypt 指定需要被加密的文件<br>SUBID可以通过<code>gpg --list-keys</code>来获取</p>
+<h4 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h4><h5 id="仅签名"><a href="#仅签名" class="headerlink" title="仅签名"></a>仅签名</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --sign test.txt</span><br></pre></td></tr></table></figure>
+<p>如需要生成单独的签名文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --detach-sign test.txt</span><br></pre></td></tr></table></figure>
+
+<h5 id="签名并加密"><a href="#签名并加密" class="headerlink" title="签名并加密"></a>签名并加密</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --local-user [发信SUBID] --recipient [接收SUBID] --armor --sign --encrypt test.txt</span><br></pre></td></tr></table></figure>
+
+<h5 id="验证签名"><a href="#验证签名" class="headerlink" title="验证签名"></a>验证签名</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --verify test.txt.asc test.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><p>列出已有密钥</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --list-keys</span><br></pre></td></tr></table></figure>
+<p>删除已有密钥</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --delete-key [SUBID]</span><br></pre></td></tr></table></figure>
+<p>上传密钥</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --send-keys [SUBID] --keyserver hkp:&#x2F;&#x2F;subkeys.pgp.net</span><br></pre></td></tr></table></figure>
+<p>导入密钥</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --import []</span><br></pre></td></tr></table></figure>
+<p>从公钥服务器获得他人公钥</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpg --keyserver hkp:&#x2F;&#x2F;subkeys.pgp.net --search-keys [SUBID]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>隐私保护</tag>
+        <tag>加密</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录有卖日本VPS的商家</title>
+    <url>/2019/02/22/jpvps/</url>
+    <content><![CDATA[<p>这里只是记录哪里能买到日本VPS,如果想要购买请尽可能多看一些评测和评价以免踩坑</p>
+<p>日本本土商家的VPS最好不要选择,一般来说,这些商家的规定非常严格</p>
+<a id="more"></a>
+
+<h2 id="Ablenet-能网"><a href="#Ablenet-能网" class="headerlink" title="Ablenet(能网)"></a>Ablenet(能网)</h2><ul>
+<li><a href="https://www.ablenet.jp/">https://www.ablenet.jp</a></li>
+<li>允许外国人购买</li>
+<li>付费可以换IP</li>
+<li>约60元每月</li>
+<li>有评价称会被限速,购买前需要看测评</li>
+</ul>
+<h2 id="Tsukaeru"><a href="#Tsukaeru" class="headerlink" title="Tsukaeru"></a>Tsukaeru</h2><ul>
+<li><a href="https://www.tsukaeru.net/">https://www.tsukaeru.net</a></li>
+<li>允许外国人购买</li>
+<li>不能换IP</li>
+<li>约35元每月起</li>
+</ul>
+<h2 id="Conoha"><a href="#Conoha" class="headerlink" title="Conoha"></a>Conoha</h2><ul>
+<li><a href="https://www.conoha.jp/zh/">https://www.conoha.jp/zh/</a></li>
+<li>允许外国人购买</li>
+<li>约60元每月</li>
+<li>TOS严格</li>
+</ul>
+<h2 id="Z-com"><a href="#Z-com" class="headerlink" title="Z.com"></a>Z.com</h2><ul>
+<li><a href="https://z.com/">https://z.com</a></li>
+<li>不对个人用户服务</li>
+</ul>
+<h2 id="ucloudbiz"><a href="#ucloudbiz" class="headerlink" title="ucloudbiz"></a>ucloudbiz</h2><ul>
+<li><a href="https://ucloudbiz.kt.com/en/">https://ucloudbiz.kt.com/en/</a></li>
+</ul>
+<h2 id="Sakura樱花"><a href="#Sakura樱花" class="headerlink" title="Sakura樱花"></a>Sakura樱花</h2><ul>
+<li><a href="http://www.sakura.ne.jp/">http://www.sakura.ne.jp/</a></li>
+</ul>
+<h2 id="Cloud-Garage"><a href="#Cloud-Garage" class="headerlink" title="Cloud Garage"></a>Cloud Garage</h2><ul>
+<li><a href="https://cloudgarage.jp/freeplan/">https://cloudgarage.jp/freeplan/</a></li>
+<li>不允许大陆地区访问,需要使用特殊操作</li>
+</ul>
+<h2 id="CloudCore、Linode、Vultr、AWS-Lightsail"><a href="#CloudCore、Linode、Vultr、AWS-Lightsail" class="headerlink" title="CloudCore、Linode、Vultr、AWS Lightsail"></a>CloudCore、Linode、Vultr、AWS Lightsail</h2><ul>
+<li><a href="http://www.cloudcore.jp/">http://www.cloudcore.jp/</a></li>
+<li><a href="https://www.linode.com/">https://www.linode.com</a></li>
+<li><a href="https://www.vultr.com/">https://www.vultr.com/</a></li>
+<li><a href="https://aws.amazon.com/lightsail/">https://aws.amazon.com/lightsail/</a></li>
+</ul>
+<h2 id="IDCF"><a href="#IDCF" class="headerlink" title="IDCF"></a>IDCF</h2><ul>
+<li><a href="https://www.idcf.jp/">https://www.idcf.jp</a></li>
+<li>不对个人用户服务</li>
+</ul>
+<h2 id="Kagoya"><a href="#Kagoya" class="headerlink" title="Kagoya"></a>Kagoya</h2><ul>
+<li><a href="https://www.kagoya.jp/">https://www.kagoya.jp</a></li>
+<li>购买需要代购</li>
+</ul>
+<h2 id="GMOCloud"><a href="#GMOCloud" class="headerlink" title="GMOCloud"></a>GMOCloud</h2><ul>
+<li><a href="https://altus.gmocloud.com/">https://altus.gmocloud.com/</a></li>
+<li>不对个人用户服务</li>
+</ul>
+<h2 id="阿里云日本"><a href="#阿里云日本" class="headerlink" title="阿里云日本"></a>阿里云日本</h2><ul>
+<li><a href="https://jp.alibabacloud.com/">https://jp.alibabacloud.com/</a></li>
+<li>购买需要代购</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Buy</category>
+      </categories>
+      <tags>
+        <tag>服务器</tag>
+        <tag>购买</tag>
+        <tag>IDC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LiteSpeed Web Server 免费企业版</title>
+    <url>/2019/05/02/lsfree/</url>
+    <content><![CDATA[<p>免费并且开源的 OpenLiteSpeed 对于个人用户已经足够，企业版的 LiteSpeed Web Server 功能更多,官方提供了试用机会并且还是长期免费,虽然有一些限制,但是对于尝试已经足够</p>
+<a id="more"></a>
+
+<h2 id="获取免费授权"><a href="#获取免费授权" class="headerlink" title="获取免费授权"></a>获取免费授权</h2><ol>
+<li>访问:<a href="https://www.litespeedtech.com/products/litespeed-web-server/lsws-pricing">https://www.litespeedtech.com/products/litespeed-web-server/lsws-pricing</a></li>
+<li>购买 Free Start档位的授权</li>
+<li>由于是0元,直接顺着向导一路过去就好,需要注意使用真实的信息注册,不然会被标记为欺诈</li>
+</ol>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li>使用 LLStack (<a href="https://www.llstack.com/">https://www.llstack.com/</a>) 部署 LiteSpeed 运行环境</li>
+<li>使用 CyberPanel (<a href="https://cyberpanel.net/">https://cyberpanel.net/</a>) 部署 CyberPanel 面板,这个面板支持OpenLiteSpeed和LiteSpeed</li>
+</ul>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li>使用 LiteSpeed 或者 Caddy 可以为网站开启 HTTP/3 (QUIC)</li>
+<li>使用 QUIC.Cloud 获得 LiteSpeed 高性能特性并且不需要在服务器上安装软件还可以同时开启 HTTP/3（QUIC）</li>
+<li>在 WordPress 安装 LSCache for WordPress 插件,经设置后,即可使用 QUIC.Cloud 的 CDN 加速</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p>OpenLiteSpeed 官网 <a href="https://openlitespeed.org/">https://openlitespeed.org/</a></p>
+<p>关于如何使用和设置 QUIC.Cloud <a href="https://www.mf8.biz/quic-cloud-litespeed">https://www.mf8.biz/quic-cloud-litespeed</a></p>
+<p><a href="https://quic.cloud/">https://quic.cloud/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>软件</tag>
+        <tag>免费</tag>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Minio 建立对象存储</title>
+    <url>/2019/08/18/minio1/</url>
+    <content><![CDATA[<p>MinIO 是一个开源对象存储服务,兼容亚马逊S3云存储服务接口，非常适合于存储如图片、备份数据和虚拟机镜像等大容量非结构化的数据，一个对象文件可以是任意大小，从几kb到最大5T不等。</p>
+<p>MinIO是一个非常轻量的服务,可以很简单的和其他应用的结合.</p>
+<a id="more"></a>
+
+<h2 id="服务端的使用"><a href="#服务端的使用" class="headerlink" title="服务端的使用"></a>服务端的使用</h2><h3 id="对接对象存储"><a href="#对接对象存储" class="headerlink" title="对接对象存储"></a>对接对象存储</h3><p>minio可以对接azure,gcp,aws s3,阿里云,还有b2 cloud.</p>
+<p>这里以对接 b2 cloud 为例 , 在部署完成后即可访问 <code>http://[IP地址]:9000</code> 进行查看,上传等操作.</p>
+<p>登录网页的Access和Secret密钥,就是docker运行输入时的<code>MINIO_ACCESS_KEY</code> 和 <code>MINIO_SECRET_KEY</code> 的值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -p 9000:9000 --name b2-s3 -e &quot;MINIO_ACCESS_KEY&#x3D;b2_account_id&quot; -e &quot;MINIO_SECRET_KEY&#x3D;b2_application_key&quot; minio&#x2F;minio gateway b2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 使用二进制文件进行对接</span><br><span class="line">export MINIO_ACCESS_KEY&#x3D;b2_account_id</span><br><span class="line">export MINIO_SECRET_KEY&#x3D;b2_application_key</span><br><span class="line">minio gateway b2</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用服务器空间作为存储"><a href="#使用服务器空间作为存储" class="headerlink" title="使用服务器空间作为存储"></a>使用服务器空间作为存储</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -p 9000:9000 --name minio1 -v &#x2F;mnt&#x2F;data:&#x2F;data -v &#x2F;mnt&#x2F;config:&#x2F;root&#x2F;.minio minio&#x2F;minio server &#x2F;data</span><br><span class="line">#Access和Secret密钥可以在容器日志中找到</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -p 9000:9000 --name minio1 -e &quot;MINIO_ACCESS_KEY&#x3D;AKIAIOSFODNN7EXAMPLE&quot; -e &quot;MINIO_SECRET_KEY&#x3D;wJalrXUtnFEMI&#x2F;K7MDENG&#x2F;bPxRfiCYEXAMPLEKEY&quot; -v &#x2F;mnt&#x2F;data:&#x2F;data -v &#x2F;mnt&#x2F;config:&#x2F;root&#x2F;.minio minio&#x2F;minio server &#x2F;data</span><br><span class="line">#可以将Access和Secret密钥设置为环境变量</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端的使用"><a href="#客户端的使用" class="headerlink" title="客户端的使用"></a>客户端的使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -it --entrypoint&#x3D;&#x2F;bin&#x2F;sh minio&#x2F;mc</span><br></pre></td></tr></table></figure>
+
+<p>客户端通过 docker 运行后即可使用 <code>mc config</code> 等命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mc config host add &lt;ALIAS&gt; &lt;YOUR-S3-ENDPOINT&gt; &lt;YOUR-ACCESS-KEY&gt; &lt;YOUR-SECRET-KEY&gt; &lt;API-SIGNATURE&gt;  #&lt;ALIAS&gt;就是给你的云存储服务起了一个名字,类似于docker中的 &#96;&#96;--name&#x3D;&#96;&#96; ,S3 endpoint,access key和secret key是你的云存储服务提供的。API签名是可选参数，默认情况下，它被设置为&quot;S3v4&quot;。</span><br><span class="line">mc config host add myb2 http:&#x2F;&#x2F;gateway-ip:9000 b2_account_id b2_application_key  #接入示例中的服务端</span><br><span class="line">mc config host add minio http:&#x2F;&#x2F;192.168.1.51 BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 S3v4 #接入minio服务端</span><br><span class="line">mc config host add s3 https:&#x2F;&#x2F;s3.amazonaws.com BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 S3v4 #接入aws s3</span><br><span class="line">mc config host add gcs  https:&#x2F;&#x2F;storage.googleapis.com BKIKJAA5BMMU2RHO6IBB V8f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 S3v2 #接入gcp Google云存储只支持旧版签名版本V2所以此处选择 S3v2</span><br></pre></td></tr></table></figure>
+
+<p>可用命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ls       列出文件和文件夹。</span><br><span class="line">mb       创建一个存储桶或一个文件夹。</span><br><span class="line">cat      显示文件和对象内容。</span><br><span class="line">pipe     将一个STDIN重定向到一个对象或者文件或者STDOUT。</span><br><span class="line">share    生成用于共享的URL。</span><br><span class="line">cp       拷贝文件和对象。</span><br><span class="line">mirror   给存储桶和文件夹做镜像。</span><br><span class="line">find     基于参数查找文件。</span><br><span class="line">diff     对两个文件夹或者存储桶比较差异。</span><br><span class="line">rm       删除文件和对象。</span><br><span class="line">events   管理对象通知。</span><br><span class="line">watch    监听文件和对象的事件。</span><br><span class="line">policy   管理访问策略。</span><br><span class="line">session  为cp命令管理保存的会话。</span><br><span class="line">config   管理mc配置文件。</span><br><span class="line">update   检查软件更新。</span><br><span class="line">version  输出版本信息。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://docs.min.io/cn/minio-docker-quickstart-guide.html">https://docs.min.io/cn/minio-docker-quickstart-guide.html</a><br><a href="https://www.moerats.com/archives/643/">https://www.moerats.com/archives/643/</a><br><a href="https://theo.im/blog/2017/10/17/use-minio-with-aliyun-oss/">https://theo.im/blog/2017/10/17/use-minio-with-aliyun-oss/</a> <a href="https://archive.fo/AFGbN">https://archive.fo/AFGbN</a><br><a href="https://github.com/minio/minio/pull/5103">https://github.com/minio/minio/pull/5103</a><br><a href="https://github.com/minio/minio/blob/master/docs/gateway/b2.md">https://github.com/minio/minio/blob/master/docs/gateway/b2.md</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>docker</tag>
+        <tag>服务器</tag>
+        <tag>web</tag>
+        <tag>对象存储</tag>
+        <tag>Minio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>服务器监控面板推荐与使用</title>
+    <url>/2019/01/20/monitor/</url>
+    <content><![CDATA[<p>在平时使用服务器的过程中,总有一些挂针的需求,这里介绍几款监控的面板,有免费的服务也有需要自建的开源项目</p>
+<a id="more"></a>
+
+<h2 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h2><h3 id="UptimeRobot"><a href="#UptimeRobot" class="headerlink" title="UptimeRobot"></a>UptimeRobot</h3><p><a href="https://uptimerobot.com/">https://uptimerobot.com/</a></p>
+<ul>
+<li>免费最多50个节点</li>
+<li>不需要安装软件</li>
+<li>免费仅有宕机监控</li>
+<li>支持 http,tcp 等</li>
+</ul>
+<h3 id="NodeQuery"><a href="#NodeQuery" class="headerlink" title="NodeQuery"></a>NodeQuery</h3><p><a href="https://nodequery.com/">https://nodequery.com/</a></p>
+<ul>
+<li>免费最多10个节点</li>
+<li>需要在被监控节点安装软件</li>
+<li>信息全面(网络,IO,进程,资源使用)</li>
+</ul>
+<h3 id="FreshPing"><a href="#FreshPing" class="headerlink" title="FreshPing"></a>FreshPing</h3><p><a href="https://www.freshworks.com/website-monitoring/">https://www.freshworks.com/website-monitoring/</a></p>
+<ul>
+<li>免费最多50个节点</li>
+<li>不需要安装软件</li>
+<li>免费仅有宕机监控</li>
+<li>支持 http,tcp 等</li>
+</ul>
+<h3 id="阿里云监控"><a href="#阿里云监控" class="headerlink" title="阿里云监控"></a>阿里云监控</h3><p><a href="https://www.aliyun.com/product/jiankong">https://www.aliyun.com/product/jiankong</a></p>
+<ul>
+<li>免费最多10个节点</li>
+<li>可选多机房监控</li>
+<li>与阿里云服务无缝衔接</li>
+</ul>
+<h3 id="Wachete"><a href="#Wachete" class="headerlink" title="Wachete"></a>Wachete</h3><p><a href="https://www.wachete.com/">https://www.wachete.com/</a></p>
+<ul>
+<li>可以监控指定网页内容的变动,如价格、是否有货等数据</li>
+</ul>
+<h3 id="Downtime-Monkey"><a href="#Downtime-Monkey" class="headerlink" title="Downtime Monkey"></a>Downtime Monkey</h3><p><a href="https://downtimemonkey.com/index.php">https://downtimemonkey.com/index.php</a></p>
+<ul>
+<li>免费最多60个节点</li>
+<li>只能监控http/https</li>
+</ul>
+<h2 id="自建面板"><a href="#自建面板" class="headerlink" title="自建面板"></a>自建面板</h2><h3 id="Serverstatus"><a href="#Serverstatus" class="headerlink" title="Serverstatus"></a>Serverstatus</h3><p>Serverstatus的部署比较简单,有一键脚本也有docker镜像,这里来介绍docker的部署方式<br><a href="https://github.com/cppla/ServerStatus">https://github.com/cppla/ServerStatus</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 服务端</span><br><span class="line">wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;cppla&#x2F;ServerStatus&#x2F;master&#x2F;autodeploy&#x2F;config.json</span><br><span class="line">docker run -d --restart&#x3D;always --name&#x3D;serverstatus -v &#123;$path&#125;&#x2F;config.json:&#x2F;ServerStatus&#x2F;server&#x2F;config.json -p &#123;$port&#125;:80 -p &#123;$port&#125;:35601 cppla&#x2F;serverstatus</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 客户端 (这里使用了 nohup 来保证程序持续在后台运行,如果想要结束指定程序使用 jobs -i 命令,会显示出进程id,使用kill命令即可)</span><br><span class="line">wget --no-check-certificate -qO client-linux.py &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;cppla&#x2F;ServerStatus&#x2F;master&#x2F;clients&#x2F;client-linux.py&#39; &amp;&amp; nohup python client-linux.py SERVER&#x3D;&#123;$SERVER&#125; USER&#x3D;&#123;$USER&#125; PASSWORD&#x3D;&#123;$PASSWORD&#125; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更好看的Serverstatus面板主题 <a href="https://github.com/krwu/ServerStatus-web">https://github.com/krwu/ServerStatus-web</a> </p>
+</blockquote>
+<h3 id="Smokeping"><a href="#Smokeping" class="headerlink" title="Smokeping"></a>Smokeping</h3><p><a href="https://hub.docker.com/r/linuxserver/smokeping">https://hub.docker.com/r/linuxserver/smokeping</a><br><a href="https://github.com/linuxserver/docker-smokeping">https://github.com/linuxserver/docker-smokeping</a></p>
+<p>Smokeping 的手动安装方式比较复杂,建议选择docker方式部署,但是无法完美支持 <code>master/slave</code> 架构</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --name smokeping \</span><br><span class="line">    -d \</span><br><span class="line">    -p 8880:80 \</span><br><span class="line">    -e PUID&#x3D;1000 -e PGID&#x3D;1000 \</span><br><span class="line">    -e TZ&#x3D;Asia&#x2F;Shanghai \</span><br><span class="line">    -v &#x2F;data&#x2F;smokeping&#x2F;data:&#x2F;data \</span><br><span class="line">    -v &#x2F;data&#x2F;smokeping&#x2F;config:&#x2F;config \</span><br><span class="line">    linuxserver&#x2F;smokeping</span><br></pre></td></tr></table></figure>
+<p>Docker安装方式需要通过修改<code>/data/smokeping/config/Targets</code>然后重启容器来添加监控节点</p>
+<h3 id="Smartping"><a href="#Smartping" class="headerlink" title="Smartping"></a>Smartping</h3><p>官方提供编译好的二进制文件,可以直接运行,并且支持正向PING与反向Ping绘图</p>
+<p><a href="https://smartping.org/">https://smartping.org/</a><br><a href="https://docs.smartping.org/install/">https://docs.smartping.org/install/</a><br><a href="https://github.com/smartping/smartping">https://github.com/smartping/smartping</a></p>
+<h3 id="Torch-Web"><a href="#Torch-Web" class="headerlink" title="Torch-Web"></a>Torch-Web</h3><p><a href="https://github.com/TorchPing/Torch-Web">https://github.com/TorchPing/Torch-Web</a><br><a href="https://github.com/TorchPing/Torch">https://github.com/TorchPing/Torch</a><br><a href="https://github.com/TorchPing">https://github.com/TorchPing</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>监控面板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>连接或本地挂载网盘的工具</title>
+    <url>/2019/08/20/mount1/</url>
+    <content><![CDATA[<p>使用支持挂载或连接多个网盘的第三方程序可以避免同时安装多个网盘客户端的情况</p>
+<a id="more"></a>
+
+<h2 id="rClone"><a href="#rClone" class="headerlink" title="rClone"></a>rClone</h2><p><a href="https://rclone.org/">https://rclone.org/</a><br><a href="https://github.com/mmozeiko/RcloneBrowser">https://github.com/mmozeiko/RcloneBrowser</a></p>
+<ul>
+<li>支持的服务全面,从<code>aliyun OSS</code> 到 <code>Google Drive</code>,几乎全都有</li>
+<li>全命令行操作,但可以使用GUI</li>
+<li>开源,免费,全平台</li>
+</ul>
+<h2 id="RaiDrive"><a href="#RaiDrive" class="headerlink" title="RaiDrive"></a>RaiDrive</h2><p><a href="https://www.raidrive.com/">https://www.raidrive.com/</a></p>
+<ul>
+<li>支持 <code>Google Drive, Google Shared drives,Google Photos, OneDrive, SharePoint,Dropbox, Box, pCloud, Yandex Disk,WebDAV, SFTP, FTP</code></li>
+<li>操作界面易用美观</li>
+<li>可以在软件内配置代理</li>
+<li>可以挂载到本地</li>
+</ul>
+<h2 id="CyberDuck"><a href="#CyberDuck" class="headerlink" title="CyberDuck"></a>CyberDuck</h2><p><a href="https://cyberduck.io/">https://cyberduck.io/</a></p>
+<ul>
+<li>支持 <code>FTP, SFTP, WebDAV, Amazon S3, OpenStack Swift, Backblaze B2, Microsoft Azure &amp; OneDrive, Google Drive and Dropbox.</code></li>
+<li>操作界面易用</li>
+<li>不能挂载到本地,如果需要可以使用 <a href="https://mountainduck.io/">Mountain Duck</a></li>
+</ul>
+<h2 id="Minio"><a href="#Minio" class="headerlink" title="Minio"></a>Minio</h2><p><a href="https://github.com/minio/minio/">https://github.com/minio/minio/</a></p>
+<p>这实际上是个建立对象存储的程序,但是可以对接多家云服务的对象存储,可以拿来当网盘用</p>
+<h2 id="SFTP-Drive"><a href="#SFTP-Drive" class="headerlink" title="SFTP Drive"></a>SFTP Drive</h2><p><a href="https://www.nsoftware.com/sftp/drive/">https://www.nsoftware.com/sftp/drive/</a></p>
+<p>只能将SFTP挂载到Windows硬盘,也就是只支持SFTP</p>
+<h2 id="需要付费购买的"><a href="#需要付费购买的" class="headerlink" title="需要付费购买的"></a>需要付费购买的</h2><blockquote>
+<p><a href="https://webdrive.com/">https://webdrive.com/</a> 40美元<br><a href="https://www.expandrive.com/">https://www.expandrive.com/</a> 49.95<br><a href="http://www.netdrive.net/">http://www.netdrive.net/</a> 一次性49.95美元或者19.9美元一年订阅<br><a href="https://cloudmounter.net/">CloudMounter</a> 仅支持macOS,44.99美元</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www2.hiroyuki.com/posts/2035378">https://www2.hiroyuki.com/posts/2035378</a></li>
+<li><a href="https://github.com/mmozeiko/RcloneBrowser">https://github.com/mmozeiko/RcloneBrowser</a></li>
+<li><a href="https://github.com/minio/minio/blob/master/docs/gateway/b2.md">https://github.com/minio/minio/blob/master/docs/gateway/b2.md</a></li>
+<li><a href="https://docs.min.io/cn/minio-client-quickstart-guide.html#add-a-cloud-storage-service">https://docs.min.io/cn/minio-client-quickstart-guide.html#add-a-cloud-storage-service</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>软件</tag>
+        <tag>对象存储</tag>
+        <tag>存储</tag>
+        <tag>网盘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>轻量好用的笔记软件</title>
+    <url>/2019/09/19/note1/</url>
+    <content><![CDATA[<p>除去常用的OneNote,EverNote等热门的笔记应用外,还有轻量好用各具特色的笔记软件,比如可以将数据掌握在自己手中,自己定制主题,Markdown支持,好用的代码片段功能等</p>
+<a id="more"></a>
+
+<h2 id="Boostnote"><a href="#Boostnote" class="headerlink" title="Boostnote"></a>Boostnote</h2><ul>
+<li><a href="https://boostnote.io/cn/">Boostnote</a></li>
+<li><a href="https://github.com/BoostIO/Boostnote">GitHub - BoostIO/Boostnote: A markdown editor for developers on Mac, Windows and Linux.</a></li>
+<li>相关文章: <a href="https://www.waerfa.com/boostnote-review">Boostnote：为程序员量身定做的笔记应用 - Mac玩儿法</a></li>
+</ul>
+<ul>
+<li>支持 Markdown 还有 snippet 功能</li>
+<li>依靠云服务同步,但本身无法联网</li>
+<li>支持全平台</li>
+</ul>
+<h2 id="VNote"><a href="#VNote" class="headerlink" title="VNote"></a>VNote</h2><ul>
+<li><a href="https://tamlok.github.io/vnote/zh_cn/#!index.md">Viki - A simple Wiki page in Markdown from notebook of VNote</a></li>
+<li><a href="https://github.com/tamlok/vnote/blob/master/README_zh.md">vnote/README_zh.md at master · tamlok/vnote · GitHub</a></li>
+</ul>
+<ul>
+<li>支持 Markdown 还有 snippet 功能</li>
+<li>依靠云服务同步,但本身无法联网</li>
+<li>支持全平台</li>
+<li>可自定义主题</li>
+<li>支持全文搜索</li>
+</ul>
+<h2 id="Joplin"><a href="#Joplin" class="headerlink" title="Joplin"></a>Joplin</h2><p><a href="https://joplin.cozic.net/">Joplin - an open source note taking and to-do application with synchronisation capabilities</a></p>
+<ul>
+<li>支持 Markdown</li>
+<li>支持全平台</li>
+<li>支持文件附件和云存储</li>
+</ul>
+<h2 id="Tea"><a href="#Tea" class="headerlink" title="Tea"></a>Tea</h2><ul>
+<li><a href="https://haocha.co/#hero">Tea</a></li>
+</ul>
+<ul>
+<li>支持 Markdown</li>
+<li>支持云存储</li>
+<li>支持多种插件</li>
+</ul>
+<h2 id="自带云服务的笔记软件"><a href="#自带云服务的笔记软件" class="headerlink" title="自带云服务的笔记软件"></a>自带云服务的笔记软件</h2><ul>
+<li><a href="https://standardnotes.org/">https://standardnotes.org/</a></li>
+<li><a href="https://simplenote.com/">https://simplenote.com/</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.waerfa.com/quiver-review">Quiver：程序员专用笔记本 - Mac玩儿法</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>免费</tag>
+        <tag>隐私保护</tag>
+        <tag>记录</tag>
+        <tag>服务</tag>
+        <tag>笔记软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx Proxy Manager 的安装</title>
+    <url>/2018/11/11/npm/</url>
+    <content><![CDATA[<p>Nginx Proxy Manager是一个带有WEB界面且使用简单的反向代理配置工具,带有ssl管理功能</p>
+<a id="more"></a>
+
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>首先要在指定目录中创建<code>config.json</code>,写入以下配置信息</p>
+<p>无论是使用<code>mysql</code>或者是<code>mariadb</code>,在<code>config.json</code>配置信息中都是<code>&quot;engine&quot;: &quot;mysql&quot;,</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;database&quot;: &#123;</span><br><span class="line">    &quot;engine&quot;: &quot;mysql&quot;,</span><br><span class="line">    &quot;host&quot;: &quot;db&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;npm&quot;,</span><br><span class="line">    &quot;user&quot;: &quot;npm&quot;,</span><br><span class="line">    &quot;password&quot;: &quot;mypwd&quot;,</span><br><span class="line">    &quot;port&quot;: 3306</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后创建<code>docker-compose.yaml</code>,写入以下配置信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line">  app:</span><br><span class="line">    image: jc21&#x2F;nginx-proxy-manager:2</span><br><span class="line">    restart: always</span><br><span class="line">    ports:</span><br><span class="line">      - 80:80</span><br><span class="line">      - 81:81</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;config.json:&#x2F;app&#x2F;config&#x2F;production.json</span><br><span class="line">      - .&#x2F;data:&#x2F;data</span><br><span class="line">      - .&#x2F;letsencrypt:&#x2F;etc&#x2F;letsencrypt</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">    environment:</span><br><span class="line">      # if you want pretty colors in your docker logs:</span><br><span class="line">      - FORCE_COLOR&#x3D;1</span><br><span class="line">  db:</span><br><span class="line">    image: jc21&#x2F;mariadb-aria</span><br><span class="line">    hostname: db</span><br><span class="line">    restart: always</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: &quot;mypwd&quot;</span><br><span class="line">      MYSQL_DATABASE: &quot;npm&quot;</span><br><span class="line">      MYSQL_USER: &quot;npm&quot;</span><br><span class="line">      MYSQL_PASSWORD: &quot;mypwd&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;data&#x2F;mysql:&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>成功运行之后访问<code>http://[ip地址]:81</code></p>
+<blockquote>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#x64;&#109;&#105;&#110;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#111;&#109;">&#97;&#x64;&#109;&#105;&#110;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#111;&#109;</a><br>Password: changeme</p>
+</blockquote>
+<p>即可开始设置面板</p>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
+<p>docker-compose安装 <a href="https://github.com/docker/compose/releases">https://github.com/docker/compose/releases</a> <a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>服务器</tag>
+        <tag>Web开发</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>主机面板推荐</title>
+    <url>/2018/08/18/pl1/</url>
+    <content><![CDATA[<p>使用面板管理服务器更加方便,不需要ssh进入,在web界面就可以操作,这里介绍几个好用的面板</p>
+<a id="more"></a>
+
+<h2 id="收费面板"><a href="#收费面板" class="headerlink" title="收费面板"></a>收费面板</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>官网</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cPanel</td>
+<td>cpanel.com</td>
+</tr>
+<tr>
+<td>DirectAdmin</td>
+<td><a href="http://www.directadmin.com/">www.directadmin.com</a></td>
+</tr>
+<tr>
+<td>plesk</td>
+<td><a href="http://www.plesk.com/">www.plesk.com</a></td>
+</tr>
+</tbody></table>
+<h2 id="免费面板"><a href="#免费面板" class="headerlink" title="免费面板"></a>免费面板</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>官网</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZPanel</td>
+<td><a href="http://www.zpanelcp.com/">www.zpanelcp.com</a></td>
+</tr>
+<tr>
+<td>AMH面板</td>
+<td>amh.sh</td>
+</tr>
+<tr>
+<td>Kloxo</td>
+<td>mratwork.com</td>
+</tr>
+<tr>
+<td>dockeradmin</td>
+<td><a href="http://www.dockeradmin.net/">www.dockeradmin.net</a></td>
+</tr>
+<tr>
+<td>virtualmin</td>
+<td><a href="http://www.virtualmin.com/">www.virtualmin.com</a></td>
+</tr>
+<tr>
+<td>宝塔面板</td>
+<td>bt.cn</td>
+</tr>
+<tr>
+<td>appnode</td>
+<td><a href="http://www.appnode.com/">www.appnode.com</a></td>
+</tr>
+<tr>
+<td>CyberPanel</td>
+<td>cyberpanel.net</td>
+</tr>
+</tbody></table>
+<h2 id="快速从域名服务商转出域名"><a href="#快速从域名服务商转出域名" class="headerlink" title="快速从域名服务商转出域名"></a>快速从域名服务商转出域名</h2><h3 id="快速从Namesilo转出域名"><a href="#快速从Namesilo转出域名" class="headerlink" title="快速从Namesilo转出域名"></a>快速从Namesilo转出域名</h3><p>当新注册商向Namesilo发起域名转出请求后，Namesilo会在“Transfer Manager”页面显示“Pending Outbound Transfers ”列出待转出域名。</p>
+<p>所以，当你需要将域名快速从Namesilo转出时，只需要登录Nameilo网站，选择“Transfer Manager”，在“Pending Outbound Transfers ”列表中找到你要转出的域名，点击“APPROVE”即可快速的将域名转入到新运营商。</p>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ps命令常见用法</title>
+    <url>/2018/09/01/ps1/</url>
+    <content><![CDATA[<p>Linux中的ps命令用来列出系统中当前运行的那些进程,查看它们的运行状态,占用的资源</p>
+<a id="more"></a>
+<h2 id="Linux进程状态"><a href="#Linux进程状态" class="headerlink" title="Linux进程状态"></a>Linux进程状态</h2><p>linux上进程有5种状态</p>
+<ul>
+<li><p>运行:正在运行或在运行队列中等待</p>
+</li>
+<li><p>中断:休眠中, 受阻, 在等待某个条件的形成或接受到信号</p>
+</li>
+<li><p>不可中断:收到信号不唤醒和不可运行, 进程必须等待直到有中断发生</p>
+</li>
+<li><p>僵死:进程已终止, 但进程描述符存在, 直到父进程调用wait4()系统调用后释放 </p>
+</li>
+<li><p>停止:进程收到SIGSTOP, SIGSTP, SIGTIN, SIGTOU信号后停止运行运行</p>
+</li>
+</ul>
+<p>ps工具标识进程的5种状态码 </p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D</td>
+<td>不可中断</td>
+</tr>
+<tr>
+<td>R</td>
+<td>运行</td>
+</tr>
+<tr>
+<td>S</td>
+<td>中断</td>
+</tr>
+<tr>
+<td>T</td>
+<td>停止</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>僵死</td>
+</tr>
+</tbody></table>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>ps [参数]</p>
+<h3 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>显示所有进程</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>显示同一终端下的所有程序</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>显示所有进程</td>
+</tr>
+<tr>
+<td>c</td>
+<td>显示进程的真实名称</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>反向选择</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>等于“-A”</td>
+</tr>
+<tr>
+<td>e</td>
+<td>显示环境变量</td>
+</tr>
+<tr>
+<td>f</td>
+<td>显示程序间的关系</td>
+</tr>
+<tr>
+<td>-H</td>
+<td>显示树状结构</td>
+</tr>
+<tr>
+<td>r</td>
+<td>显示当前终端的进程</td>
+</tr>
+<tr>
+<td>T</td>
+<td>显示当前终端的所有程序</td>
+</tr>
+<tr>
+<td>u</td>
+<td>指定用户的所有进程</td>
+</tr>
+<tr>
+<td>-au</td>
+<td>显示较详细的资讯</td>
+</tr>
+<tr>
+<td>-aux</td>
+<td>显示所有包含其他使用者的行程</td>
+</tr>
+<tr>
+<td>-C&lt;命令&gt;</td>
+<td>列出指定命令的状况</td>
+</tr>
+<tr>
+<td>–lines&lt;行数&gt;</td>
+<td>每页显示的行数</td>
+</tr>
+<tr>
+<td>–width&lt;字符数&gt;</td>
+<td>每页显示的字符数</td>
+</tr>
+<tr>
+<td>–help</td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td>–version</td>
+<td>显示版本显示</td>
+</tr>
+</tbody></table>
+<h2 id="使用举例"><a href="#使用举例" class="headerlink" title="使用举例"></a>使用举例</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ps -A</td>
+<td>显示所有进程信息</td>
+</tr>
+<tr>
+<td>ps -u</td>
+<td>root 显示指定用户信息</td>
+</tr>
+<tr>
+<td>ps -ef</td>
+<td>显示所有进程信息和命令行</td>
+</tr>
+<tr>
+<td>ps -ef&#124;grep ssh</td>
+<td>查找特定进程</td>
+</tr>
+<tr>
+<td>ps -l</td>
+<td>将目前属于你这次登入的 PID 与相关信息列示出来</td>
+</tr>
+<tr>
+<td>ps aux</td>
+<td>列出目前所有的正在内存当中的程序</td>
+</tr>
+<tr>
+<td>ps -axjf</td>
+<td>列出程序树式的程序显示</td>
+</tr>
+<tr>
+<td>ps -aux &gt; 1.txt</td>
+<td>把所有进程显示出来，并输出到1.txt文件</td>
+</tr>
+<tr>
+<td>ps -aux &#124;more</td>
+<td>可以用 &#124; 和more连接起来分页查看</td>
+</tr>
+<tr>
+<td>ps -o pid,ppid,pgrp,session,tpgid,comm</td>
+<td>输出指定的字段</td>
+</tr>
+</tbody></table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><code>ps -l</code>命令执行后,输出的结果中包含一些字段,下表解释了字段含义</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F</td>
+<td>代表这个程序的旗标 (flag)， 4 代表使用者为 superuser</td>
+</tr>
+<tr>
+<td>S</td>
+<td>代表这个程序的状态 (STAT)</td>
+</tr>
+<tr>
+<td>UID</td>
+<td>程序被该 UID 所拥有</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>就是这个程序的 ID</td>
+</tr>
+<tr>
+<td>PPID</td>
+<td>则是其上级父程序的ID</td>
+</tr>
+<tr>
+<td>C</td>
+<td>CPU 使用的资源百分比</td>
+</tr>
+<tr>
+<td>PRI</td>
+<td>这个是 Priority (优先执行序) 的缩写，详细后面介绍</td>
+</tr>
+<tr>
+<td>NI</td>
+<td>这个是 Nice 值，在下一小节我们会持续介绍</td>
+</tr>
+<tr>
+<td>ADDR</td>
+<td>这个是 kernel function，指出该程序在内存的那个部分。如果是个 running的程序，一般就是 “-“</td>
+</tr>
+<tr>
+<td>SZ</td>
+<td>使用掉的内存大小</td>
+</tr>
+<tr>
+<td>WCHAN</td>
+<td>目前这个程序是否正在运作当中，若为 - 表示正在运作</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>登入者的终端机位置</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>使用掉的 CPU 时间</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>所下达的指令为何</td>
+</tr>
+</tbody></table>
+<p>在预设的情况下， ps 仅会列出与目前所在的 bash shell 有关的 PID 而已，所以， 当我使用 ps -l 的时候，只有三个 PID。</p>
+<p><code>ps -aux</code>命令执行后,输出的结果中包含一些字段,下表解释了字段含义</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>USER</td>
+<td>该进程属于那个使用者账号的</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>该进程的号码</td>
+</tr>
+<tr>
+<td>%CPU</td>
+<td>该进程使用掉的 CPU 资源百分比</td>
+</tr>
+<tr>
+<td>%MEM</td>
+<td>该进程所占用的物理内存百分比</td>
+</tr>
+<tr>
+<td>VSZ</td>
+<td>该进程使用掉的虚拟内存量</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>该进程占用的固定的内存量</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>该进程是在哪个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。</td>
+</tr>
+<tr>
+<td>STAT</td>
+<td>该进程目前的状态</td>
+</tr>
+<tr>
+<td>R</td>
+<td>该进程目前正在运作</td>
+</tr>
+<tr>
+<td>S</td>
+<td>该进程目前正在睡眠当中</td>
+</tr>
+<tr>
+<td>T</td>
+<td>该进程目前正在侦测或者是停止了</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>该进程应该已经终止，但是其父程序却无法正常的终止他，造成僵死程序的状态</td>
+</tr>
+<tr>
+<td>START</td>
+<td>该进程被触发启动的时间</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>该进程实际使用 CPU 运作的时间</td>
+</tr>
+<tr>
+<td>COMMAND</td>
+<td>该进程的实际指令</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>我的博客即将搬运同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=4uyeo7rel7ug">https://cloud.tencent.com/developer/support-plan?invite_code=4uyeo7rel7ug</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RouterOS 基础问题</title>
+    <url>/2019/10/02/rosstart/</url>
+    <content><![CDATA[<p>RouterOS是一种路由操作系统,带有配套的GUI操作软件,也可以使用命令直接操作,功能齐全,使用方便.由于功能繁多需要从最基本的连接到互联网开始做起,这里记录了使用过程中的一些基础问题</p>
+<a id="more"></a>
+
+<h3 id="DD安装"><a href="#DD安装" class="headerlink" title="DD安装"></a>DD安装</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;download2.mikrotik.com&#x2F;routeros&#x2F;6.42.6&#x2F;chr-6.42.6.img.zip -O chr.img.zip &amp;&amp; \</span><br><span class="line">gunzip -c chr.img.zip &gt; chr.img &amp;&amp; \</span><br><span class="line">mount -o loop,offset&#x3D;33554944 chr.img &#x2F;mnt &amp;&amp; \</span><br><span class="line">ADDRESS0&#x3D;&#96;ip addr show eth0 | grep global | cut -d&#39; &#39; -f 6 | head -n 1&#96; &amp;&amp; \</span><br><span class="line">GATEWAY0&#x3D;&#96;ip route list | grep default | cut -d&#39; &#39; -f 3&#96; &amp;&amp; \</span><br><span class="line">echo &quot;&#x2F;ip address add address&#x3D;$ADDRESS0 interface&#x3D;[&#x2F;interface ethernet find where name&#x3D;ether1]</span><br><span class="line">&#x2F;ip route add gateway&#x3D;$GATEWAY0</span><br><span class="line">&quot; &gt; &#x2F;mnt&#x2F;rw&#x2F;autorun.scr &amp;&amp; \</span><br><span class="line">umount &#x2F;mnt &amp;&amp; \</span><br><span class="line">echo u &gt; &#x2F;proc&#x2F;sysrq-trigger &amp;&amp; \</span><br><span class="line">dd if&#x3D;chr.img bs&#x3D;1024 of&#x3D;&#x2F;dev&#x2F;vda &amp;&amp; \</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dd操作时,目标路径可能不是 &#x2F;dev&#x2F;vda 而是 &#x2F;dev&#x2F;sda 或其他,操作前先 ls &#x2F;dev 查看一下</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;download2.mikrotik.com&#x2F;routeros&#x2F;6.43.8&#x2F;chr-6.43.8.img.zip -O chr.img.zip &amp;&amp; \</span><br><span class="line">gunzip -c chr.img.zip &gt; chr.img &amp;&amp; \</span><br><span class="line">mount -o loop,offset&#x3D;33554944 chr.img &#x2F;mnt &amp;&amp; \</span><br><span class="line">ADDRESS0&#x3D;&#96;ip addr show eth0 | grep global | cut -d&#39; &#39; -f 6 | head -n 1&#96; &amp;&amp; \</span><br><span class="line">GATEWAY0&#x3D;&#96;ip route list | grep default | cut -d&#39; &#39; -f 3&#96; &amp;&amp; \</span><br><span class="line">echo &quot;&#x2F;ip address add address&#x3D;$ADDRESS0 interface&#x3D;[&#x2F;interface ethernet find where name&#x3D;ether1]</span><br><span class="line">&#x2F;ip route add gateway&#x3D;$GATEWAY0</span><br><span class="line">&quot; &gt; &#x2F;mnt&#x2F;rw&#x2F;autorun.scr &amp;&amp; \</span><br><span class="line">umount &#x2F;mnt &amp;&amp; \</span><br><span class="line">echo u &gt; &#x2F;proc&#x2F;sysrq-trigger &amp;&amp; \</span><br><span class="line">dd if&#x3D;chr.img bs&#x3D;1024 of&#x3D;&#x2F;dev&#x2F;vda &amp;&amp; \</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="安全加固"><a href="#安全加固" class="headerlink" title="安全加固"></a>安全加固</h3><p>禁用不常用不安全的服务</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;ip service disable telnet,f​​tp,www,www-ssl,api,api-ssl</span><br></pre></td></tr></table></figure>
+
+<p>禁用邻居发现</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;ip neighbor discovery-settings set discover-interface-list&#x3D;none</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加IP"><a href="#添加IP" class="headerlink" title="添加IP"></a>添加IP</h3><p>添加网关和IP以连接互联网,dd安装时网关和IP设置的脚本应该自动写在 <code>/mnt/rw/autorun.scr</code> 中的,但是意外常有,这里还是写一下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#定义接口的IP和掩码</span><br><span class="line">&#x2F;ip address add address&#x3D;192.168.2.233&#x2F;24 interface&#x3D;ether1</span><br><span class="line">#定义网关</span><br><span class="line">&#x2F;ip route add gateway&#x3D;192.168.2.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h3><p>将外网访问 10.5.8.200 的 80 端口的数据映射到主机 192.168.0.18</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;ip firewall nat add chain&#x3D;srcnat action&#x3D;masquerade</span><br><span class="line">&#x2F;ip firewall nat add action&#x3D;dst-nat chain&#x3D;dstnat dst-address&#x3D;10.5.8.200 dst-port&#x3D;80 protocol&#x3D;tcp to-addresses&#x3D;192.168.0.18 to-ports&#x3D;80</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令映射目标是一个IP,转发到公网主机时会遇到目标主机是动态IP的情况,这时候就需要一个定时脚本来定时更新IP地址,如何定时请查看下一部分</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;ip firewall nat set 6 to-addresses&#x3D;[:resolve cu.ddns.com;]</span><br><span class="line"></span><br><span class="line">#使用 set 方法设置防火墙 nat 表中的编号为 6 的规则的 to-addresses 字段的值为 [:resolve cu.ddns.com;] ,也就是解析 cu.ddns.com 地址所得到的IP,关于[:resolve &lt;arg&gt;;]等语法请查看参考部分</span><br></pre></td></tr></table></figure>
+
+<h3 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h3><h4 id="Scripts"><a href="#Scripts" class="headerlink" title="Scripts"></a>Scripts</h4><p>在Winbox 中 System &gt; Scripts 即可找到此功能</p>
+<p>如果设置 <code>Scripts</code>的</p>
+<p><code>Name</code>为<code>cuddns</code></p>
+<p><code>Source</code>为<code>/ip firewall nat set 6 to-addresses=[:resolve cu.ddns.com;]</code></p>
+<p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">system script&gt; add name&#x3D;cuddns source&#x3D;&#x2F;ip firewall nat set 6 to-addresses&#x3D;[:resolve cu.ddns.com;]</span><br></pre></td></tr></table></figure>
+
+<p>那么这个给端口映射的目标主机换IP的脚本就设置好了,接下来是定时</p>
+<h4 id="Schedule"><a href="#Schedule" class="headerlink" title="Schedule"></a>Schedule</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">system scheduler&gt; add interval&#x3D;300 name&#x3D;&quot;autoddns&quot; on-event&#x3D;cuddns</span><br><span class="line">#每300秒执行一次脚本 cuddns</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看资源占用"><a href="#查看资源占用" class="headerlink" title="查看资源占用"></a>查看资源占用</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;system resource print</span><br></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p>DD安装部分<br><a href="https://www.qedev.com/router/59061.html">https://www.qedev.com/router/59061.html</a> <a href="https://web.archive.org/web/20200422025111/https://www.qedev.com/router/59061.html">https://web.archive.org/web/20200422025111/https://www.qedev.com/router/59061.html</a><br><a href="https://www.kvm.la/1065.html">https://www.kvm.la/1065.html</a> <a href="https://web.archive.org/web/20200422031312/https://www.kvm.la/1065.html">https://web.archive.org/web/20200422031312/https://www.kvm.la/1065.html</a></p>
+</blockquote>
+<blockquote>
+<p>安全加固部分<br><a href="https://www.sklinux.com/posts/secrity/mikrotik%E8%B7%AF%E7%94%B1%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83%E8%AE%BE%E7%BD%AE/">https://www.sklinux.com/posts/secrity/mikrotik%E8%B7%AF%E7%94%B1%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83%E8%AE%BE%E7%BD%AE/</a> <a href="https://archive.vn/Xp09A">https://archive.vn/Xp09A</a></p>
+</blockquote>
+<blockquote>
+<p>端口转发部分<br><a href="http://www.irouteros.com/?page_id=186">http://www.irouteros.com/?page_id=186</a> 推荐余松老师的 《RouterOS入门到精通》<br><a href="https://www.ros9.com/755.html">https://www.ros9.com/755.html</a> <a href="https://web.archive.org/web/20200422033539/https://www.ros9.com/755.html">https://web.archive.org/web/20200422033539/https://www.ros9.com/755.html</a> <a href="https://blog.csdn.net/wyf_fantastic/article/details/80083096">https://blog.csdn.net/wyf_fantastic/article/details/80083096</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>软路由</tag>
+        <tag>RouterOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Telegram搭建一个订阅机器人</title>
+    <url>/2018/05/01/rssbot1/</url>
+    <content><![CDATA[<p>使用Telegram机器人来推送rss,方便每天浏览文章</p>
+<a id="more"></a>
+
+<blockquote>
+<p>项目地址 <a href="https://github.com/iovxw/rssbot">https://github.com/iovxw/rssbot</a></p>
+</blockquote>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><code>Ubuntu 14 </code></p>
+<p>开始前先运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">apt-get install pkg-config libssl-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载编译安装RssBot"><a href="#下载编译安装RssBot" class="headerlink" title="下载编译安装RssBot"></a>下载编译安装RssBot</h2><h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">下载地址：https:&#x2F;&#x2F;github.com&#x2F;iovxw&#x2F;rssbot&#x2F;releases </span><br></pre></td></tr></table></figure>
+<h3 id="上传到服务器解压"><a href="#上传到服务器解压" class="headerlink" title="上传到服务器解压"></a>上传到服务器解压</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar xvf rssbot-1.4.3-limited.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="安装Rust-Nightly"><a href="#安装Rust-Nightly" class="headerlink" title="安装Rust Nightly"></a>安装Rust Nightly</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -s https:&#x2F;&#x2F;static.rust-lang.org&#x2F;rustup.sh | sh -s -- --channel&#x3D;nightly</span><br></pre></td></tr></table></figure>
+<h3 id="进入目录编译"><a href="#进入目录编译" class="headerlink" title="进入目录编译"></a>进入目录编译</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;ubuntu&#x2F;rssbot-1.4.3-limited #进入目录</span><br><span class="line">cargo build --release #编译安装</span><br></pre></td></tr></table></figure>
+<h3 id="创建机器人获得Token"><a href="#创建机器人获得Token" class="headerlink" title="创建机器人获得Token"></a>创建机器人获得Token</h3><p>如何创建机器人自行搜索<br>这里我刚刚创建了个机器人@PushRss_Bot 获取到了Token 进入这个目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;ubuntu&#x2F;rssbot-1.4.3-limited&#x2F;target&#x2F;release</span><br><span class="line">.&#x2F;rssbot DATAFILE TELEGRAM-BOT-TOKEN</span><br></pre></td></tr></table></figure>
+<p><code>DATAFILE</code> 为数据库保存路径(其实就是一个 json 文件, 不需要手动创建)，<code>TELEGRAM-BOT-TOKEN</code>就是你创建的机器人的Token</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>如果需要一直运行需要使用<a href="https://huramkin.me/2018/04/30/screen/#more">Screen命令</a></p>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>Software</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Screen命令常见用法</title>
+    <url>/2018/05/01/screen/</url>
+    <content><![CDATA[<p>Screen可以帮助管理员同时进行多项任务,实现后台运行程序的操作</p>
+<a id="more"></a>
+<h2 id="常用语法和快捷键"><a href="#常用语法和快捷键" class="headerlink" title="常用语法和快捷键"></a>常用语法和快捷键</h2><table>
+<thead>
+<tr>
+<th>语法和快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>screen</td>
+<td>进入screen模式</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>退出当前窗口，如果它是此screen的唯一窗口时，此screen也将完全退出。</td>
+</tr>
+<tr>
+<td>screen -ls</td>
+<td>查看有哪些screen</td>
+</tr>
+<tr>
+<td>screen -d [pid/tty/host]</td>
+<td>将指定的screen作业离线</td>
+</tr>
+<tr>
+<td>screen -r [id/name]</td>
+<td>打开编号为id或者名称为name的screen窗口</td>
+</tr>
+<tr>
+<td>screen -wipe</td>
+<td>清除死掉的会话</td>
+</tr>
+<tr>
+<td>C-a d</td>
+<td>detach，暂离当前session，将目前的session丢到后台执行，即使登出也不受影响</td>
+</tr>
+<tr>
+<td>C-a c</td>
+<td>创建一个新的运行shell的窗口并切换到该窗口</td>
+</tr>
+<tr>
+<td>C-a n</td>
+<td>Next，切换到下一个 window</td>
+</tr>
+<tr>
+<td>C-a k</td>
+<td>强行关闭当前的 window</td>
+</tr>
+</tbody></table>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">screen [-AmRvx -ls -wipe][-d &lt;pid&#x2F;tty&#x2F;host&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-A</td>
+<td>将所有的视窗都调整为目前终端机的大小</td>
+</tr>
+<tr>
+<td>-c filename</td>
+<td>用指定的filename文件替代screen的配置文件’.screenrc’</td>
+</tr>
+<tr>
+<td>-D [pid/tty/host]</td>
+<td>与-d命令相同，区别是若执行成功，会踢掉原来在screen里的用户并让他logout</td>
+</tr>
+<tr>
+<td>-d [pid/tty/host]</td>
+<td>将指定的screen作业离线</td>
+</tr>
+<tr>
+<td>-h [行数]</td>
+<td>指定视窗的缓冲区行数</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>即使目前已在作业中的screen作业，仍强制建立新的screen作业</td>
+</tr>
+<tr>
+<td>-p number or name</td>
+<td>预先选择一个窗口</td>
+</tr>
+<tr>
+<td>-r [pid/tty/host]</td>
+<td>恢复离线的screen作业</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定建立新视窗时，所要执行的shell</td>
+</tr>
+<tr>
+<td>-S [作业名称]</td>
+<td>指定screen作业的名称</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示版本信息</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>恢复之前离线的screen作业</td>
+</tr>
+<tr>
+<td>-ls</td>
+<td>显示目前所有的screen作业</td>
+</tr>
+<tr>
+<td>-wipe</td>
+<td>检查目前所有的screen作业，并删除已经无法使用的screen作业</td>
+</tr>
+</tbody></table>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C-a 为 Ctrl+A组合键的简写</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>组合键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C-a ?</td>
+<td>显示所有键绑定信息</td>
+</tr>
+<tr>
+<td>C-a c</td>
+<td>创建一个新的运行shell的窗口并切换到该窗口</td>
+</tr>
+<tr>
+<td>C-a n</td>
+<td>Next，切换到下一个 window</td>
+</tr>
+<tr>
+<td>C-a p</td>
+<td>Previous，切换到前一个 window</td>
+</tr>
+<tr>
+<td>C-a 0..9</td>
+<td>切换到第 0..9 个 window</td>
+</tr>
+<tr>
+<td>Ctrl+a [Space]</td>
+<td>由视窗0循序切换到视窗9</td>
+</tr>
+<tr>
+<td>C-a C-a</td>
+<td>在两个最近使用的 window 间切换</td>
+</tr>
+<tr>
+<td>C-a x</td>
+<td>锁住当前的 window，需用用户密码解锁</td>
+</tr>
+<tr>
+<td>C-a d</td>
+<td>detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响。</td>
+</tr>
+<tr>
+<td>C-a z</td>
+<td>把当前session放到后台执行，用 shell 的 fg 命令则可回去。</td>
+</tr>
+<tr>
+<td>C-a w</td>
+<td>显示所有窗口列表</td>
+</tr>
+<tr>
+<td>C-a t</td>
+<td>Time，显示当前时间，和系统的 load</td>
+</tr>
+<tr>
+<td>C-a k</td>
+<td>kill window，强行关闭当前的 window</td>
+</tr>
+<tr>
+<td>C-a [</td>
+<td>进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 vi 一样</td>
+</tr>
+<tr>
+<td>C-b</td>
+<td>Backward，PageUp</td>
+</tr>
+<tr>
+<td>C-f</td>
+<td>Forward，PageDown</td>
+</tr>
+<tr>
+<td>H(大写)</td>
+<td>High，将光标移至左上角</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Low，将光标移至左下角</td>
+</tr>
+<tr>
+<td>0</td>
+<td>移到行首</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行末</td>
+</tr>
+<tr>
+<td>w</td>
+<td>forward one word，以字为单位往前移</td>
+</tr>
+<tr>
+<td>b</td>
+<td>backward one word，以字为单位往后移</td>
+</tr>
+<tr>
+<td>Space</td>
+<td>第一次按为标记区起点，第二次按为终点</td>
+</tr>
+<tr>
+<td>Esc</td>
+<td>结束 copy mode</td>
+</tr>
+<tr>
+<td>C-a ]</td>
+<td>Paste，把刚刚在 copy mode 选定的内容贴上</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSH快速登录服务器</title>
+    <url>/2017/11/19/ssh1/</url>
+    <content><![CDATA[<p>平时有许多服务器需要通过终端进行管理，如果每次都使用<code>ssh username@ipdomain</code>这种命令会显得麻烦，效率低下而且还需要每次输入密码。所以这里要说的是如何让这个过程更加简单。</p>
+<a id="more"></a>
+
+<h2 id="命令简化"><a href="#命令简化" class="headerlink" title="命令简化"></a>命令简化</h2><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>修改~/.ssh/config(如果没有就新建一个)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host 1</span><br><span class="line">      HostName 192.168.199.1</span><br><span class="line">      Port 22</span><br><span class="line">      User name</span><br></pre></td></tr></table></figure>
+<p>保存，输入<code>ssh 1</code>就可以直接执行<code>name@192.168.199.1</code></p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>使用<a href="https://github.com/fitztrev/shuttle">Shuttle</a></p>
+<p>点击Settings-Edit打开配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;Manage Servers&quot;: [                     &#x2F;&#x2F;父级菜单</span><br><span class="line">  &#123;                                    &#x2F;&#x2F;单个命令的配置</span><br><span class="line">      &quot;cmd&quot;:&quot;ssh root@107.a.b.c&quot;,     &#x2F;&#x2F;命令本体</span><br><span class="line">    &quot;inTerminal&quot;: &quot;tab&quot;,             &#x2F;&#x2F;选择执行命令窗口，可选：new,tab,current</span><br><span class="line">    &quot;name&quot;: &quot;server1&quot;,              &#x2F;&#x2F;菜单名</span><br><span class="line">    &quot;theme&quot;:&quot;basic&quot;,               &#x2F;&#x2F;终端主题</span><br><span class="line">    &quot;title&quot;:&quot;vrmc&quot;                &#x2F;&#x2F;终端标题</span><br><span class="line">  &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="免密码"><a href="#免密码" class="headerlink" title="免密码"></a>免密码</h2><p>登录过程中的ssh命令已经简化，接下来就要输入密码来登录服务器，现在就将输入密码的过程化到最简。也就是免密码。</p>
+<p>在本地计算机生成一对公钥与私钥，将公钥内容上传至 <code>~/.ssh/authorized_keys</code>文件内(如果没有<code>.ssh</code>文件夹就新建一个)</p>
+<p>需要注意保管好私钥，备份于合适的位置。</p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>Terminal</tag>
+        <tag>SSH</tag>
+        <tag>Shuttle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决macOS下ssh空闲一段时间自动断开的问题</title>
+    <url>/2018/08/05/ssherror1/</url>
+    <content><![CDATA[<p>使用macOS时,当ssh空闲一段时间会自动断开,等待卡死结束非常浪费时间</p>
+<p>在这里记录解决这个问题的方法</p>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>使用ssh登录linux服务器后，在后台放置一段时间，会发现会自动断开或者卡死无法输入</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><code>vim /etc/ssh/ssh_config</code></p>
+<p>添加这2句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ServerAliveCountMax 3</span><br><span class="line">ServerAliveInterval 5</span><br></pre></td></tr></table></figure>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>1.<code>ServerAliveCountMax 3</code>表示服务器发出请求后客户端未响应次数达到一定值就自动断开,正常情况下,客户端会正常响应.</p>
+<p>2.<code>SerAliveInterval 0 </code>指定了服务器端向客户端请求消息的时间间隔, 默认是0, 不发送,　而<code>ServerAliveInterval 5</code>表示每5秒向服务器发送一次,这样就可以保持连接</p>
+<p>3.<code>/etc/ssh/</code> 目录下的ssh_config是针对客户端的配置文件，另外一个sshd_config是针对服务端的文件，因为这里的Mac作为客户端去远程连接其他服务器，所以仅需修改ssh_config</p>
+]]></content>
+      <categories>
+        <category>Server</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typecho换域名的方法</title>
+    <url>/2018/06/24/switchdomain/</url>
+    <content><![CDATA[<p>备份方法如下</p>
+<ol>
+<li>进入phpmyadmin</li>
+<li>找到typecho数据库里面的<code>typecho_options</code>表</li>
+<li>把里面的<code>siteUrl</code>值换成新的。</li>
+</ol>
+<p>正常情况下，只要是修改好了数据库配置，这么操作就已经换过来了。</p>
+<p>如果需要更换文章里面的网址，在数据库里面执行下面的语句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UPDATE &#96;typecho_contents&#96; SET &#96;text&#96; &#x3D; REPLACE(&#96;text&#96;,&#39;旧域名地址&#39;,&#39;新域名地址&#39;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tcping的使用</title>
+    <url>/2019/07/21/tcping1/</url>
+    <content><![CDATA[<p>有些服务器禁止ping,比如<code>AWS</code>的<code>LightSail</code>.或者是网络出现了某些奇妙的问题,比如<code>ping</code>得通但就是连不上<code>tcp</code></p>
+<p>为了能够正常测试服务器的可用性需要一种替代方案,这种方案就是使用<code>tcping</code></p>
+<a id="more"></a>
+
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>下载链接 <a href="https://elifulkerson.com/projects/tcping.php">https://elifulkerson.com/projects/tcping.php</a> </p>
+<p>这里可以选择32位或者64位程序 (<a href="https://download.elifulkerson.com/files/tcping/0.39/x64/tcping64.exe">tcping64.exe</a>)</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>下载完成后需要把 <code>tcping.exe</code> 文件复制到 <code>C:\Windows\System32</code> 文件夹下,也就是 <code>C:\Windows\System32\tcping.exe </code><br>这样就可以直接在<code>CMD</code>中直接使用<code>tcping</code>命令</p>
+<p>如果你不想把这文件放入系统盘 <code>tcping xxx</code> 改成 <code>D:\abc\tcping.exe xxx</code> 即可</p>
+<p>或者,使用<code>cd</code>切换到此文件所在文件夹直接使用<code>tcping</code>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tcping [命令参数] 服务器地址(IP&#x2F;域名) [服务器端口]</span><br><span class="line"> </span><br><span class="line"> -t     : 连续 TCPing ，直到使用 Ctrl+C 键停止</span><br><span class="line">示例：tcping -t 1.1.1.1 80</span><br><span class="line"> </span><br><span class="line"> -n 5   : TCPing 5次后停止</span><br><span class="line">示例：tcping -n 5 1.1.1.1 80</span><br><span class="line"> </span><br><span class="line"> -i 5   : 每隔 5秒 TCPing 一次</span><br><span class="line">示例：tcping -i 5 1.1.1.1 80</span><br><span class="line"> </span><br><span class="line"> -w 0.5 : 设置超时时间为 0.5秒（1秒&#x3D;1000毫秒），单位 秒</span><br><span class="line">示例：tcping -w 0.5 1.1.1.1 80</span><br><span class="line"> </span><br><span class="line"> -d     : 在每行返回信息中加入时间信息</span><br><span class="line">示例：tcping -d 1.1.1.1 80</span><br><span class="line"> </span><br><span class="line"> -s     : 当 TCPing 测试成功后（在超时时间以内返回 TCPing 延迟数据）自动停止 TCPing</span><br><span class="line">示例：tcping -s 1.1.1.1 80</span><br><span class="line"> </span><br><span class="line"> -4     : 优先 IPv4（如果一个域名有 IPv4 和 IPv6 解析，那么走 IPv4）</span><br><span class="line">示例：tcping -4 www.google.com 80</span><br><span class="line"> </span><br><span class="line"> -6     : 优先 IPv6（如果一个域名有 IPv4 和 IPv6 解析，那么走 IPv6）</span><br><span class="line">示例：tcping -6 www.google.com 80</span><br><span class="line"> </span><br><span class="line"> --file : TCPing 将逐行循环遍历文件内的 服务器IP&#x2F;域名 信息（一行一个，支持端口，例如：1.1.1.1 443）</span><br><span class="line">示例：tcping --file D:\abc\1.txt</span><br><span class="line"> </span><br><span class="line"> -v : 显示版本号</span><br><span class="line">示例：tcping -v</span><br><span class="line"> </span><br><span class="line"># 如果你没有写服务器地址的端口，那么默认为 80 端口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux系统下的安装"><a href="#Linux系统下的安装" class="headerlink" title="Linux系统下的安装"></a>Linux系统下的安装</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">安装命令</span><br><span class="line">CentOS&#x2F;REHL: yum install tcping</span><br><span class="line">Debian&#x2F;Ubuntu: apt-get install tcptraceroute</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://doubibackup.com/dkj0kb1w.html">https://doubibackup.com/dkj0kb1w.html</a></li>
+<li><a href="https://elifulkerson.com/projects/tcping.php">https://elifulkerson.com/projects/tcping.php</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>测试</tag>
+        <tag>ping</tag>
+        <tag>tcping</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows 好用的终端工具</title>
+    <url>/2019/08/10/term1/</url>
+    <content><![CDATA[<p>Windows 已经原生支持 OpenSSH 但是第三方的软件功能更多或者更加美观</p>
+<a id="more"></a>
+
+
+<h2 id="PuTTY"><a href="#PuTTY" class="headerlink" title="PuTTY"></a>PuTTY</h2><ul>
+<li><a href="https://www.putty.org/">https://www.putty.org/</a></li>
+<li>免费,开源,轻量,易用</li>
+</ul>
+<h2 id="Xshell"><a href="#Xshell" class="headerlink" title="Xshell"></a>Xshell</h2><ul>
+<li><a href="https://www.netsarang.com/zh/xshell/">https://www.netsarang.com/zh/xshell/</a></li>
+<li>家庭版免费而且够用</li>
+<li>需要注意不要下到山寨软件</li>
+</ul>
+<h2 id="MobaXterm"><a href="#MobaXterm" class="headerlink" title="MobaXterm"></a>MobaXterm</h2><ul>
+<li><a href="https://mobaxterm.mobatek.net/">https://mobaxterm.mobatek.net/</a></li>
+<li>免费,功能齐全</li>
+</ul>
+<h2 id="terminus"><a href="#terminus" class="headerlink" title="terminus"></a>terminus</h2><ul>
+<li><a href="https://eugeny.github.io/terminus/">https://eugeny.github.io/terminus/</a></li>
+<li><a href="https://github.com/Eugeny/terminus">https://github.com/Eugeny/terminus</a></li>
+<li>免费,美观</li>
+</ul>
+<h2 id="FluentTerminal"><a href="#FluentTerminal" class="headerlink" title="FluentTerminal"></a>FluentTerminal</h2><ul>
+<li><a href="https://github.com/felixse/FluentTerminal">https://github.com/felixse/FluentTerminal</a></li>
+<li>免费,美观</li>
+</ul>
+<h2 id="Bitvise"><a href="#Bitvise" class="headerlink" title="Bitvise"></a>Bitvise</h2><ul>
+<li><a href="https://www.bitvise.com/">https://www.bitvise.com/</a></li>
+<li>客户端支持多种文件传输协议,远程桌面连接和代理</li>
+<li>还有可以安装在<code>Windows</code>系统的<code>ssh Service</code></li>
+</ul>
+<h2 id="Cygwin"><a href="#Cygwin" class="headerlink" title="Cygwin"></a>Cygwin</h2><ul>
+<li><a href="https://www.cygwin.com/">https://www.cygwin.com/</a></li>
+</ul>
+<h2 id="SecureCRT"><a href="#SecureCRT" class="headerlink" title="SecureCRT"></a>SecureCRT</h2><ul>
+<li><a href="https://www.vandyke.com/products/securecrt/">https://www.vandyke.com/products/securecrt/</a></li>
+</ul>
+<h2 id="Finalshell"><a href="#Finalshell" class="headerlink" title="Finalshell"></a>Finalshell</h2><ul>
+<li><a href="http://www.hostbuf.com/c/131.html">http://www.hostbuf.com/c/131.html</a></li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote>
+<p>SSH Secure Shell Client<br>Rstudio <a href="https://www.rstudio.com/">https://www.rstudio.com/</a><br>mRemoteNG <a href="https://mremoteng.org/download">https://mremoteng.org/download</a><br>比 Lynx 更强大的终端网页浏览器 <a href="https://github.com/browsh-org/browsh">https://github.com/browsh-org/browsh</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>docker</tag>
+        <tag>服务器</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VSCode的快捷键</title>
+    <url>/2018/05/23/vscc/</url>
+    <content><![CDATA[<p>使用VSCode的快捷键，效率会提高很多</p>
+<a id="more"></a>
+<h2 id="VsCode快捷键五种组合方式"><a href="#VsCode快捷键五种组合方式" class="headerlink" title="VsCode快捷键五种组合方式"></a>VsCode快捷键五种组合方式</h2><table>
+<thead>
+<tr>
+<th>组合</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + Shift + ?</td>
+<td>这种常规组合按钮</td>
+</tr>
+<tr>
+<td>Ctrl + V Ctrl +V</td>
+<td>同时依赖一个按键的组合</td>
+</tr>
+<tr>
+<td>Shift + V c</td>
+<td>先组合后单键的输入</td>
+</tr>
+<tr>
+<td>Ctrl + Click</td>
+<td>键盘 + 鼠标点击</td>
+</tr>
+<tr>
+<td>Ctrl + DragMouse</td>
+<td>键盘 + 鼠标拖动</td>
+</tr>
+</tbody></table>
+<h2 id="通用快捷键"><a href="#通用快捷键" class="headerlink" title="通用快捷键"></a>通用快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+Shift+P,F1</td>
+<td>展示全局命令面板</td>
+</tr>
+<tr>
+<td>Ctrl+P</td>
+<td>快速打开最近打开的文件</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+N</td>
+<td>打开新的编辑器窗口</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+W</td>
+<td>关闭编辑器</td>
+</tr>
+</tbody></table>
+<h2 id="基础编辑"><a href="#基础编辑" class="headerlink" title="基础编辑"></a>基础编辑</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + X</td>
+<td>剪切</td>
+</tr>
+<tr>
+<td>Ctrl + C</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>Alt + up/down</td>
+<td>移动行上下</td>
+</tr>
+<tr>
+<td>Shift + Alt up/down</td>
+<td>在当前行上下复制当前行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + K</td>
+<td>删除行</td>
+</tr>
+<tr>
+<td>Ctrl + Enter</td>
+<td>在当前行下插入新的一行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Enter</td>
+<td>在当前行上插入新的一行</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + &#124;</td>
+<td>匹配花括号的闭合处，跳转</td>
+</tr>
+<tr>
+<td>Ctrl + ] / [</td>
+<td>行缩进</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>光标跳转到行头</td>
+</tr>
+<tr>
+<td>End</td>
+<td>光标跳转到行尾</td>
+</tr>
+<tr>
+<td>Ctrl + Home</td>
+<td>跳转到页头</td>
+</tr>
+<tr>
+<td>Ctrl + End</td>
+<td>跳转到页尾</td>
+</tr>
+<tr>
+<td>Ctrl + up/down</td>
+<td>行视图上下偏移</td>
+</tr>
+<tr>
+<td>Alt + PgUp/PgDown</td>
+<td>屏视图上下偏移</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + [</td>
+<td>折叠区域代码</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + ]</td>
+<td>展开区域代码</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + [</td>
+<td>折叠所有子区域代码</td>
+</tr>
+<tr>
+<td>Ctrl + k Ctrl + ]</td>
+<td>展开所有折叠的子区域代码</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + 0</td>
+<td>折叠所有区域代码</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + J</td>
+<td>展开所有折叠区域代码</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + C</td>
+<td>添加行注释</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + U</td>
+<td>删除行注释</td>
+</tr>
+<tr>
+<td>Ctrl + /</td>
+<td>添加关闭行注释</td>
+</tr>
+<tr>
+<td>Shift + Alt +A</td>
+<td>块区域注释</td>
+</tr>
+<tr>
+<td>Alt + Z</td>
+<td>添加关闭词汇包含</td>
+</tr>
+</tbody></table>
+<h2 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + T</td>
+<td>列出所有符号</td>
+</tr>
+<tr>
+<td>Ctrl + G</td>
+<td>跳转行</td>
+</tr>
+<tr>
+<td>Ctrl + P</td>
+<td>跳转文件</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + O</td>
+<td>跳转到符号处</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + M</td>
+<td>打开问题展示面板</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>跳转到下一个错误或者警告</td>
+</tr>
+<tr>
+<td>Shift + F8</td>
+<td>跳转到上一个错误或者警告</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Tab</td>
+<td>切换到最近打开的文件</td>
+</tr>
+<tr>
+<td>Alt + left / right</td>
+<td>向后、向前</td>
+</tr>
+<tr>
+<td>Ctrl + M</td>
+<td>进入用Tab来移动焦点</td>
+</tr>
+</tbody></table>
+<h2 id="查询与替换"><a href="#查询与替换" class="headerlink" title="查询与替换"></a>查询与替换</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + F</td>
+<td>查询</td>
+</tr>
+<tr>
+<td>Ctrl + H</td>
+<td>替换</td>
+</tr>
+<tr>
+<td>F3 / Shift + F3</td>
+<td>查询下一个/上一个</td>
+</tr>
+<tr>
+<td>Alt + Enter</td>
+<td>选中所有出现在查询中的</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>匹配当前选中的词汇或者行，再次选中-可操作</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + D</td>
+<td>移动当前选择到下个匹配选择的位置(光标选定)</td>
+</tr>
+</tbody></table>
+<h2 id="多行光标操作于选择"><a href="#多行光标操作于选择" class="headerlink" title="多行光标操作于选择"></a>多行光标操作于选择</h2><p>|快捷键|作用|<br>|Alt + Click|    插入光标-支持多个|<br>|Ctrl + Alt + up/down    |上下插入光标-支持多个|<br>|Ctrl + U    |撤销最后一次光标操作|<br>|Shift + Alt + I|    插入光标到选中范围内所有行结束符|<br>|Ctrl + I    |选中当前行|<br>|Ctrl + Shift + L    |选择所有出现在当前选中的行-操作|<br>|Ctrl + F2|    选择所有出现在当前选中的词汇-操作|<br>|Shift + Alt + right    |从光标处扩展选中全行|<br>|Shift + Alt + left    |收缩选择区域|<br>|Shift + Alt + (drag mouse)|    鼠标拖动区域，同时在多个行结束符插入光标|<br>|Ctrl + Shift + Alt + (Arrow Key)    |也是插入多行光标的[方向键控制]|<br>|Ctrl + Shift + Alt + PgUp/PgDown    |也是插入多行光标的[整屏生效]|</p>
+<h2 id="丰富的语言操作"><a href="#丰富的语言操作" class="headerlink" title="丰富的语言操作"></a>丰富的语言操作</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + Space</td>
+<td>输入建议[智能提示]</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Space</td>
+<td>参数提示</td>
+</tr>
+<tr>
+<td>Tab</td>
+<td>Emmet指令触发/缩进</td>
+</tr>
+<tr>
+<td>Shift + Alt + F</td>
+<td>格式化代码</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + F</td>
+<td>格式化选中部分的代码</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>跳转到定义处</td>
+</tr>
+<tr>
+<td>Alt + F12</td>
+<td>代码片段显示定义</td>
+</tr>
+<tr>
+<td>Ctrl + K F12</td>
+<td>在其他窗口打开定义处</td>
+</tr>
+<tr>
+<td>Ctrl + .</td>
+<td>快速修复部分可以修复的语法错误</td>
+</tr>
+<tr>
+<td>Shift + F12</td>
+<td>显示所有引用</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>重命名符号</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + . / ,</td>
+<td>替换下个值</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + X</td>
+<td>移除空白字符</td>
+</tr>
+<tr>
+<td>Ctrl + K M</td>
+<td>更改页面文档格式</td>
+</tr>
+</tbody></table>
+<h2 id="编辑器管理"><a href="#编辑器管理" class="headerlink" title="编辑器管理"></a>编辑器管理</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + F4, Ctrl + W</td>
+<td>关闭编辑器</td>
+</tr>
+<tr>
+<td>Ctrl + k F</td>
+<td>关闭当前打开的文件夹</td>
+</tr>
+<tr>
+<td>Ctrl +</td>
+<td>切割编辑窗口</td>
+</tr>
+<tr>
+<td>Ctrl + 1/2/3</td>
+<td>切换焦点在不同的切割窗口</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl &lt;-/-&gt;</td>
+<td>切换焦点在不同的切割窗口</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + PgUp/PgDown</td>
+<td>切换标签页的位置</td>
+</tr>
+<tr>
+<td>Ctrl + K &lt;-/-&gt;</td>
+<td>切割窗口位置调换</td>
+</tr>
+</tbody></table>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + N</td>
+<td>新建文件</td>
+</tr>
+<tr>
+<td>Ctrl + O</td>
+<td>打开文件</td>
+</tr>
+<tr>
+<td>Ctrl + S</td>
+<td>保存文件</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + S</td>
+<td>另存为</td>
+</tr>
+<tr>
+<td>Ctrl + K S</td>
+<td>保存所有当前已经打开的文件</td>
+</tr>
+<tr>
+<td>Ctrl + F4</td>
+<td>关闭当前编辑窗口</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + W</td>
+<td>关闭所有编辑窗口</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + T</td>
+<td>撤销最近关闭的一个文件编辑窗口</td>
+</tr>
+<tr>
+<td>Ctrl + K Enter</td>
+<td>保持开启</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Tab</td>
+<td>调出最近打开的文件列表，重复按会切换</td>
+</tr>
+<tr>
+<td>Ctrl + Tab</td>
+<td>与上面一致，顺序不一致</td>
+</tr>
+<tr>
+<td>Ctrl + K P</td>
+<td>复制当前打开文件的存放路径</td>
+</tr>
+<tr>
+<td>Ctrl + K R</td>
+<td>打开当前编辑文件存放位置</td>
+</tr>
+<tr>
+<td>Ctrl + K O</td>
+<td>在新的编辑器中打开当前编辑的文件</td>
+</tr>
+</tbody></table>
+<h2 id="显示"><a href="#显示" class="headerlink" title="显示"></a>显示</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F11</td>
+<td>切换全屏模式</td>
+</tr>
+<tr>
+<td>Shift + Alt + 1</td>
+<td>切换编辑布局</td>
+</tr>
+<tr>
+<td>Ctrl + =/-</td>
+<td>放大 / 缩小</td>
+</tr>
+<tr>
+<td>Ctrl + B</td>
+<td>侧边栏显示隐藏</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + E</td>
+<td>资源视图和编辑视图的焦点切换</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F</td>
+<td>打开全局搜索</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + G</td>
+<td>打开Git可视管理</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + D</td>
+<td>打开DeBug面板</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + X</td>
+<td>打开插件市场面板</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + H</td>
+<td>在当前文件替换查询替换</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + J</td>
+<td>开启详细查询</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + V</td>
+<td>预览Markdown文件</td>
+</tr>
+<tr>
+<td>Ctrl + K v</td>
+<td>在边栏打开渲染后的视图[新建]</td>
+</tr>
+</tbody></table>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F9</td>
+<td>添加解除断点</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>启动调试、继续</td>
+</tr>
+<tr>
+<td>F11 / Shift + F11</td>
+<td>单步进入 / 单步跳出</td>
+</tr>
+<tr>
+<td>F10</td>
+<td>单步跳过</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + I</td>
+<td>显示悬浮</td>
+</tr>
+</tbody></table>
+<h2 id="集成终端"><a href="#集成终端" class="headerlink" title="集成终端"></a>集成终端</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + `</td>
+<td>打开集成终端</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + `</td>
+<td>创建一个新的终端</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + C</td>
+<td>复制所选</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + V</td>
+<td>复制到当前激活的终端</td>
+</tr>
+<tr>
+<td>Shift + PgUp / PgDown</td>
+<td>页面上下翻屏</td>
+</tr>
+<tr>
+<td>Ctrl + Home / End</td>
+<td>滚动到页面头部或尾部</td>
+</tr>
+</tbody></table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><blockquote>
+<p>Markdown编辑表格时如何输入竖线<br>竖线用<code>&amp;#124;</code>或者<code> &amp;#x7C;</code> 来代替</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>Tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设置特定国家和地区的防火墙白名单</title>
+    <url>/2018/12/20/whitelist/</url>
+    <content><![CDATA[<p>用以允许特定国家访问服务器以及服务,达到锁定区域的目的</p>
+<a id="more"></a>
+
+<h2 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-get -y install ipset #Ubuntu系统安装ipset</span><br><span class="line">yum -y install ipset #CentOS系统安装ipset</span><br><span class="line">-----</span><br><span class="line">iptables -P INPUT ACCEPT #安全清空防火墙规则以防止清空后无法访问服务器以及部署过程中发生冲突</span><br><span class="line">iptables -F</span><br><span class="line">-----</span><br><span class="line">ipset -N cndz hash:net #创建一个名为cndz的规则</span><br><span class="line">wget -P . http:&#x2F;&#x2F;www.ipdeny.com&#x2F;ipblocks&#x2F;data&#x2F;countries&#x2F;cn.zone #下载IP段</span><br><span class="line">for i in $(cat &#x2F;root&#x2F;cn.zone ); do ipset -A cndz $i; done #将IP段添加到cndz规则中</span><br><span class="line">-----</span><br><span class="line">iptables -A INPUT -p tcp -m set --match-set cndz src -j ACCEPT #设置白名单IP段</span><br><span class="line">-----</span><br><span class="line">iptables -P INPUT DROP  #对白名单外国家关闭所有端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j DROP #对白名单外国家关闭80端口</span><br></pre></td></tr></table></figure>
+
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>获取特定地区IP段：<a href="http://www.ipdeny.com/ipblocks/">http://www.ipdeny.com/ipblocks/</a></p>
+<p>CentOS关闭firewall防火墙</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>防火墙</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在服务器上部署迅雷远程下载</title>
+    <url>/2019/03/16/xware/</url>
+    <content><![CDATA[<p>适合服务器使用的下载软件有很多,比如Aria2 Transmission 等.</p>
+<p>这里记录的是基于docker使用xware镜像在服务器部署迅雷远程下载</p>
+<a id="more"></a>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="创建目录用于挂载"><a href="#创建目录用于挂载" class="headerlink" title="创建目录用于挂载"></a>创建目录用于挂载</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir xunlei</span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --name&#x3D;xware -v $(pwd)&#x2F;xunlei:&#x2F;xware&#x2F;TDDOWNLOAD --restart&#x3D;always --network&#x3D;host caiguai&#x2F;docker-xware</span><br></pre></td></tr></table></figure>
+<h3 id="查看日志获取激活码"><a href="#查看日志获取激活码" class="headerlink" title="查看日志获取激活码"></a>查看日志获取激活码</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker logs xware</span><br></pre></td></tr></table></figure>
+<p>在日志中找到下面这行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">THE ACTIVE CODE IS: xxx</span><br></pre></td></tr></table></figure>
+<p>在 <a href="http://yuancheng.xunlei.com/">http://yuancheng.xunlei.com</a> 使用这个激活码,绑定设备</p>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>安装docker的方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt install curl -y                            #debian等系统安装curl</span><br><span class="line">yum install curl -y                            #centos等系统安装curl</span><br><span class="line">curl -sSL https:&#x2F;&#x2F;get.docker.com&#x2F; | sh         #docker安装脚本</span><br><span class="line">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh  #适合国内网络的docker安装脚本</span><br><span class="line">https:&#x2F;&#x2F;www.daocloud.io&#x2F;mirror                 #docker加速器</span><br></pre></td></tr></table></figure>
+
+<p>由于docker内存不会定期回收，可能导致服务器占用过多内存进而崩溃,运行下面的命令每日定时重启</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">crontab -l &gt; docker.cron</span><br><span class="line">echo &#39;0 18 * * * docker restart $(docker ps -q)&#39; &gt;&gt; docker.cron</span><br><span class="line">crontab docker.cron</span><br></pre></td></tr></table></figure>
+
+<p>就像使用其他下载软件那样,下载在服务器的资源搭配h5ai等网盘可以实现在线播放,在线编辑等功能</p>
+<p>常用测速文件</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Location</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CacheFly</td>
+<td>CDN</td>
+<td><code>wget -O /dev/null http://cachefly.cachefly.net/100mb.test</code></td>
+</tr>
+<tr>
+<td>SoftLayer</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://speedtest.dal01.softlayer.com/downloads/test100.zip</code></td>
+</tr>
+<tr>
+<td>SoftLayer</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip</code></td>
+</tr>
+<tr>
+<td>SoftLayer</td>
+<td>Amsterdam</td>
+<td><code>wget -O /dev/null http://speedtest.ams01.softlayer.com/downloads/test500.zip</code></td>
+</tr>
+<tr>
+<td>Linode</td>
+<td>Japan</td>
+<td><code>wget -O /dev/null http://speedtest.tokyo.linode.com/100MB-tokyo.bin</code></td>
+</tr>
+<tr>
+<td>Linode</td>
+<td>UK</td>
+<td><code>wget -O /dev/null http://speedtest.london.linode.com/100MB-london.bin</code></td>
+</tr>
+<tr>
+<td>Linode</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://speedtest.newark.linode.com/100MB-newark.bin</code></td>
+</tr>
+<tr>
+<td>Linode</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://speedtest.atlanta.linode.com/100MB-atlanta.bin</code></td>
+</tr>
+<tr>
+<td>Linode</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://speedtest.dallas.linode.com/100MB-dallas.bin</code></td>
+</tr>
+<tr>
+<td>Linode</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://speedtest.fremont.linode.com/100MB-fremont.bin</code></td>
+</tr>
+<tr>
+<td>Leaseweb</td>
+<td>Netherlands</td>
+<td><code>wget -O /dev/null http://mirror.nl.leaseweb.net/speedtest/1000mb.bin</code></td>
+</tr>
+<tr>
+<td>Leaseweb</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://mirror.us.leaseweb.net/speedtest/1000mb.bin</code></td>
+</tr>
+<tr>
+<td>FDCServer</td>
+<td>USA</td>
+<td><code>wget -O /dev/null http://lg.denver.fdcservers.net/100MBtest.zip</code></td>
+</tr>
+<tr>
+<td>OVH</td>
+<td>France</td>
+<td><code>wget -O /dev/null http://proof.ovh.net/files/100Mb.dat</code></td>
+</tr>
+</tbody></table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://hub.docker.com/r/caiguai/docker-xware">https://hub.docker.com/r/caiguai/docker-xware</a><br><a href="https://hub.docker.com/r/senorsen/docker-thunder-xware">https://hub.docker.com/r/senorsen/docker-thunder-xware</a><br><a href="http://docs.daocloud.io/dcs/docker-9152677.html">http://docs.daocloud.io/dcs/docker-9152677.html</a><br><a href="https://www.pqs.pw/knowledgebase/7/sspanel--docker-.html">https://www.pqs.pw/knowledgebase/7/sspanel--docker-.html</a><br><a href="https://www.pqs.pw/knowledgebase/10/-.html">https://www.pqs.pw/knowledgebase/10/-.html</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>软件</tag>
+        <tag>服务器</tag>
+        <tag>下载</tag>
+      </tags>
+  </entry>
+</search>
