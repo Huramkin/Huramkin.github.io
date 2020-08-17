@@ -436,7 +436,10 @@
   <entry>
     <title>RIPE的ASN注册</title>
     <url>/2019/11/09/bgpreg1/</url>
-    <content><![CDATA[<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><ul>
+    <content><![CDATA[<p>从注册BGP开始直到搞到全球互联网爆炸的第一篇</p>
+<a id="more"></a>
+
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><ul>
 <li>注册地址：<a href="https://access.ripe.net/registration">https://access.ripe.net/registration</a></li>
 <li>注册并验证邮箱后，点击My Resources，注册数据字段</li>
 <li>点击”RIPE Database”中的”Create an Object”</li>
@@ -663,7 +666,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#x61;&#x64;&#x6d;&#x69;&#x6e;&#64;&#99;&#108;&#x6f;&#x75;&#x64;&#114;&#x65;&#118;&#101;&#46;&#111;&#x72;&#103;">&#x61;&#x64;&#x6d;&#x69;&#x6e;&#64;&#99;&#108;&#x6f;&#x75;&#x64;&#114;&#x65;&#118;&#101;&#46;&#111;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#97;&#100;&#109;&#105;&#110;&#64;&#99;&#x6c;&#111;&#x75;&#100;&#114;&#x65;&#118;&#x65;&#46;&#x6f;&#114;&#x67;">&#97;&#100;&#109;&#105;&#110;&#64;&#99;&#x6c;&#111;&#x75;&#100;&#114;&#x65;&#118;&#x65;&#46;&#x6f;&#114;&#x67;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -1708,7 +1711,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#x64;&#109;&#x69;&#x6e;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x61;&#x64;&#109;&#x69;&#x6e;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#101;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#101;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
@@ -1806,7 +1809,10 @@
   <entry>
     <title>Proxmox开NAT小鸡</title>
     <url>/2019/10/27/proxmox1/</url>
-    <content><![CDATA[<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>此处环境仅有一个IPv4地址</p>
+    <content><![CDATA[<p>这里大概是服务器虚拟化教程的开始，从给NAT小鸡连上网开始的第一篇</p>
+<a id="more"></a>
+
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>此处环境仅有一个IPv4地址</p>
 <ul>
 <li>添加 <code>linux bridge</code> 名称 <code>vmbr2</code> <code>ipv4/cidr</code> 处填写 <code>10.99.0.254/24</code>，仅name和ipv4/cidr两处需填写</li>
 <li>在主机中输入， <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code></li>
@@ -1814,8 +1820,120 @@
 <li>在主机中输入（可选）， <code>iptables -t nat -A PREROUTING -i vmbr0 -p tcp --dport 1022 -j DNAT --to 10.99.0.1:22 #将母鸡的1022端口转发到10.99.0.1:22不需要从外网访问SSH端口的nat小鸡不需要设置</code></li>
 <li>配置NAT小鸡时地址为10.99.0.<em>/24，网关为10.99.0.254，地址</em>处替换不要用254或255</li>
 </ul>
+<h2 id="虚拟化软件列表"><a href="#虚拟化软件列表" class="headerlink" title="虚拟化软件列表"></a>虚拟化软件列表</h2><table>
+<thead>
+<tr>
+<th>网站</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://witsbits.com/">http://witsbits.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://libvirt.org/">https://libvirt.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/kimchi-project/kimchi">https://github.com/kimchi-project/kimchi</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mzch/vmmaestro">https://github.com/mzch/vmmaestro</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://solusvm.com/">https://solusvm.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://pve.proxmox.com/wiki/Main_Page">https://pve.proxmox.com/wiki/Main_Page</a></td>
+<td>个人用户免费</td>
+</tr>
+<tr>
+<td><a href="https://virt-manager.org/">https://virt-manager.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://www.redhat.com/en/technologies/virtualization/enterprise-virtualization">https://www.redhat.com/en/technologies/virtualization/enterprise-virtualization</a></td>
+<td>商业软件</td>
+</tr>
+<tr>
+<td><a href="https://www.ispsystem.com/software/vmmanager">https://www.ispsystem.com/software/vmmanager</a></td>
+<td>商业软件</td>
+</tr>
+<tr>
+<td><a href="https://ovirt.org/">https://ovirt.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://openqrm-enterprise.com/">https://openqrm-enterprise.com/</a></td>
+<td>商业软件</td>
+</tr>
+<tr>
+<td><a href="https://www.abiquo.com/">https://www.abiquo.com/</a></td>
+<td>商业软件</td>
+</tr>
+<tr>
+<td><a href="http://cloudstack.apache.org/">http://cloudstack.apache.org/</a></td>
+<td>免费使用</td>
+</tr>
+<tr>
+<td><a href="https://codewreck.org/kvm-wrapper/">https://codewreck.org/kvm-wrapper/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://www.linux-kvm.org/page/Kvmtools">http://www.linux-kvm.org/page/Kvmtools</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://theforeman.org/">https://theforeman.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://launchpad.net/virtualbrick">https://launchpad.net/virtualbrick</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://sourceforge.net/projects/aqemu/">https://sourceforge.net/projects/aqemu/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://code.google.com/archive/p/kvmadm/">https://code.google.com/archive/p/kvmadm/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://gkvm.sourceforge.net/">http://gkvm.sourceforge.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://clownix.net/">http://clownix.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>qemu/kvm</td>
+<td>包管理器自带</td>
+</tr>
+<tr>
+<td><a href="https://mist.io/">https://mist.io/</a></td>
+<td>管理方式多样，授权价格便宜</td>
+</tr>
+<tr>
+<td><a href="https://platform9.com/managed-openstack/">https://platform9.com/managed-openstack/</a></td>
+<td>商业软件，openstack</td>
+</tr>
+<tr>
+<td><a href="https://github.com/retspen/webvirtmgr">https://github.com/retspen/webvirtmgr</a></td>
+<td>开源免费</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ChoHag/nbsvm">https://github.com/ChoHag/nbsvm</a></td>
+<td>开源免费</td>
+</tr>
+</tbody></table>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
-<p><a href="https://www.cokemine.com/proxmox1.html">https://www.cokemine.com/proxmox1.html</a> <a href="https://web.archive.org/web/20200204213212/https://www.cokemine.com/proxmox1.html">https://web.archive.org/web/20200204213212/https://www.cokemine.com/proxmox1.html</a></p>
+<p><a href="https://www.cokemine.com/proxmox1.html">https://www.cokemine.com/proxmox1.html</a> <a href="https://web.archive.org/web/20200204213212/https://www.cokemine.com/proxmox1.html">https://web.archive.org/web/20200204213212/https://www.cokemine.com/proxmox1.html</a><br><a href="https://www.cokemine.com/xnj.html">https://www.cokemine.com/xnj.html</a><br><a href="https://juejin.im/post/6844903910600081421">https://juejin.im/post/6844903910600081421</a> <a href="http://archive.vn/6udgL">http://archive.vn/6udgL</a></p>
 </blockquote>
 ]]></content>
       <categories>

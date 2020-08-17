@@ -215,7 +215,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,31 +238,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><ul>
-<li>注册地址：<a target="_blank" rel="noopener" href="https://access.ripe.net/registration">https://access.ripe.net/registration</a></li>
-<li>注册并验证邮箱后，点击My Resources，注册数据字段</li>
-<li>点击”RIPE Database”中的”Create an Object”</li>
-<li>创建 person 和 maintainer 地址：<a target="_blank" rel="noopener" href="https://apps.db.ripe.net/db-web-ui/#/webupdates/create/person/self">https://apps.db.ripe.net/db-web-ui/#/webupdates/create/person/self</a></li>
-<li>如果你要注册ASN建议信息全部使用真实信息，因为最后会验证证件</li>
-</ul>
-<h2 id="注册ASN"><a href="#注册ASN" class="headerlink" title="注册ASN"></a>注册ASN</h2><ul>
-<li>注册ASN需要找一个LIR，或者自行充值成为RIPE大会员，成为大会员的付费地址：<a target="_blank" rel="noopener" href="https://www.ripe.net/participate/member-support/become-a-member">https://www.ripe.net/participate/member-support/become-a-member</a></li>
-<li>不想成为大会员，可以找LIR付费注册</li>
-<li>ASN付费注册地址：<a target="_blank" rel="noopener" href="https://my.hostus.us/cart.php?gid=55">https://my.hostus.us/cart.php?gid=55</a> </li>
-<li>ASN付费注册地址：<a target="_blank" rel="noopener" href="https://www.freerangecloud.com/products.php">https://www.freerangecloud.com/products.php</a></li>
-<li>ASN付费注册地址：<a target="_blank" rel="noopener" href="https://www.servperso.net/ripe-ncc-lir-services">https://www.servperso.net/ripe-ncc-lir-services</a></li>
-<li>ASN付费注册地址：<a target="_blank" rel="noopener" href="https://sinavps.ch/en/ripe_services.html">https://sinavps.ch/en/ripe_services.html</a></li>
-<li>付费注册的时候记得带IP，起码要有一组/48的IPv6，RIPE大会员自带IP不用额外购买</li>
-<li>不论是RIPE大会员还是找LIR注册，整套手续完成前是需要个人真实信息、护照扫描件等文件的</li>
-</ul>
-<h2 id="IP宣告"><a href="#IP宣告" class="headerlink" title="IP宣告"></a>IP宣告</h2><ul>
-<li>IP宣告可以先在Vultr练习</li>
-<li>更多内容会有下一篇</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://web.archive.org/web/20190227042014/https://www.ykhut.com/archives/72/">https://web.archive.org/web/20190227042014/https://www.ykhut.com/archives/72/</a></p>
-</blockquote>
-
+          <p>从注册BGP开始直到搞到全球互联网爆炸的第一篇</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/09/bgpreg1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -312,7 +296,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,18 +319,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>此处环境仅有一个IPv4地址</p>
-<ul>
-<li>添加 <code>linux bridge</code> 名称 <code>vmbr2</code> <code>ipv4/cidr</code> 处填写 <code>10.99.0.254/24</code>，仅name和ipv4/cidr两处需填写</li>
-<li>在主机中输入， <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code></li>
-<li>在主机中输入， <code>iptables -t nat -A POSTROUTING -s &#39;10.99.0.0/24&#39; -o vmbr0 -j MASQUERADE</code></li>
-<li>在主机中输入（可选）， <code>iptables -t nat -A PREROUTING -i vmbr0 -p tcp --dport 1022 -j DNAT --to 10.99.0.1:22 #将母鸡的1022端口转发到10.99.0.1:22不需要从外网访问SSH端口的nat小鸡不需要设置</code></li>
-<li>配置NAT小鸡时地址为10.99.0.<em>/24，网关为10.99.0.254，地址</em>处替换不要用254或255</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cokemine.com/proxmox1.html">https://www.cokemine.com/proxmox1.html</a> <a target="_blank" rel="noopener" href="https://web.archive.org/web/20200204213212/https://www.cokemine.com/proxmox1.html">https://web.archive.org/web/20200204213212/https://www.cokemine.com/proxmox1.html</a></p>
-</blockquote>
-
+          <p>这里大概是服务器虚拟化教程的开始，从给NAT小鸡连上网开始的第一篇</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/27/proxmox1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -396,7 +377,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -477,7 +458,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -558,7 +539,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -639,7 +620,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -720,7 +701,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -801,7 +782,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -882,7 +863,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -963,7 +944,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-17 07:39:37" itemprop="dateModified" datetime="2020-08-17T07:39:37+08:00">2020-08-17</time>
+                <time title="Modified: 2020-08-17 09:01:02" itemprop="dateModified" datetime="2020-08-17T09:01:02+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
