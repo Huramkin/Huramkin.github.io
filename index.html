@@ -215,7 +215,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,6 +242,87 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/04/05/githubactionhexo/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/12/08/cfrailgun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/08/cfrailgun/" class="post-title-link" itemprop="url">Docker 部署 Cloudflare Railgun</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-08T00:00:00+08:00">2019-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index"><span itemprop="name">Network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="部署-Cloudflare-Railgun"><a href="#部署-Cloudflare-Railgun" class="headerlink" title="部署 Cloudflare Railgun"></a>部署 Cloudflare Railgun</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/08/cfrailgun/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -296,7 +377,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -322,8 +403,7 @@
           <h2 id="Ubuntu卸载docker"><a href="#Ubuntu卸载docker" class="headerlink" title="Ubuntu卸载docker"></a>Ubuntu卸载docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l | grep -i docker</span><br><span class="line">sudo apt-get purge -y docker-engine docker docker.io docker-ce</span><br><span class="line">sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;lib&#x2F;docker &#x2F;etc&#x2F;docker</span><br><span class="line">sudo rm &#x2F;etc&#x2F;apparmor.d&#x2F;docker</span><br><span class="line">sudo groupdel docker</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;run&#x2F;docker.sock</span><br><span class="line"></span><br><span class="line">如 dpkg -l | grep -i docker 后发现显示</span><br><span class="line">ii docker-ce-cli         5:19.03.5~3-0~debian-stretch  amd64    Docker CLI: the open-source application container engine</span><br><span class="line">类似未卸载干净的包则运行：apt remove docker-ce-cli</span><br></pre></td></tr></table></figure>
 
 <h2 id="CentOS卸载Docker"><a href="#CentOS卸载Docker" class="headerlink" title="CentOS卸载Docker"></a>CentOS卸载Docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#列出已经安装的docker安装包</span><br><span class="line">yum list installed|grep docker</span><br><span class="line">rpm -qa|grep docker</span><br><span class="line">#卸载</span><br><span class="line">yum –y remove docker.x86_64</span><br><span class="line">yum –y remove docker-client.x86_64</span><br><span class="line">yum –y remove docker-common.x86_64</span><br><span class="line">#删除镜像</span><br><span class="line">rm -rf &#x2F;var&#x2F;lib&#x2F;docker</span><br></pre></td></tr></table></figure>
-<p>参考</p>
-<blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a> <a target="_blank" rel="noopener" href="https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a></p>
 </blockquote>
 
@@ -376,7 +456,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -457,7 +537,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -538,7 +618,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -619,7 +699,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -700,7 +780,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -781,7 +861,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -862,7 +942,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -889,87 +969,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/09/05/acme/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
-    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/08/22/freessl1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Huramkin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huramkin Recording">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/22/freessl1/" class="post-title-link" itemprop="url">免费的SSL证书申请</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-22 21:27:10" itemprop="dateCreated datePublished" datetime="2019-08-22T21:27:10+08:00">2019-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>购买ssl证书价格不菲,但是也有很多免费的证书,足够个人站长使用</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/22/freessl1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1058,7 +1057,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1071,7 +1070,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-count">84</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

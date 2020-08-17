@@ -612,6 +612,58 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker 部署 Cloudflare Railgun</title>
+    <url>/2019/12/08/cfrailgun/</url>
+    <content><![CDATA[<h2 id="部署-Cloudflare-Railgun"><a href="#部署-Cloudflare-Railgun" class="headerlink" title="部署 Cloudflare Railgun"></a>部署 Cloudflare Railgun</h2><a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --name railgun-memcached -d --restart&#x3D;always memcached:latest</span><br><span class="line"></span><br><span class="line">docker run -d --name&#x3D;railgun -p 2408:2408 -e RG_ACT_TOKEN&#x3D;ENTERTOKENHERE #此处为节点token,新建后即可获得\</span><br><span class="line"> -e RG_ACT_HOST&#x3D;192.0.2.1 #此处为服务器公网ip\</span><br><span class="line"> -e RG_LOG_LEVEL&#x3D;1 \</span><br><span class="line"> -e RG_WAN_PORT&#x3D;2408 #对外服务端口只能2408\</span><br><span class="line"> --link railgun-memcached:memcached \</span><br><span class="line"> --restart&#x3D;always \</span><br><span class="line"> vostro&#x2F;cloudflare-railgun</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如何判断 Railgun 工作状态是否正常运行？ 使用浏览器的开发工具(F12键),查询是否有cf-railgun的头即可假如是cf-railgun: direct (starting new WAN connection)代表初次连接，如果是含还有一些数字就代表工作啦</p>
+</blockquote>
+<ul>
+<li>不能使用自己的证书,仅可使用Cloudflare</li>
+<li>Railgun bulk actions中填写域,形如 aa.com 不得带有前缀</li>
+<li>不推荐使用 <a href="https://github.com/ZE3kr/Cloudflare-CNAME-Setup">https://github.com/ZE3kr/Cloudflare-CNAME-Setup</a></li>
+<li>推荐使用 <a href="https://github.com/Netrvin/CFPMP">https://github.com/Netrvin/CFPMP</a></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://web.archive.org/web/20200404161210/https://lala.im/6366.html">https://web.archive.org/web/20200404161210/https://lala.im/6366.html</a> 文章最后有检验是否成功开启的方法</p>
+</blockquote>
+<blockquote>
+<p><a href="https://web.archive.org/save/https://www.sakamoto.blog/cloudflare-railgun/">https://web.archive.org/save/https://www.sakamoto.blog/cloudflare-railgun/</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://web.archive.org/web/20200404112951/https://www.senra.me/deploy-cloudflare-railgun-via-docker/">https://web.archive.org/web/20200404112951/https://www.senra.me/deploy-cloudflare-railgun-via-docker/</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://web.archive.org/save/https://fengli.su/archives/Cloudflare-Partner-free-Railgun.html">https://web.archive.org/save/https://fengli.su/archives/Cloudflare-Partner-free-Railgun.html</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://hub.docker.com/r/rungeict/cloudflare-railgun">Docker Hub</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://web.archive.org/save/https://www.yunlab.me/star/virtual/2020/01/30/cloudflare-railgun-free/">https://web.archive.org/save/https://www.yunlab.me/star/virtual/2020/01/30/cloudflare-railgun-free/</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://web.archive.org/web/20200404163045/https://wzfou.com/cloudflare-railgun/">https://web.archive.org/web/20200404163045/https://wzfou.com/cloudflare-railgun/</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://web.archive.org/web/20200404163048/https://wzfou.com/cloudflare-railgun-jiasu/">https://web.archive.org/web/20200404163048/https://wzfou.com/cloudflare-railgun-jiasu/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Network</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>Service</tag>
+        <tag>Linux</tag>
+        <tag>Docker</tag>
+        <tag>Cloudflare</tag>
+        <tag>CDN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决Please check that your locale settings问题</title>
     <url>/2018/05/23/chacklocal/</url>
     <content><![CDATA[<h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">perl: warning: Setting locale failed.</span><br><span class="line"></span><br><span class="line">perl: warning: Please check that your locale settings:</span><br><span class="line"></span><br><span class="line">LANGUAGE &#x3D; &quot;en_US:en&quot;,</span><br><span class="line"></span><br><span class="line">LC_ALL &#x3D; (unset),</span><br><span class="line"></span><br><span class="line">LC_CTYPE &#x3D; &quot;zh_CN.UTF-8&quot;,</span><br><span class="line"></span><br><span class="line">LANG &#x3D; &quot;en_US.UTF-8&quot;</span><br><span class="line"></span><br><span class="line">are supported and installed on your system.</span><br><span class="line"></span><br><span class="line">perl: warning: Falling back to a fallback locale (&quot;en_US.UTF-8&quot;).</span><br><span class="line"></span><br><span class="line">perl: warning: Setting locale failed.</span><br><span class="line"></span><br><span class="line">perl: warning: Please check that your locale settings:</span><br><span class="line"></span><br><span class="line">LANGUAGE &#x3D; &quot;en_US:en&quot;,</span><br><span class="line"></span><br><span class="line">LC_ALL &#x3D; (unset),</span><br><span class="line"></span><br><span class="line">LC_CTYPE &#x3D; &quot;zh_CN.UTF-8&quot;,</span><br><span class="line"></span><br><span class="line">LANG &#x3D; &quot;en_US.UTF-8&quot;</span><br><span class="line"></span><br><span class="line">are supported and installed on your system.</span><br><span class="line"></span><br><span class="line">perl: warning: Falling back to a fallback locale (&quot;en_US.UTF-8&quot;).</span><br></pre></td></tr></table></figure>
@@ -666,7 +718,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#97;&#100;&#x6d;&#105;&#x6e;&#x40;&#x63;&#108;&#111;&#117;&#x64;&#x72;&#x65;&#x76;&#101;&#x2e;&#x6f;&#x72;&#103;">&#97;&#100;&#x6d;&#105;&#x6e;&#x40;&#x63;&#108;&#111;&#117;&#x64;&#x72;&#x65;&#x76;&#101;&#x2e;&#x6f;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#97;&#x64;&#x6d;&#x69;&#110;&#64;&#x63;&#x6c;&#x6f;&#117;&#x64;&#x72;&#101;&#x76;&#101;&#x2e;&#111;&#x72;&#103;">&#97;&#x64;&#x6d;&#x69;&#110;&#64;&#x63;&#x6c;&#x6f;&#117;&#x64;&#x72;&#101;&#x76;&#101;&#x2e;&#111;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -962,8 +1014,8 @@
       </categories>
       <tags>
         <tag>面板</tag>
-        <tag>Web开发</tag>
         <tag>Docker</tag>
+        <tag>Web开发</tag>
         <tag>集群</tag>
       </tags>
   </entry>
@@ -1767,7 +1819,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#100;&#x6d;&#x69;&#x6e;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;">&#x61;&#100;&#x6d;&#x69;&#x6e;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#x64;&#109;&#x69;&#x6e;&#64;&#101;&#x78;&#97;&#109;&#x70;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#97;&#x64;&#109;&#x69;&#x6e;&#64;&#101;&#x78;&#97;&#109;&#x70;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
@@ -1779,8 +1831,8 @@
       </categories>
       <tags>
         <tag>服务器</tag>
-        <tag>Web开发</tag>
         <tag>Docker</tag>
+        <tag>Web开发</tag>
       </tags>
   </entry>
   <entry>
@@ -2340,8 +2392,7 @@
     <content><![CDATA[<h2 id="Ubuntu卸载docker"><a href="#Ubuntu卸载docker" class="headerlink" title="Ubuntu卸载docker"></a>Ubuntu卸载docker</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dpkg -l | grep -i docker</span><br><span class="line">sudo apt-get purge -y docker-engine docker docker.io docker-ce</span><br><span class="line">sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;lib&#x2F;docker &#x2F;etc&#x2F;docker</span><br><span class="line">sudo rm &#x2F;etc&#x2F;apparmor.d&#x2F;docker</span><br><span class="line">sudo groupdel docker</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;run&#x2F;docker.sock</span><br><span class="line"></span><br><span class="line">如 dpkg -l | grep -i docker 后发现显示</span><br><span class="line">ii docker-ce-cli         5:19.03.5~3-0~debian-stretch  amd64    Docker CLI: the open-source application container engine</span><br><span class="line">类似未卸载干净的包则运行：apt remove docker-ce-cli</span><br></pre></td></tr></table></figure>
 
 <h2 id="CentOS卸载Docker"><a href="#CentOS卸载Docker" class="headerlink" title="CentOS卸载Docker"></a>CentOS卸载Docker</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#列出已经安装的docker安装包</span><br><span class="line">yum list installed|grep docker</span><br><span class="line">rpm -qa|grep docker</span><br><span class="line">#卸载</span><br><span class="line">yum –y remove docker.x86_64</span><br><span class="line">yum –y remove docker-client.x86_64</span><br><span class="line">yum –y remove docker-common.x86_64</span><br><span class="line">#删除镜像</span><br><span class="line">rm -rf &#x2F;var&#x2F;lib&#x2F;docker</span><br></pre></td></tr></table></figure>
-<p>参考</p>
-<blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
 <p><a href="https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a> <a href="https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a></p>
 </blockquote>
 ]]></content>
