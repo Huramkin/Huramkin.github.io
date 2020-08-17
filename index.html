@@ -184,6 +184,167 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2020/04/05/githubactionhexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/05/githubactionhexo/" class="post-title-link" itemprop="url">GitHub Action自动部署HEXO</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-05T00:00:00+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>GitHub Action自动部署HEXO的各种配置文件以及注意事项</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/05/githubactionhexo/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/11/24/removedocker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/24/removedocker/" class="post-title-link" itemprop="url">彻底卸载Docker</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-24 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-24T00:00:00+08:00">2019-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Ubuntu卸载docker"><a href="#Ubuntu卸载docker" class="headerlink" title="Ubuntu卸载docker"></a>Ubuntu卸载docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l | grep -i docker</span><br><span class="line">sudo apt-get purge -y docker-engine docker docker.io docker-ce</span><br><span class="line">sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;lib&#x2F;docker &#x2F;etc&#x2F;docker</span><br><span class="line">sudo rm &#x2F;etc&#x2F;apparmor.d&#x2F;docker</span><br><span class="line">sudo groupdel docker</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;run&#x2F;docker.sock</span><br><span class="line"></span><br><span class="line">如 dpkg -l | grep -i docker 后发现显示</span><br><span class="line">ii docker-ce-cli         5:19.03.5~3-0~debian-stretch  amd64    Docker CLI: the open-source application container engine</span><br><span class="line">类似未卸载干净的包则运行：apt remove docker-ce-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS卸载Docker"><a href="#CentOS卸载Docker" class="headerlink" title="CentOS卸载Docker"></a>CentOS卸载Docker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#列出已经安装的docker安装包</span><br><span class="line">yum list installed|grep docker</span><br><span class="line">rpm -qa|grep docker</span><br><span class="line">#卸载</span><br><span class="line">yum –y remove docker.x86_64</span><br><span class="line">yum –y remove docker-client.x86_64</span><br><span class="line">yum –y remove docker-common.x86_64</span><br><span class="line">#删除镜像</span><br><span class="line">rm -rf &#x2F;var&#x2F;lib&#x2F;docker</span><br></pre></td></tr></table></figure>
+<p>参考</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a> <a target="_blank" rel="noopener" href="https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
     <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/11/09/bgpreg1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +376,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,7 +457,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -377,7 +538,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -458,7 +619,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -539,7 +700,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -620,7 +781,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -701,7 +862,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -782,7 +943,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -809,168 +970,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/08/22/freessl1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
-    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/08/21/cloudstpr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Huramkin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huramkin Recording">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/21/cloudstpr/" class="post-title-link" itemprop="url">网盘程序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-21 21:27:10" itemprop="dateCreated datePublished" datetime="2019-08-21T21:27:10+08:00">2019-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一些简单好用的自建网盘程序</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/21/cloudstpr/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
-    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2019/08/20/mount1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Huramkin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huramkin Recording">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/20/mount1/" class="post-title-link" itemprop="url">连接或本地挂载网盘的工具</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-20 21:27:10" itemprop="dateCreated datePublished" datetime="2019-08-20T21:27:10+08:00">2019-08-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>使用支持挂载或连接多个网盘的第三方程序可以避免同时安装多个网盘客户端的情况</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/20/mount1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1059,7 +1058,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -184,6 +184,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2018/06/04/dockerenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/04/dockerenv/" class="post-title-link" itemprop="url">设置与查看Docker容器环境变量</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-04T00:00:00+08:00">2018-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>通过ENV指令来为Docker容器设置环境变量.</p>
+<h3 id="Docker容器环境变量设置方法"><a href="#Docker容器环境变量设置方法" class="headerlink" title="Docker容器环境变量设置方法"></a>Docker容器环境变量设置方法</h3><p>使用ENV指令可以用于为docker容器设置环境变量。<br>在运行前修改环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --env &lt;key&gt;&#x3D;&lt;value&gt; &lt;IMAGE-ID&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>Linux系统下相关环境变量设置有以下几个文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~&#x2F;.bashrc</span><br><span class="line">~&#x2F;.profile</span><br><span class="line">~&#x2F;.bash_profile</span><br><span class="line">&#x2F;etc&#x2F;profile</span><br><span class="line">&#x2F;etc&#x2F;environment</span><br><span class="line">&#x2F;etc&#x2F;bash.bashrc</span><br></pre></td></tr></table></figure>
+<h2 id="查看环境变量"><a href="#查看环境变量" class="headerlink" title="查看环境变量"></a>查看环境变量</h2><p>如果我们需要查看ENV设置的环境变量，可通过以下方法进行查看。</p>
+<h3 id="使用docker-inspect查看"><a href="#使用docker-inspect查看" class="headerlink" title="使用docker inspect查看"></a>使用docker inspect查看</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect &lt;CONTAINER-NAME&gt; OR &lt;CONTAINER-ID&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="使用docker-exec查看"><a href="#使用docker-exec查看" class="headerlink" title="使用docker exec查看"></a>使用docker exec查看</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &lt;CONTAINER-NAME&gt; OR &lt;CONTAINER-ID&gt; env</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
     <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2018/05/23/chacklocal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +299,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,7 +388,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -385,7 +469,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -466,7 +550,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -547,7 +631,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -629,7 +713,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -710,7 +794,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -791,7 +875,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -872,7 +956,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
+                <time title="Modified: 2020-08-18 05:38:25" itemprop="dateModified" datetime="2020-08-18T05:38:25+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -899,87 +983,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/11/19/ssh1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
-    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2017/11/11/git1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Huramkin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huramkin Recording">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/11/11/git1/" class="post-title-link" itemprop="url">GitHub使用（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-11-11 00:00:00" itemprop="dateCreated datePublished" datetime="2017-11-11T00:00:00+08:00">2017-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:10:19" itemprop="dateModified" datetime="2020-08-18T05:10:19+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Skill/" itemprop="url" rel="index"><span itemprop="name">Skill</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>GitHub的版本控制系统，用来上传与管理代码非常方便，当然可以选择比如像<a target="_blank" rel="noopener" href="https://www.sourcetreeapp.com/">SourceTree</a>这类GUI,但是Git可以使用更多的功能。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/11/11/git1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1068,7 +1071,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -666,7 +666,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#x61;&#x64;&#109;&#x69;&#110;&#x40;&#x63;&#x6c;&#111;&#117;&#100;&#114;&#x65;&#x76;&#x65;&#x2e;&#111;&#114;&#x67;">&#x61;&#x64;&#109;&#x69;&#110;&#x40;&#x63;&#x6c;&#111;&#117;&#100;&#114;&#x65;&#x76;&#x65;&#x2e;&#111;&#114;&#x67;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#97;&#100;&#x6d;&#105;&#x6e;&#x40;&#x63;&#108;&#111;&#117;&#x64;&#x72;&#x65;&#x76;&#101;&#x2e;&#x6f;&#x72;&#103;">&#97;&#100;&#x6d;&#105;&#x6e;&#x40;&#x63;&#108;&#111;&#117;&#x64;&#x72;&#x65;&#x76;&#101;&#x2e;&#x6f;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -1332,7 +1332,7 @@
   </entry>
   <entry>
     <title>GitHub Action自动部署HEXO</title>
-    <url>/2019/04/05/githubactionhexo/</url>
+    <url>/2020/04/05/githubactionhexo/</url>
     <content><![CDATA[<p>GitHub Action自动部署HEXO的各种配置文件以及注意事项</p>
 <a id="more"></a>
 
@@ -1767,7 +1767,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#100;&#109;&#x69;&#x6e;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#97;&#100;&#109;&#x69;&#x6e;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#100;&#x6d;&#x69;&#x6e;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;">&#x61;&#100;&#x6d;&#x69;&#x6e;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
@@ -1867,7 +1867,10 @@
     <url>/2019/10/27/proxmox1/</url>
     <content><![CDATA[<p>这里大概是服务器虚拟化教程的开始，从给NAT小鸡连上网开始的第一篇</p>
 <a id="more"></a>
-
+<h2 id="系统镜像"><a href="#系统镜像" class="headerlink" title="系统镜像"></a>系统镜像</h2><ul>
+<li>KVM虚拟机所需的ISO镜像对应目录：<code>/var/lib/vz/template/iso</code>，直接使用ISO镜像</li>
+<li>OpenVZ虚拟机所需的tar.gz镜像对应目录：<code>/var/lib/vz/template/cache/</code>，下载地址：<a href="https://download.openvz.org/template/precreated/">https://download.openvz.org/template/precreated/</a></li>
+</ul>
 <h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>此处环境仅有一个IPv4地址</p>
 <ul>
 <li>添加 <code>linux bridge</code> 名称 <code>vmbr2</code> <code>ipv4/cidr</code> 处填写 <code>10.99.0.254/24</code>，仅name和ipv4/cidr两处需填写</li>
@@ -2329,6 +2332,27 @@
         <tag>Server</tag>
         <tag>随笔</tag>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>彻底卸载Docker</title>
+    <url>/2019/11/24/removedocker/</url>
+    <content><![CDATA[<h2 id="Ubuntu卸载docker"><a href="#Ubuntu卸载docker" class="headerlink" title="Ubuntu卸载docker"></a>Ubuntu卸载docker</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dpkg -l | grep -i docker</span><br><span class="line">sudo apt-get purge -y docker-engine docker docker.io docker-ce</span><br><span class="line">sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;lib&#x2F;docker &#x2F;etc&#x2F;docker</span><br><span class="line">sudo rm &#x2F;etc&#x2F;apparmor.d&#x2F;docker</span><br><span class="line">sudo groupdel docker</span><br><span class="line">sudo rm -rf &#x2F;var&#x2F;run&#x2F;docker.sock</span><br><span class="line"></span><br><span class="line">如 dpkg -l | grep -i docker 后发现显示</span><br><span class="line">ii docker-ce-cli         5:19.03.5~3-0~debian-stretch  amd64    Docker CLI: the open-source application container engine</span><br><span class="line">类似未卸载干净的包则运行：apt remove docker-ce-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS卸载Docker"><a href="#CentOS卸载Docker" class="headerlink" title="CentOS卸载Docker"></a>CentOS卸载Docker</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#列出已经安装的docker安装包</span><br><span class="line">yum list installed|grep docker</span><br><span class="line">rpm -qa|grep docker</span><br><span class="line">#卸载</span><br><span class="line">yum –y remove docker.x86_64</span><br><span class="line">yum –y remove docker-client.x86_64</span><br><span class="line">yum –y remove docker-common.x86_64</span><br><span class="line">#删除镜像</span><br><span class="line">rm -rf &#x2F;var&#x2F;lib&#x2F;docker</span><br></pre></td></tr></table></figure>
+<p>参考</p>
+<blockquote>
+<p><a href="https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a> <a href="https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker">https://web.archive.org/save/https://askubuntu.com/questions/935569/how-to-completely-uninstall-docker</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
