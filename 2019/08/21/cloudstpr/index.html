@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些简单好用的自建网盘程序">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-08-21T13:27:10.000Z">
-<meta property="article:modified_time" content="2021-07-04T07:05:00.895Z">
+<meta property="article:modified_time" content="2021-07-04T07:08:16.428Z">
 <meta property="article:author" content="Huramkin">
 <meta property="article:tag" content="软件">
 <meta property="article:tag" content="docker">
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-04 15:05:00" itemprop="dateModified" datetime="2021-07-04T15:05:00+08:00">2021-07-04</time>
+                <time title="Modified: 2021-07-04 15:08:16" itemprop="dateModified" datetime="2021-07-04T15:08:16+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,7 +276,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#x61;&#x64;&#x6d;&#x69;&#110;&#x40;&#x63;&#108;&#x6f;&#117;&#x64;&#x72;&#x65;&#118;&#101;&#46;&#111;&#x72;&#x67;">&#x61;&#x64;&#x6d;&#x69;&#110;&#x40;&#x63;&#108;&#x6f;&#117;&#x64;&#x72;&#x65;&#118;&#101;&#46;&#111;&#x72;&#x67;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#x63;&#108;&#x6f;&#x75;&#100;&#114;&#101;&#118;&#101;&#46;&#111;&#x72;&#x67;">&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#x63;&#108;&#x6f;&#x75;&#100;&#114;&#101;&#118;&#101;&#46;&#111;&#x72;&#x67;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>

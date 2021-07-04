@@ -6,7 +6,7 @@
   <link href="https://intl.huramkin.com/atom.xml" rel="self"/>
   
   <link href="https://intl.huramkin.com/"/>
-  <updated>2021-07-04T07:05:00.895Z</updated>
+  <updated>2021-07-04T07:08:16.428Z</updated>
   <id>https://intl.huramkin.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://intl.huramkin.com/2021/06/18/huramkintoolbox/"/>
     <id>https://intl.huramkin.com/2021/06/18/huramkintoolbox/</id>
     <published>2021-06-17T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;一些的小工具的集合&lt;/p&gt;</summary>
@@ -46,7 +46,7 @@
     <link href="https://intl.huramkin.com/2020/04/05/githubactionhexo/"/>
     <id>https://intl.huramkin.com/2020/04/05/githubactionhexo/</id>
     <published>2020-04-04T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;GitHub Action自动部署HEXO的各种配置文件以及注意事项&lt;/p&gt;</summary>
@@ -73,7 +73,7 @@
     <link href="https://intl.huramkin.com/2019/12/08/cfrailgun/"/>
     <id>https://intl.huramkin.com/2019/12/08/cfrailgun/</id>
     <published>2019-12-07T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;部署 Cloudflare Railgun&lt;/p&gt;</summary>
@@ -102,7 +102,7 @@
     <link href="https://intl.huramkin.com/2019/11/24/removedocker/"/>
     <id>https://intl.huramkin.com/2019/11/24/removedocker/</id>
     <published>2019-11-23T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;Ubuntu/Debian/CentOS彻底卸载Docker&lt;/p&gt;</summary>
@@ -127,7 +127,7 @@
     <link href="https://intl.huramkin.com/2019/11/09/bgpreg1/"/>
     <id>https://intl.huramkin.com/2019/11/09/bgpreg1/</id>
     <published>2019-11-08T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;从注册BGP开始直到搞到全球互联网爆炸的第一篇&lt;/p&gt;</summary>
@@ -152,7 +152,7 @@
     <link href="https://intl.huramkin.com/2019/10/27/proxmox1/"/>
     <id>https://intl.huramkin.com/2019/10/27/proxmox1/</id>
     <published>2019-10-26T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;这里大概是服务器虚拟化教程的开始，从给NAT小鸡连上网开始的第一篇&lt;/p&gt;</summary>
@@ -179,7 +179,7 @@
     <link href="https://intl.huramkin.com/2019/10/02/rosstart/"/>
     <id>https://intl.huramkin.com/2019/10/02/rosstart/</id>
     <published>2019-10-01T16:00:00.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;RouterOS是一种路由操作系统,带有配套的GUI操作软件,也可以使用命令直接操作,功能齐全,使用方便.由于功能繁多需要从最基本的连接到互联网开始做起,这里记录了使用过程中的一些基础问题&lt;/p&gt;</summary>
@@ -206,7 +206,7 @@
     <link href="https://intl.huramkin.com/2019/09/19/note1/"/>
     <id>https://intl.huramkin.com/2019/09/19/note1/</id>
     <published>2019-09-19T11:21:45.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;除去常用的OneNote,EverNote等热门的笔记应用外,还有轻量好用各具特色的笔记软件,比如可以将数据掌握在自己手中,自己定制主题,Markdown支持,好用的代码片段功能等&lt;/p&gt;</summary>
@@ -233,7 +233,7 @@
     <link href="https://intl.huramkin.com/2019/09/12/btr/"/>
     <id>https://intl.huramkin.com/2019/09/12/btr/</id>
     <published>2019-09-12T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;平时会遇到内网设备间传输数据的需求,搜了许多的软件,记录以下这些&lt;/p&gt;</summary>
@@ -260,7 +260,7 @@
     <link href="https://intl.huramkin.com/2019/09/08/androidocker/"/>
     <id>https://intl.huramkin.com/2019/09/08/androidocker/</id>
     <published>2019-09-08T11:21:45.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;也许可以拿来搞云手机…&lt;/p&gt;</summary>
@@ -287,7 +287,7 @@
     <link href="https://intl.huramkin.com/2019/09/05/acme/"/>
     <id>https://intl.huramkin.com/2019/09/05/acme/</id>
     <published>2019-09-05T11:21:45.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;用acme.sh获取免费SSL证书&lt;/p&gt;</summary>
@@ -314,7 +314,7 @@
     <link href="https://intl.huramkin.com/2019/08/22/freessl1/"/>
     <id>https://intl.huramkin.com/2019/08/22/freessl1/</id>
     <published>2019-08-22T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;购买ssl证书价格不菲,但是也有很多免费的证书,足够个人站长使用&lt;/p&gt;</summary>
@@ -343,7 +343,7 @@
     <link href="https://intl.huramkin.com/2019/08/21/cloudstpr/"/>
     <id>https://intl.huramkin.com/2019/08/21/cloudstpr/</id>
     <published>2019-08-21T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;一些简单好用的自建网盘程序&lt;/p&gt;</summary>
@@ -368,7 +368,7 @@
     <link href="https://intl.huramkin.com/2019/08/20/mount1/"/>
     <id>https://intl.huramkin.com/2019/08/20/mount1/</id>
     <published>2019-08-20T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;使用支持挂载或连接多个网盘的第三方程序可以避免同时安装多个网盘客户端的情况&lt;/p&gt;</summary>
@@ -395,7 +395,7 @@
     <link href="https://intl.huramkin.com/2019/08/19/caddy2/"/>
     <id>https://intl.huramkin.com/2019/08/19/caddy2/</id>
     <published>2019-08-19T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;使用官网脚本和docker两种方式部署caddy服务&lt;/p&gt;</summary>
@@ -422,7 +422,7 @@
     <link href="https://intl.huramkin.com/2019/08/18/minio1/"/>
     <id>https://intl.huramkin.com/2019/08/18/minio1/</id>
     <published>2019-08-18T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;MinIO 是一个开源对象存储服务,兼容亚马逊S3云存储服务接口，非常适合于存储如图片、备份数据和虚拟机镜像等大容量非结构化的数据，一个对象文件可以是任意大小，从几kb到最大5T不等。&lt;/p&gt;
@@ -452,7 +452,7 @@
     <link href="https://intl.huramkin.com/2019/08/17/bbr1/"/>
     <id>https://intl.huramkin.com/2019/08/17/bbr1/</id>
     <published>2019-08-17T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;在一些特殊的环境,BBR原版并不能发挥出最佳作用,这里是部署bbrplus的脚本&lt;/p&gt;</summary>
@@ -477,7 +477,7 @@
     <link href="https://intl.huramkin.com/2019/08/16/Chocolatey1/"/>
     <id>https://intl.huramkin.com/2019/08/16/Chocolatey1/</id>
     <published>2019-08-16T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;Chocolatey 是用在Windows上的包管理器&lt;/p&gt;</summary>
@@ -502,7 +502,7 @@
     <link href="https://intl.huramkin.com/2019/08/16/blogf1/"/>
     <id>https://intl.huramkin.com/2019/08/16/blogf1/</id>
     <published>2019-08-16T13:27:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;因为使用hexo作为博客,对其他的框架不是很了解,这里仅做记录准备以后换个人网站框架时候用&lt;/p&gt;</summary>
@@ -529,7 +529,7 @@
     <link href="https://intl.huramkin.com/2019/08/15/cron1/"/>
     <id>https://intl.huramkin.com/2019/08/15/cron1/</id>
     <published>2019-08-14T20:00:10.000Z</published>
-    <updated>2021-07-04T07:05:00.895Z</updated>
+    <updated>2021-07-04T07:08:16.428Z</updated>
     
     
     <summary type="html">&lt;p&gt;记录一下常用的crontab命令,如果实在搞不明白可以使用cron表达式生成工具&lt;/p&gt;</summary>
