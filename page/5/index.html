@@ -184,6 +184,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2018/07/08/ffdoh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huramkin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huramkin Recording">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/08/ffdoh/" class="post-title-link" itemprop="url">Firefox启用DNS Over HTTPS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-08 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-08T00:00:00+08:00">2018-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>DNS over HTTPS是一个进行安全化的域名解析的方案，目前尚处于实验性阶段。其意义在于以加密的HTTPS协议进行DNS解析请求，避免原始DNS协议中用户的DNS解析请求被窃听或者修改的问题（例如中间人攻击）来达到保护用户隐私的目的。现在主要是在 Google、Cloudflare 和 Mozilla 等科技公司在产品中进行使用,更多介绍点击这里<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/DNS_over_HTTPS">DNS-Over-HTTPS</a></p>
+<!----more---->
+<h2 id="Firefox启用DNS-Over-HTTPS"><a href="#Firefox启用DNS-Over-HTTPS" class="headerlink" title="Firefox启用DNS Over HTTPS"></a>Firefox启用DNS Over HTTPS</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>由于DNS-Over-HTTPS是一种新出现的实验性技术,所以需要新建一个Firefox的配置来启用该项功能</p>
+<p>在运行中输入<code>firefox.exe -p -no-remote</code>，新建一个Firefox的配置。</p>
+<p>关于Firefox如何管理配置文件请看<a target="_blank" rel="noopener" href="https://support.mozilla.org/zh-CN/kb/%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">官方说明</a></p>
+<h2 id="开启DNS-Over-HTTPS"><a href="#开启DNS-Over-HTTPS" class="headerlink" title="开启DNS Over HTTPS"></a>开启DNS Over HTTPS</h2><p>打开 about:config 修改以下三处的相应值</p>
+<h3 id="network-trr-mode"><a href="#network-trr-mode" class="headerlink" title="network.trr.mode"></a>network.trr.mode</h3><ul>
+<li>0 : 禁用该功能</li>
+<li>1 :设置Firefox为更快的模式</li>
+<li>2 :使用DNS Over HTTPS，并配置常规DNS使用</li>
+<li>3 :仅仅使用TRR模式</li>
+</ul>
+<p>由于要尝试DNS-Over-HTTPS,这里推荐选择3</p>
+<h3 id="network-trr-uri"><a href="#network-trr-uri" class="headerlink" title="network.trr.uri"></a>network.trr.uri</h3><p>这里应写DNS提供商的网址,鉴于某些原因,更推荐使用Cloudflare的服务</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cloudflare-dns.com/dns-query">https://cloudflare-dns.com/dns-query</a></li>
+<li><a target="_blank" rel="noopener" href="https://mozilla.cloudflare-dns.com/dns-query">https://mozilla.cloudflare-dns.com/dns-query</a></li>
+<li><a target="_blank" rel="noopener" href="https://1.1.1.1/dns-query">https://1.1.1.1/dns-query</a></li>
+<li><a target="_blank" rel="noopener" href="https://dns.google.com/experimental">https://dns.google.com/experimental</a></li>
+</ul>
+<p>前三个是Cloudflare的服务,最后一个是Google的,如果你有个人服务器的话可以尝试<a target="_blank" rel="noopener" href="https://github.com/m13253/dns-over-https">自建</a></p>
+<h3 id="network-trr-bootstrapAddress"><a href="#network-trr-bootstrapAddress" class="headerlink" title="network.trr.bootstrapAddress"></a>network.trr.bootstrapAddress</h3><p>推荐修改为<code>1.1.1.1</code>或是<code>1.0.0.1</code></p>
+<p>设置完成后重启浏览器</p>
+<h2 id="检查DNS-Over-HTTPS设置是否生效"><a href="#检查DNS-Over-HTTPS设置是否生效" class="headerlink" title="检查DNS Over HTTPS设置是否生效"></a>检查DNS Over HTTPS设置是否生效</h2><p>打开下面的网站进行检查</p>
+<blockquote>
+<p>ipleak <a target="_blank" rel="noopener" href="https://www.ipleak.net/">https://www.ipleak.net/</a></p>
+</blockquote>
+<p>如果你把<code>network.trr.mode</code>改为<code>3</code>那么DNS Address后面内容应该为0 servers</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>Firefox <a target="_blank" rel="noopener" href="https://www.mozilla.org/en-US/firefox/channel/desktop/">下载地址</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
     <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2018/06/24/switchdomain/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +317,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,7 +398,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -380,7 +482,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -469,7 +571,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -550,7 +652,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -631,7 +733,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -712,7 +814,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -794,7 +896,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -875,7 +977,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
+                <time title="Modified: 2021-07-04 10:35:42" itemprop="dateModified" datetime="2021-07-04T10:35:42+08:00">2021-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -902,87 +1004,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/04/06/dnslist/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
-    <link itemprop="mainEntityOfPage" href="https://intl.huramkin.com/2018/02/15/gpg/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Huramkin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huramkin Recording">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/15/gpg/" class="post-title-link" itemprop="url">GPG基本使用方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-02-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-02-15T00:00:00+08:00">2018-02-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-18 05:48:45" itemprop="dateModified" datetime="2020-08-18T05:48:45+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="简介及安装方式"><a href="#简介及安装方式" class="headerlink" title="简介及安装方式"></a>简介及安装方式</h2><p>GnuPG是用于加密、数字签名及产生非对称匙对的软件。下载与安装方式：<a target="_blank" rel="noopener" href="https://gpgtools.org/">gpgtools</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/02/15/gpg/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1071,20 +1092,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1119,7 +1140,7 @@
 <div class="copyright">
   
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
