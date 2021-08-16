@@ -196,6 +196,77 @@
       </tags>
   </entry>
   <entry>
+    <title>VMware的虚拟网卡的配置和使用</title>
+    <url>/2020/08/08/VMwareusevmnet1/</url>
+    <content><![CDATA[<p>VMware的虚拟网卡经常出问题,记录配置和解决问题的过程</p>
+<a id="more"></a>
+
+<h2 id="VMware的虚拟网卡"><a href="#VMware的虚拟网卡" class="headerlink" title="VMware的虚拟网卡"></a>VMware的虚拟网卡</h2><p>VMware的虚拟网卡有 VMnet0、VMnet1、VMnet8 这三个,在网络适配器中可以看到VMnet1和VMnet8,VMnet0要在VMware的虚拟网络编辑器中更改设置时才能看到</p>
+<ul>
+<li>VMnet0 : 桥接模式使用,建立虚拟机的默认网络模式,不需要对网络进行调整</li>
+<li>VMnet1 : host-only模式只能与宿主机通信,无法连接互联网</li>
+<li>VMnet8 : NAT模式,可以与宿主机通信也可以访问互联网,使用虚拟机做开发环境,如安装数据库或做注册中心等需求时使用,作为开发环境时常用</li>
+</ul>
+<h2 id="VMnet8配置步骤"><a href="#VMnet8配置步骤" class="headerlink" title="VMnet8配置步骤"></a>VMnet8配置步骤</h2><ol>
+<li>虚拟网络编辑器中编辑VMnet8将子网ip改为a.b.c.0(如 192.168.163.0)子网掩码改为255.255.255.0</li>
+<li>配置DHCP服务器<ul>
+<li>不需要自动分配ip地址可以把虚拟网络编辑器中的”使用本地DHCP服务将IP地址分配给虚拟机”前对勾取消</li>
+<li>点击DHCP设置配置起始和结束IP地址,IP地址范围不能含有子网和网关IP(如 起始192.168.163.10 结束 192.168.163.200)</li>
+<li>点击 NAT设置,修改网关IP为192.168.163.2,网关IP不能包含在DHCP起始IP和结束IP地址中</li>
+<li>点击应用 完成保存并应用配置</li>
+</ul>
+</li>
+<li>Windows控制面板中修改网络适配器VMnet8的配置<ul>
+<li>IP地址为DHCP范围内的任意一个ip地址(如: 192.168.163.128)</li>
+<li>子网掩码 255.255.255.0</li>
+<li>默认网关是上一步的网关在本文例子中即 192.168.163.2</li>
+</ul>
+</li>
+</ol>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><h3 id="电脑睡眠后NAT模式的虚拟机无法连接"><a href="#电脑睡眠后NAT模式的虚拟机无法连接" class="headerlink" title="电脑睡眠后NAT模式的虚拟机无法连接"></a>电脑睡眠后NAT模式的虚拟机无法连接</h3><p>原因是由于虚拟网卡睡眠后无法唤醒导致的解决方法是禁用网卡再启用,使用以下的脚本可以快速执行这一操作</p>
+<p>新建一个.bat脚本,输入以下内容,运行时使用管理员权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface set interface &quot;VMware Network Adapter VMnet8&quot; disabled</span><br><span class="line">netsh interface set interface &quot;VMware Network Adapter VMnet8&quot; enable</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>NetWork</tag>
+        <tag>VMware</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>acme.sh 的 docker 部署使用方法</title>
+    <url>/2019/09/05/acme/</url>
+    <content><![CDATA[<p>用acme.sh获取免费SSL证书</p>
+<a id="more"></a>
+
+
+<h2 id="脚本部署"><a href="#脚本部署" class="headerlink" title="脚本部署"></a>脚本部署</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;get.acme.sh | sh</span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">export CF_Key&#x3D;&quot;asasasasasadasasas&quot;</span><br><span class="line">export CF_Email&#x3D;&quot;example@aa.aa&quot;</span><br><span class="line">acme.sh --issue --dns dns_cf -d aa.aa -d *.aa.aa</span><br></pre></td></tr></table></figure>
+<p>成功运行后,证书会自动生成到用户目录下的 <code>.acme.sh</code> 文件夹,续签证书 <code>acme.sh  --renew   -d aa.com -d *.aa.com</code></p>
+<h2 id="docker部署"><a href="#docker部署" class="headerlink" title="docker部署"></a>docker部署</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --rm  -itd  \</span><br><span class="line">  -v &quot;$(pwd)&#x2F;out&quot;:&#x2F;acme.sh  \</span><br><span class="line">  -e CF_Email&#x3D;&quot;example@aa.aa&quot; \</span><br><span class="line">  -e CF_Key&#x3D;&quot;asasasasasadasasas&quot; \</span><br><span class="line">  --net&#x3D;host \</span><br><span class="line">  --name&#x3D;acme.sh \</span><br><span class="line">  neilpang&#x2F;acme.sh daemon</span><br></pre></td></tr></table></figure>
+
+<p>这样配置容器可以自动续签证书</p>
+<p>容器启动后开始获取证书</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker exec acme.sh --issue --dns dns_cf -d *.aa.aa -d aa.aa</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker">https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker</a></li>
+<li><a href="https://github.com/Neilpang/acme.sh/wiki/dnsapi">https://github.com/Neilpang/acme.sh/wiki/dnsapi</a></li>
+<li><a href="https://hub.docker.com/r/neilpang/acme.sh">https://hub.docker.com/r/neilpang/acme.sh</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>SSL</tag>
+        <tag>docker</tag>
+        <tag>域名</tag>
+        <tag>免费</tag>
+        <tag>隐私保护</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vim入门</title>
     <url>/2017/08/28/Vim/</url>
     <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>Vim是坠吼的编辑器，是最适合软件开发使用的，但是使用Vim需要的命令成为了劝退的重要因素。</p>
@@ -348,37 +419,6 @@
         <tag>随笔</tag>
         <tag>Vim</tag>
         <tag>文本编辑器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>acme.sh 的 docker 部署使用方法</title>
-    <url>/2019/09/05/acme/</url>
-    <content><![CDATA[<p>用acme.sh获取免费SSL证书</p>
-<a id="more"></a>
-
-
-<h2 id="脚本部署"><a href="#脚本部署" class="headerlink" title="脚本部署"></a>脚本部署</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;get.acme.sh | sh</span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">export CF_Key&#x3D;&quot;asasasasasadasasas&quot;</span><br><span class="line">export CF_Email&#x3D;&quot;example@aa.aa&quot;</span><br><span class="line">acme.sh --issue --dns dns_cf -d aa.aa -d *.aa.aa</span><br></pre></td></tr></table></figure>
-<p>成功运行后,证书会自动生成到用户目录下的 <code>.acme.sh</code> 文件夹,续签证书 <code>acme.sh  --renew   -d aa.com -d *.aa.com</code></p>
-<h2 id="docker部署"><a href="#docker部署" class="headerlink" title="docker部署"></a>docker部署</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run --rm  -itd  \</span><br><span class="line">  -v &quot;$(pwd)&#x2F;out&quot;:&#x2F;acme.sh  \</span><br><span class="line">  -e CF_Email&#x3D;&quot;example@aa.aa&quot; \</span><br><span class="line">  -e CF_Key&#x3D;&quot;asasasasasadasasas&quot; \</span><br><span class="line">  --net&#x3D;host \</span><br><span class="line">  --name&#x3D;acme.sh \</span><br><span class="line">  neilpang&#x2F;acme.sh daemon</span><br></pre></td></tr></table></figure>
-
-<p>这样配置容器可以自动续签证书</p>
-<p>容器启动后开始获取证书</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker exec acme.sh --issue --dns dns_cf -d *.aa.aa -d aa.aa</span><br></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker">https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker</a></li>
-<li><a href="https://github.com/Neilpang/acme.sh/wiki/dnsapi">https://github.com/Neilpang/acme.sh/wiki/dnsapi</a></li>
-<li><a href="https://hub.docker.com/r/neilpang/acme.sh">https://hub.docker.com/r/neilpang/acme.sh</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-      <tags>
-        <tag>SSL</tag>
-        <tag>docker</tag>
-        <tag>域名</tag>
-        <tag>免费</tag>
-        <tag>隐私保护</tag>
       </tags>
   </entry>
   <entry>
@@ -719,7 +759,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#x61;&#100;&#109;&#105;&#110;&#x40;&#x63;&#108;&#x6f;&#x75;&#x64;&#x72;&#101;&#118;&#x65;&#x2e;&#x6f;&#114;&#103;">&#x61;&#100;&#109;&#105;&#110;&#x40;&#x63;&#108;&#x6f;&#x75;&#x64;&#x72;&#101;&#118;&#x65;&#x2e;&#x6f;&#114;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#x61;&#x64;&#109;&#x69;&#110;&#x40;&#99;&#108;&#x6f;&#117;&#100;&#114;&#101;&#x76;&#101;&#46;&#111;&#x72;&#x67;">&#x61;&#x64;&#109;&#x69;&#110;&#x40;&#99;&#108;&#x6f;&#117;&#100;&#114;&#101;&#x76;&#101;&#46;&#111;&#x72;&#x67;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -1600,6 +1640,32 @@
       </tags>
   </entry>
   <entry>
+    <title>使用jsDelivr作为GitHub资源的CDN</title>
+    <url>/2020/06/08/jsdelivrandgithub/</url>
+    <content><![CDATA[<p>给github加个速</p>
+<a id="more"></a>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>拼接下面的链接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h3><ul>
+<li>user: GitHub的用户名</li>
+<li>repo: GitHub的仓库名</li>
+<li>version: 在GitHub中点击release发布一个版本然后自定义一个版本号,此处填写版本号,如不写版本号会获取最新的资源</li>
+<li>file: 目标文件在GitHub的文件路径</li>
+</ul>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 加载 jQuery v3.2.1</span><br><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;jquery&#x2F;jquery@3.2.1&#x2F;dist&#x2F;jquery.min.js</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 使用版本范围而非特定版本</span><br><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;jquery&#x2F;jquery@3.2&#x2F;dist&#x2F;jquery.min.js   https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;jquery&#x2F;jquery@3&#x2F;dist&#x2F;jquery.min.js</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; 完全省略版本号以获取最新版本资源</span><br><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;jquery&#x2F;jquery&#x2F;dist&#x2F;jquery.min.js</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; 将“.min”添加到任何JS&#x2F;CSS文件中以获取缩小版本，如果不存在，将为会自动生成</span><br><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;jquery&#x2F;jquery@3.2.1&#x2F;src&#x2F;core.min.js</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; 在末尾添加 &#x2F; 以获取资源目录列表</span><br><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;jquery&#x2F;jquery&#x2F;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Service</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>CDN</tag>
+        <tag>jsDelivr</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LiteSpeed Web Server 免费企业版</title>
     <url>/2019/05/02/lsfree/</url>
     <content><![CDATA[<p>免费并且开源的 OpenLiteSpeed 对于个人用户已经足够，企业版的 LiteSpeed Web Server 功能更多,官方提供了试用机会并且还是长期免费,虽然有一些限制,但是对于尝试已经足够</p>
@@ -1898,7 +1964,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#x64;&#x6d;&#x69;&#110;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#x64;&#x6d;&#x69;&#110;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#x64;&#109;&#105;&#110;&#64;&#101;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#x64;&#109;&#105;&#110;&#64;&#101;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
