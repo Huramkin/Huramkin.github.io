@@ -759,7 +759,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#97;&#x64;&#109;&#105;&#x6e;&#64;&#99;&#108;&#x6f;&#117;&#x64;&#x72;&#x65;&#x76;&#101;&#46;&#111;&#x72;&#103;">&#97;&#x64;&#109;&#105;&#x6e;&#64;&#99;&#108;&#x6f;&#117;&#x64;&#x72;&#x65;&#x76;&#101;&#46;&#111;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#97;&#100;&#109;&#x69;&#x6e;&#x40;&#99;&#x6c;&#x6f;&#117;&#100;&#114;&#101;&#118;&#x65;&#46;&#x6f;&#x72;&#103;">&#97;&#100;&#109;&#x69;&#x6e;&#x40;&#99;&#x6c;&#x6f;&#117;&#100;&#114;&#101;&#118;&#x65;&#46;&#x6f;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -1345,7 +1345,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;Name&quot;</span><br><span class="line">git config --global user.email &quot;email&quot;</span><br></pre></td></tr></table></figure>
 <h4 id="macOS和Linux中的安装"><a href="#macOS和Linux中的安装" class="headerlink" title="macOS和Linux中的安装"></a>macOS和Linux中的安装</h4><p>macOS首先需要安装<a href="https://brew.sh/">Homebrew</a>使用homebrew安装git</p>
 <p>Linux根据发行版的不同使用apt-get/yum来进行安装</p>
-<h2 id="常用简单命令"><a href="#常用简单命令" class="headerlink" title="常用简单命令"></a>常用简单命令</h2><p><img src="https://github.com/Huramkin/libpic/blob/master/git1.png?raw=true"></p>
+<h2 id="常用简单命令"><a href="#常用简单命令" class="headerlink" title="常用简单命令"></a>常用简单命令</h2><p><img src="https://web.archive.org/web/20200817180239im_/https://raw.githubusercontent.com/Huramkin/libpic/master/git1.png"></p>
 <table>
 <thead>
 <tr>
@@ -1964,7 +1964,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#100;&#x6d;&#105;&#x6e;&#x40;&#x65;&#120;&#97;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#97;&#100;&#x6d;&#105;&#x6e;&#x40;&#x65;&#120;&#97;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#x64;&#109;&#105;&#x6e;&#64;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;">&#97;&#x64;&#109;&#105;&#x6e;&#64;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
