@@ -37,28 +37,12 @@
   <entry>
     <title>关于网站和我</title>
     <url>/2017/08/16/AboutMe/</url>
-    <content><![CDATA[<p><img src="https://github.com/Huramkin/libpic/blob/master/malisa%20%E6%98%9F.jpg?raw=true" alt="友人赠图"></p>
+    <content><![CDATA[<p><img src="https://web.archive.org/web/20200817180346im_/https://raw.githubusercontent.com/Huramkin/libpic/master/malisa%20%E6%98%9F.jpg" alt="友人赠图"></p>
 <a id="more"></a>
 
 <h2 id="关于网站"><a href="#关于网站" class="headerlink" title="关于网站"></a>关于网站</h2><ul>
-<li>用的HEXO,网站代码在<a href="https://github.com/Huramkin/Huramkin.github.io">GitHub</a>,在Travis CI自动部署,未来几个月内争取出一篇教程从头说清。</li>
-<li>主题是yilia,<a href="https://github.com/litten/hexo-theme-yilia">https://github.com/litten/hexo-theme-yilia</a></li>
+<li>用的HEXO,网站代码在<a href="https://github.com/Huramkin/Huramkin.github.io">GitHub</a></li>
 </ul>
-<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><ul>
-<li>算是个准码农</li>
-<li>喜欢看冻鳗</li>
-<li>极度讨厌GFW</li>
-<li>喜欢喜+1</li>
-<li>懒癌患者</li>
-</ul>
-<h2 id="DN42"><a href="#DN42" class="headerlink" title="DN42"></a>DN42</h2><h3 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h3><ul>
-<li>ASN : 4242423821</li>
-<li>IPv4 地址池 : 172.20.165.8/29</li>
-<li>IPv6 地址池 : fdfc:44e4:146e:8f69::/64</li>
-</ul>
-<h3 id="服务器列表"><a href="#服务器列表" class="headerlink" title="服务器列表"></a>服务器列表</h3><h4 id="服务器1-美国洛杉矶-VirMach"><a href="#服务器1-美国洛杉矶-VirMach" class="headerlink" title="服务器1 美国洛杉矶 VirMach"></a>服务器1 美国洛杉矶 VirMach</h4><blockquote>
-<p>公网 IPv4：107.175.215.27<br>公网 IPv6：2001:470:c:16fb::2（HE.NET 隧道）<br>DN42 IPv4：172.20.165.9<br>DN42 IPv6：fdfc:44e4:146e:8f69:0:4b:a1bb:47ee<br>Link-local IPv6：fe80::216:3cff:fe92:bec0<br>可用的 VPN：ZeroTier One</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>Other</category>
@@ -759,7 +743,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#97;&#x64;&#109;&#105;&#110;&#x40;&#99;&#x6c;&#111;&#x75;&#x64;&#114;&#x65;&#118;&#x65;&#46;&#x6f;&#x72;&#x67;">&#97;&#x64;&#109;&#105;&#110;&#x40;&#99;&#x6c;&#111;&#x75;&#x64;&#114;&#x65;&#118;&#x65;&#46;&#x6f;&#x72;&#x67;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#97;&#x64;&#x6d;&#x69;&#x6e;&#64;&#99;&#108;&#111;&#x75;&#x64;&#x72;&#101;&#118;&#101;&#x2e;&#x6f;&#x72;&#103;">&#97;&#x64;&#x6d;&#x69;&#x6e;&#64;&#99;&#108;&#111;&#x75;&#x64;&#x72;&#101;&#118;&#101;&#x2e;&#x6f;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -1964,7 +1948,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#100;&#x6d;&#x69;&#110;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#x61;&#100;&#x6d;&#x69;&#110;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
