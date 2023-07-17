@@ -743,7 +743,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location &#x2F;youdomain&#x2F; &#123;</span><br><span class="line">    if (!-e $request_filename)&#123;</span><br><span class="line">        rewrite  ^&#x2F;youdomain&#x2F;(.*)$  &#x2F;youdomain&#x2F;index.php?s&#x3D;&#x2F;$1  last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5.后续操作<br>到此步时，系统已基本可以正常运行，但还需要进行一些后续操作.</p>
 <ul>
-<li>登录后台（初始用户名<a href="mailto:&#97;&#x64;&#x6d;&#x69;&#x6e;&#64;&#99;&#108;&#111;&#x75;&#x64;&#x72;&#101;&#118;&#101;&#x2e;&#x6f;&#x72;&#103;">&#97;&#x64;&#x6d;&#x69;&#x6e;&#64;&#99;&#108;&#111;&#x75;&#x64;&#x72;&#101;&#118;&#101;&#x2e;&#x6f;&#x72;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
+<li>登录后台（初始用户名<a href="mailto:&#97;&#100;&#109;&#105;&#110;&#64;&#x63;&#x6c;&#x6f;&#x75;&#x64;&#x72;&#101;&#x76;&#101;&#x2e;&#x6f;&#114;&#103;">&#97;&#100;&#109;&#105;&#110;&#64;&#x63;&#x6c;&#x6f;&#x75;&#x64;&#x72;&#101;&#x76;&#101;&#x2e;&#x6f;&#114;&#103;</a> 初始密码 admin 后台URlhttp://你的域名/Admin,登录后到设置 - 基本设置中检查站点URL是否正确）</li>
 <li>到用户管理页修改初始用户密码</li>
 <li>如果你需要使用二步验证功能，请在程序目录下依次执行<code>composer require phpgangsta/googleauthenticator:dev-master</code> <code>composer require endroid/qrcode</code>安装二步验证扩展</li>
 <li>添加Cron定时任务：<code> * * * * * curl http://你的域名/Cron</code></li>
@@ -815,6 +815,42 @@
       </tags>
   </entry>
   <entry>
+    <title>k8s部署Factorio</title>
+    <url>/2023/05/18/deploy_factorio_k8s/</url>
+    <content><![CDATA[<p>使用microk8s部署Factorio,记录一下配置文件</p>
+<a id="more"></a>
+<h2 id="安装-microk8s"><a href="#安装-microk8s" class="headerlink" title="安装 microk8s"></a>安装 microk8s</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install snapd</span><br><span class="line">sudo snap install microk8s --classic</span><br><span class="line">microk8s status --<span class="built_in">wait</span>-ready</span><br><span class="line">microk8s <span class="built_in">enable</span> dashboard dns registry istio</span><br><span class="line">microk8s kubectl get all --all-namespaces</span><br><span class="line">microk8s dashboard-proxy</span><br><span class="line">sudo snap <span class="built_in">alias</span> microk8s.kubectl kubectl</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">factorio</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">factorio</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">factorio</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">factorio</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">factoriotools/factorio</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">34197</span></span><br><span class="line">          <span class="attr">protocol:</span> <span class="string">UDP</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">27015</span></span><br><span class="line">          <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">        <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">factorio-volume</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/factorio</span></span><br><span class="line">      <span class="attr">restartPolicy:</span> <span class="string">Always</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">factorio-volume</span></span><br><span class="line">        <span class="attr">hostPath:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">/opt/factorio</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">factorio</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">factorio</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">NodePort</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">udp</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">UDP</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">34197</span></span><br><span class="line">    <span class="attr">targetPort:</span> <span class="number">34197</span></span><br><span class="line">    <span class="attr">nodePort:</span> <span class="number">30002</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">tcp</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">TCP</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">27015</span></span><br><span class="line">    <span class="attr">targetPort:</span> <span class="number">27015</span></span><br><span class="line">    <span class="attr">nodePort:</span> <span class="number">30001</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>nodePort端口外部可访问 其范围是 30000 到 32767</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f .\xxx.yaml</span><br><span class="line">microk8s.kubectl get deployments</span><br><span class="line">microk8s.kubectl get pods</span><br><span class="line">microk8s.kubectl get services</span><br><span class="line">microk8s.kubectl delete services myapp2</span><br><span class="line">microk8s.kubectl create deployment nginx --image=nginx</span><br><span class="line">microk8s.kubectl expose deployments/nginx --<span class="built_in">type</span>=<span class="string">&quot;NodePort&quot;</span> --port=80 --name=myapp5</span><br><span class="line">microk8s.kubectl describe svc myapp5</span><br><span class="line">microk8s.kubectl port-forward nginx-xxxxxxx-xxxx --address 0.0.0.0  8081:8080</span><br></pre></td></tr></table></figure>
+
+<h2 id="二进制方式启动"><a href="#二进制方式启动" class="headerlink" title="二进制方式启动"></a>二进制方式启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/x64/factorio --config ~/factorio/config/config.ini --port 34197 --start-server ~/factorio/saves/test1.zip --server-settings ~/factorio/data/server-settings.json</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置游戏管理员"><a href="#设置游戏管理员" class="headerlink" title="设置游戏管理员"></a>设置游戏管理员</h3><ul>
+<li>在服务端输入 <code>/promote 玩家名字</code></li>
+<li>在启动服务器命令时加上 –server-adminlist +管理员名单json文件的路径<br>例如：  </li>
+<li>-server-adminlist /usr/local/games/factorio/data/server-adminlist.json<br>具体的adminlist.json文件内容的写法和白名单的example一样</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a href="https://kubernetes.io/zh-cn/docs/concepts/services-networking/service/">https://kubernetes.io/zh-cn/docs/concepts/services-networking/service/</a><br><a href="https://github.com/factoriotools/factorio-docker">https://github.com/factoriotools/factorio-docker</a><br><a href="https://microk8s.io/#install-microk8s">https://microk8s.io/#install-microk8s</a><br><a href="https://wiki.factorio.com/Command_line_parameters">https://wiki.factorio.com/Command_line_parameters</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Software</category>
+      </categories>
+      <tags>
+        <tag>Server</tag>
+        <tag>随笔</tag>
+        <tag>Linux</tag>
+        <tag>Factorio</tag>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>好用的批量扫米工具DomainMegaBot</title>
     <url>/2018/08/15/dmb/</url>
     <content><![CDATA[<p>项目地址<br><a href="https://github.com/Har-Kuun/DomainMegaBot">https://github.com/Har-Kuun/DomainMegaBot</a></p>
@@ -864,79 +900,16 @@
       </tags>
   </entry>
   <entry>
-    <title>在中国大陆好用的DNS</title>
+    <title>内容已隐藏</title>
     <url>/2018/04/06/dnslist/</url>
-    <content><![CDATA[<h2 id="文章简介"><a href="#文章简介" class="headerlink" title="文章简介"></a>文章简介</h2><p>这里选择了一些在中国大陆好用的公共DNS服务<br>污染小，响应速度快<br>还有一些其他的使用技巧</p>
+    <content><![CDATA[<h2 id="文章简介"><a href="#文章简介" class="headerlink" title="文章简介"></a>文章简介</h2><p>内容已隐藏</p>
 <a id="more"></a>
-<h2 id="DNS服务的网站及服务器信息"><a href="#DNS服务的网站及服务器信息" class="headerlink" title="DNS服务的网站及服务器信息"></a>DNS服务的网站及服务器信息</h2><table>
-<thead>
-<tr>
-<th>详细信息站点</th>
-<th>服务器IP</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://www.233py.com/">GeekDNS</a></td>
-<td><a href="https://ndns.233py.com/dns-query">https://ndns.233py.com/dns-query</a></td>
-</tr>
-<tr>
-<td><a href="https://www.rubyfish.cn/docs">红鱼DNS</a></td>
-<td>dns.rubyfish.cn</td>
-</tr>
-<tr>
-<td><a href="https://www.onedns.net/personal">ONE DNS</a></td>
-<td>117.50.11.11;117.50.22.22</td>
-</tr>
-<tr>
-<td><a href="http://ip.yqie.com/dns_jiaoyu.htm">北京教育网</a></td>
-<td>58.132.8.1</td>
-</tr>
-<tr>
-<td><a href="http://aixyz.com/">AIXYZ DNS</a></td>
-<td>南方：115.159.146.99 北方：123.206.21.48</td>
-</tr>
-<tr>
-<td>中科大 DNS</td>
-<td>202.38.64.1;202.112.20.131;202.141.160.95;202.141.160.99;202.141.176.95 ;202.141.176.99</td>
-</tr>
-<tr>
-<td><a href="https://www.dnspod.cn/products/public.dns">PUBLIC DNS+</a></td>
-<td>119.29.29.29</td>
-</tr>
-<tr>
-<td><a href="http://www.sdns.cn/">sDNS(CNNIC)</a></td>
-<td>1.2.4.8; 210.2.4.8</td>
-</tr>
-<tr>
-<td><a href="http://www.alidns.com/">ALIDNS</a></td>
-<td>223.5.5.5; 223.6.6.6</td>
-</tr>
-<tr>
-<td>V2EX DNS</td>
-<td>199.91.73.222;178.79.131.110</td>
-</tr>
-<tr>
-<td><a href="https://github.com/openertech/openerdns/wiki/OpenerDNS">OpenerDNS</a></td>
-<td>42.120.21.30</td>
-</tr>
-</tbody></table>
-<h2 id="针对不同设备的DNS设置推荐"><a href="#针对不同设备的DNS设置推荐" class="headerlink" title="针对不同设备的DNS设置推荐"></a>针对不同设备的DNS设置推荐</h2><h3 id="Windows-Linux-macOS"><a href="#Windows-Linux-macOS" class="headerlink" title="Windows/Linux/macOS"></a>Windows/Linux/macOS</h3><p>在系统中直接设置DNS服务器地址或者尝试使用下面的软件来进一步保障上网的速度与安全</p>
-<blockquote>
-<p><a href="https://github.com/jedisct1/dnscrypt-proxy">Dnscrypt-proxy</a></p>
-<p><a href="https://github.com/shadowsocks/ChinaDNS">ChinaDNS</a></p>
-<p><a href="https://github.com/mili-tan/AuroraDNS.GUI">AuroraDNS</a><br><code>AuroraDNS</code> 是一个纯净、简单、面向普通用户的图形化的本地 DoH 客户端。它在本地将 <code>DNS over HTTPS</code> 转换为传统的 <code>DNS</code> 协议。</p>
-</blockquote>
-<h3 id="移动设备"><a href="#移动设备" class="headerlink" title="移动设备"></a>移动设备</h3><p>由于一些移动设备用户无法通过系统自行修改DNS配置<br>比如iPhone只能修改Wi-Fi的DNS配置但无法修改4G网络DNS<br>所以我们需要一些第三方软件的帮助</p>
-<h4 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h4><p>通过Surge软件，就可以更改iOS设备的DNS，如果您觉得这款软件太昂贵了。<br>也可以使用DNS Override来进行修改，不过需要花费$2.99进行内购解锁<br>以上两款软件均可通过AppStore找到</p>
-<h4 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h4><p>在Google play商店搜索“daedalus“下载安装即可</p>
+
 ]]></content>
       <categories>
         <category>Tools</category>
       </categories>
       <tags>
-        <tag>软件</tag>
-        <tag>DNS</tag>
-        <tag>基础服务</tag>
         <tag>网络</tag>
       </tags>
   </entry>
@@ -1292,31 +1265,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Gmail 别名的使用</title>
+    <title>内容已隐藏</title>
     <url>/2019/06/02/gamil1/</url>
-    <content><![CDATA[<p>使用Gmail的时候,如果能利用好过滤器和别名,就可以把不重要的邮件筛选到指定的分类,避免不重要的邮件推送通知</p>
-<p>还可以在不同网站注册用不同的别名,还可以在同一网站用不同的别名注册小号</p>
-<p>如果你发现某个别名经常收到垃圾邮件,也就证明你的信息被使用这个别名注册网站卖掉或者泄露了</p>
-<a id="more"></a>
-
-<p>Gmail没有传统的那种别名方式，Gmail的别名是在用户名后添加<code>+</code>号和其他合法字符构成的字符串</p>
-<blockquote>
-<p>例:<br>如果邮箱地址是 <code>example@gmail.com</code><br>那么别名地址是 <code>example+任意合法字符@gmail.com</code><br>例如 <code>example+123abc@gmail.com</code><br>例如 <code>example+google.com@gmail.com</code><br>例如 <code>example+google.com-2019-6@gmail.com</code></p>
-</blockquote>
-<p>另外在Gmail用户名中任意加上点也是可以的</p>
-<blockquote>
-<p>例：<br><code>example@gmail.com</code><br><code>ex.ample@gmail.com</code><br><code>exam.ple@gmail.com</code></p>
-</blockquote>
-]]></content>
+    <content><![CDATA[]]></content>
       <categories>
         <category>Tools</category>
       </categories>
       <tags>
-        <tag>免费</tag>
-        <tag>隐私保护</tag>
-        <tag>Gmail</tag>
         <tag>服务</tag>
-        <tag>电子邮件</tag>
       </tags>
   </entry>
   <entry>
@@ -1552,78 +1508,6 @@
       </tags>
   </entry>
   <entry>
-    <title>记录有卖日本VPS的商家</title>
-    <url>/2019/02/22/jpvps/</url>
-    <content><![CDATA[<p>这里只是记录哪里能买到日本VPS,如果想要购买请尽可能多看一些评测和评价以免踩坑</p>
-<p>日本本土商家的VPS最好不要选择,一般来说,这些商家的规定非常严格</p>
-<a id="more"></a>
-
-<h2 id="Ablenet-能网"><a href="#Ablenet-能网" class="headerlink" title="Ablenet(能网)"></a>Ablenet(能网)</h2><ul>
-<li><a href="https://www.ablenet.jp/">https://www.ablenet.jp</a></li>
-<li>允许外国人购买</li>
-<li>付费可以换IP</li>
-<li>约60元每月</li>
-<li>有评价称会被限速,购买前需要看测评</li>
-</ul>
-<h2 id="Tsukaeru"><a href="#Tsukaeru" class="headerlink" title="Tsukaeru"></a>Tsukaeru</h2><ul>
-<li><a href="https://www.tsukaeru.net/">https://www.tsukaeru.net</a></li>
-<li>允许外国人购买</li>
-<li>不能换IP</li>
-<li>约35元每月起</li>
-</ul>
-<h2 id="Conoha"><a href="#Conoha" class="headerlink" title="Conoha"></a>Conoha</h2><ul>
-<li><a href="https://www.conoha.jp/zh/">https://www.conoha.jp/zh/</a></li>
-<li>允许外国人购买</li>
-<li>约60元每月</li>
-<li>TOS严格</li>
-</ul>
-<h2 id="Z-com"><a href="#Z-com" class="headerlink" title="Z.com"></a>Z.com</h2><ul>
-<li><a href="https://z.com/">https://z.com</a></li>
-<li>不对个人用户服务</li>
-</ul>
-<h2 id="ucloudbiz"><a href="#ucloudbiz" class="headerlink" title="ucloudbiz"></a>ucloudbiz</h2><ul>
-<li><a href="https://ucloudbiz.kt.com/en/">https://ucloudbiz.kt.com/en/</a></li>
-</ul>
-<h2 id="Sakura樱花"><a href="#Sakura樱花" class="headerlink" title="Sakura樱花"></a>Sakura樱花</h2><ul>
-<li><a href="http://www.sakura.ne.jp/">http://www.sakura.ne.jp/</a></li>
-</ul>
-<h2 id="Cloud-Garage"><a href="#Cloud-Garage" class="headerlink" title="Cloud Garage"></a>Cloud Garage</h2><ul>
-<li><a href="https://cloudgarage.jp/freeplan/">https://cloudgarage.jp/freeplan/</a></li>
-<li>不允许大陆地区访问,需要使用特殊操作</li>
-</ul>
-<h2 id="CloudCore、Linode、Vultr、AWS-Lightsail"><a href="#CloudCore、Linode、Vultr、AWS-Lightsail" class="headerlink" title="CloudCore、Linode、Vultr、AWS Lightsail"></a>CloudCore、Linode、Vultr、AWS Lightsail</h2><ul>
-<li><a href="http://www.cloudcore.jp/">http://www.cloudcore.jp/</a></li>
-<li><a href="https://www.linode.com/">https://www.linode.com</a></li>
-<li><a href="https://www.vultr.com/">https://www.vultr.com/</a></li>
-<li><a href="https://aws.amazon.com/lightsail/">https://aws.amazon.com/lightsail/</a></li>
-</ul>
-<h2 id="IDCF"><a href="#IDCF" class="headerlink" title="IDCF"></a>IDCF</h2><ul>
-<li><a href="https://www.idcf.jp/">https://www.idcf.jp</a></li>
-<li>不对个人用户服务</li>
-</ul>
-<h2 id="Kagoya"><a href="#Kagoya" class="headerlink" title="Kagoya"></a>Kagoya</h2><ul>
-<li><a href="https://www.kagoya.jp/">https://www.kagoya.jp</a></li>
-<li>购买需要代购</li>
-</ul>
-<h2 id="GMOCloud"><a href="#GMOCloud" class="headerlink" title="GMOCloud"></a>GMOCloud</h2><ul>
-<li><a href="https://altus.gmocloud.com/">https://altus.gmocloud.com/</a></li>
-<li>不对个人用户服务</li>
-</ul>
-<h2 id="阿里云日本"><a href="#阿里云日本" class="headerlink" title="阿里云日本"></a>阿里云日本</h2><ul>
-<li><a href="https://jp.alibabacloud.com/">https://jp.alibabacloud.com/</a></li>
-<li>购买需要代购</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Buy</category>
-      </categories>
-      <tags>
-        <tag>服务器</tag>
-        <tag>购买</tag>
-        <tag>IDC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用jsDelivr作为GitHub资源的CDN</title>
     <url>/2020/06/08/jsdelivrandgithub/</url>
     <content><![CDATA[<p>给github加个速</p>
@@ -1725,6 +1609,204 @@
         <tag>web</tag>
         <tag>对象存储</tag>
         <tag>Minio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔记录</title>
+    <url>/2019/02/22/mixed/</url>
+    <content><![CDATA[<p>随便写的什么都有</p>
+<a id="more"></a>
+<h2 id="日本VPS"><a href="#日本VPS" class="headerlink" title="日本VPS"></a>日本VPS</h2><h3 id="Ablenet-能网"><a href="#Ablenet-能网" class="headerlink" title="Ablenet(能网)"></a>Ablenet(能网)</h3><ul>
+<li><a href="https://www.ablenet.jp/">https://www.ablenet.jp</a></li>
+<li>允许外国人购买</li>
+<li>付费可以换IP</li>
+<li>约60元每月</li>
+<li>有评价称会被限速,购买前需要看测评</li>
+</ul>
+<h3 id="Tsukaeru"><a href="#Tsukaeru" class="headerlink" title="Tsukaeru"></a>Tsukaeru</h3><ul>
+<li><a href="https://www.tsukaeru.net/">https://www.tsukaeru.net</a></li>
+<li>允许外国人购买</li>
+<li>不能换IP</li>
+<li>约35元每月起</li>
+</ul>
+<h3 id="Conoha"><a href="#Conoha" class="headerlink" title="Conoha"></a>Conoha</h3><ul>
+<li><a href="https://www.conoha.jp/zh/">https://www.conoha.jp/zh/</a></li>
+<li>允许外国人购买</li>
+<li>约60元每月</li>
+<li>TOS严格</li>
+</ul>
+<h3 id="Z-com"><a href="#Z-com" class="headerlink" title="Z.com"></a>Z.com</h3><ul>
+<li><a href="https://z.com/">https://z.com</a></li>
+<li>不对个人用户服务</li>
+</ul>
+<h3 id="ucloudbiz"><a href="#ucloudbiz" class="headerlink" title="ucloudbiz"></a>ucloudbiz</h3><ul>
+<li><a href="https://ucloudbiz.kt.com/en/">https://ucloudbiz.kt.com/en/</a></li>
+</ul>
+<h3 id="Sakura樱花"><a href="#Sakura樱花" class="headerlink" title="Sakura樱花"></a>Sakura樱花</h3><ul>
+<li><a href="http://www.sakura.ne.jp/">http://www.sakura.ne.jp/</a></li>
+</ul>
+<h3 id="Cloud-Garage"><a href="#Cloud-Garage" class="headerlink" title="Cloud Garage"></a>Cloud Garage</h3><ul>
+<li><a href="https://cloudgarage.jp/freeplan/">https://cloudgarage.jp/freeplan/</a></li>
+<li>不允许大陆地区访问,需要使用特殊操作</li>
+</ul>
+<h3 id="CloudCore、Linode、Vultr、AWS-Lightsail"><a href="#CloudCore、Linode、Vultr、AWS-Lightsail" class="headerlink" title="CloudCore、Linode、Vultr、AWS Lightsail"></a>CloudCore、Linode、Vultr、AWS Lightsail</h3><ul>
+<li><a href="http://www.cloudcore.jp/">http://www.cloudcore.jp/</a></li>
+<li><a href="https://www.linode.com/">https://www.linode.com</a></li>
+<li><a href="https://www.vultr.com/">https://www.vultr.com/</a></li>
+<li><a href="https://aws.amazon.com/lightsail/">https://aws.amazon.com/lightsail/</a></li>
+</ul>
+<h3 id="IDCF"><a href="#IDCF" class="headerlink" title="IDCF"></a>IDCF</h3><ul>
+<li><a href="https://www.idcf.jp/">https://www.idcf.jp</a></li>
+<li>不对个人用户服务</li>
+</ul>
+<h3 id="Kagoya"><a href="#Kagoya" class="headerlink" title="Kagoya"></a>Kagoya</h3><ul>
+<li><a href="https://www.kagoya.jp/">https://www.kagoya.jp</a></li>
+<li>购买需要代购</li>
+</ul>
+<h3 id="GMOCloud"><a href="#GMOCloud" class="headerlink" title="GMOCloud"></a>GMOCloud</h3><ul>
+<li><a href="https://altus.gmocloud.com/">https://altus.gmocloud.com/</a></li>
+<li>不对个人用户服务</li>
+</ul>
+<h3 id="阿里云日本"><a href="#阿里云日本" class="headerlink" title="阿里云日本"></a>阿里云日本</h3><ul>
+<li><a href="https://jp.alibabacloud.com/">https://jp.alibabacloud.com/</a></li>
+<li>购买需要代购</li>
+</ul>
+<h2 id="管理面板"><a href="#管理面板" class="headerlink" title="管理面板"></a>管理面板</h2><h3 id="收费面板"><a href="#收费面板" class="headerlink" title="收费面板"></a>收费面板</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>官网</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cPanel</td>
+<td>cpanel.com</td>
+</tr>
+<tr>
+<td>DirectAdmin</td>
+<td><a href="http://www.directadmin.com/">www.directadmin.com</a></td>
+</tr>
+<tr>
+<td>plesk</td>
+<td><a href="http://www.plesk.com/">www.plesk.com</a></td>
+</tr>
+</tbody></table>
+<h3 id="免费面板"><a href="#免费面板" class="headerlink" title="免费面板"></a>免费面板</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>官网</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ZPanel</td>
+<td><a href="http://www.zpanelcp.com/">www.zpanelcp.com</a></td>
+</tr>
+<tr>
+<td>AMH面板</td>
+<td>amh.sh</td>
+</tr>
+<tr>
+<td>Kloxo</td>
+<td>mratwork.com</td>
+</tr>
+<tr>
+<td>dockeradmin</td>
+<td><a href="http://www.dockeradmin.net/">www.dockeradmin.net</a></td>
+</tr>
+<tr>
+<td>virtualmin</td>
+<td><a href="http://www.virtualmin.com/">www.virtualmin.com</a></td>
+</tr>
+<tr>
+<td>appnode</td>
+<td><a href="http://www.appnode.com/">www.appnode.com</a></td>
+</tr>
+<tr>
+<td>CyberPanel</td>
+<td>cyberpanel.net</td>
+</tr>
+</tbody></table>
+<h3 id="快速从域名服务商转出域名"><a href="#快速从域名服务商转出域名" class="headerlink" title="快速从域名服务商转出域名"></a>快速从域名服务商转出域名</h3><h4 id="快速从Namesilo转出域名"><a href="#快速从Namesilo转出域名" class="headerlink" title="快速从Namesilo转出域名"></a>快速从Namesilo转出域名</h4><p>当新注册商向Namesilo发起域名转出请求后，Namesilo会在“Transfer Manager”页面显示“Pending Outbound Transfers ”列出待转出域名。</p>
+<p>所以，当你需要将域名快速从Namesilo转出时，只需要登录Nameilo网站，选择“Transfer Manager”，在“Pending Outbound Transfers ”列表中找到你要转出的域名，点击“APPROVE”即可快速的将域名转入到新运营商。</p>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="DNS服务的网站及服务器信息"><a href="#DNS服务的网站及服务器信息" class="headerlink" title="DNS服务的网站及服务器信息"></a>DNS服务的网站及服务器信息</h3><table>
+<thead>
+<tr>
+<th>详细信息站点</th>
+<th>服务器IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.233py.com/">GeekDNS</a></td>
+<td><a href="https://ndns.233py.com/dns-query">https://ndns.233py.com/dns-query</a></td>
+</tr>
+<tr>
+<td><a href="https://www.rubyfish.cn/docs">红鱼DNS</a></td>
+<td>dns.rubyfish.cn</td>
+</tr>
+<tr>
+<td><a href="https://www.onedns.net/personal">ONE DNS</a></td>
+<td>117.50.11.11;117.50.22.22</td>
+</tr>
+<tr>
+<td><a href="http://ip.yqie.com/dns_jiaoyu.htm">北京教育网</a></td>
+<td>58.132.8.1</td>
+</tr>
+<tr>
+<td><a href="http://aixyz.com/">AIXYZ DNS</a></td>
+<td>南方：115.159.146.99 北方：123.206.21.48</td>
+</tr>
+<tr>
+<td>中科大 DNS</td>
+<td>202.38.64.1;202.112.20.131;202.141.160.95;202.141.160.99;202.141.176.95 ;202.141.176.99</td>
+</tr>
+<tr>
+<td><a href="https://www.dnspod.cn/products/public.dns">PUBLIC DNS+</a></td>
+<td>119.29.29.29</td>
+</tr>
+<tr>
+<td><a href="http://www.sdns.cn/">sDNS(CNNIC)</a></td>
+<td>1.2.4.8; 210.2.4.8</td>
+</tr>
+<tr>
+<td><a href="http://www.alidns.com/">ALIDNS</a></td>
+<td>223.5.5.5; 223.6.6.6</td>
+</tr>
+<tr>
+<td>V2EX DNS</td>
+<td>199.91.73.222;178.79.131.110</td>
+</tr>
+<tr>
+<td><a href="https://github.com/openertech/openerdns/wiki/OpenerDNS">OpenerDNS</a></td>
+<td>42.120.21.30</td>
+</tr>
+</tbody></table>
+<h3 id="针对不同设备的DNS设置推荐"><a href="#针对不同设备的DNS设置推荐" class="headerlink" title="针对不同设备的DNS设置推荐"></a>针对不同设备的DNS设置推荐</h3><h4 id="Windows-Linux-macOS"><a href="#Windows-Linux-macOS" class="headerlink" title="Windows/Linux/macOS"></a>Windows/Linux/macOS</h4><p>在系统中直接设置DNS服务器地址或者尝试使用下面的软件来进一步保障上网的速度与安全</p>
+<blockquote>
+<p><a href="https://github.com/jedisct1/dnscrypt-proxy">Dnscrypt-proxy</a></p>
+<p><a href="https://github.com/shadowsocks/ChinaDNS">ChinaDNS</a></p>
+<p><a href="https://github.com/mili-tan/AuroraDNS.GUI">AuroraDNS</a><br><code>AuroraDNS</code> 是一个纯净、简单、面向普通用户的图形化的本地 DoH 客户端。它在本地将 <code>DNS over HTTPS</code> 转换为传统的 <code>DNS</code> 协议。</p>
+</blockquote>
+<h4 id="移动设备"><a href="#移动设备" class="headerlink" title="移动设备"></a>移动设备</h4><p>由于一些移动设备用户无法通过系统自行修改DNS配置<br>比如iPhone只能修改Wi-Fi的DNS配置但无法修改4G网络DNS<br>所以我们需要一些第三方软件的帮助</p>
+<h5 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h5><p>通过Surge软件，就可以更改iOS设备的DNS，如果您觉得这款软件太昂贵了。<br>也可以使用DNS Override来进行修改，不过需要花费$2.99进行内购解锁<br>以上两款软件均可通过AppStore找到</p>
+<h5 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h5><p>在Google play商店搜索“daedalus“下载安装即可</p>
+<h2 id="Gmail"><a href="#Gmail" class="headerlink" title="Gmail"></a>Gmail</h2><p>使用Gmail的时候,如果能利用好过滤器和别名,就可以把不重要的邮件筛选到指定的分类,避免不重要的邮件推送通知</p>
+<p>还可以在不同网站注册用不同的别名,还可以在同一网站用不同的别名注册小号</p>
+<p>如果你发现某个别名经常收到垃圾邮件,也就证明你的信息被使用这个别名注册网站卖掉或者泄露了</p>
+<p>Gmail没有传统的那种别名方式，Gmail的别名是在用户名后添加<code>+</code>号和其他合法字符构成的字符串</p>
+<blockquote>
+<p>例:<br>如果邮箱地址是 <code>example@gmail.com</code><br>那么别名地址是 <code>example+任意合法字符@gmail.com</code><br>例如 <code>example+123abc@gmail.com</code><br>例如 <code>example+google.com@gmail.com</code><br>例如 <code>example+google.com-2019-6@gmail.com</code></p>
+</blockquote>
+<p>另外在Gmail用户名中任意加上点也是可以的</p>
+<blockquote>
+<p>例：<br><code>example@gmail.com</code><br><code>ex.ample@gmail.com</code><br><code>exam.ple@gmail.com</code></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Record</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -1948,7 +2030,7 @@
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>成功运行之后访问<code>http://[ip地址]:81</code></p>
 <blockquote>
-<p>默认账号信息:<br>Email:    <a href="mailto:&#x61;&#100;&#x6d;&#x69;&#110;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#x61;&#100;&#x6d;&#x69;&#110;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;</a><br>Password: changeme</p>
+<p>默认账号信息:<br>Email:    <a href="mailto:&#97;&#100;&#x6d;&#x69;&#110;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#97;&#100;&#x6d;&#x69;&#110;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a><br>Password: changeme</p>
 </blockquote>
 <p>即可开始设置面板</p>
 <h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><blockquote>
@@ -1962,85 +2044,6 @@
         <tag>服务器</tag>
         <tag>Docker</tag>
         <tag>Web开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>主机面板推荐</title>
-    <url>/2018/08/18/pl1/</url>
-    <content><![CDATA[<p>使用面板管理服务器更加方便,不需要ssh进入,在web界面就可以操作,这里介绍几个好用的面板</p>
-<a id="more"></a>
-
-<h2 id="收费面板"><a href="#收费面板" class="headerlink" title="收费面板"></a>收费面板</h2><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>官网</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>cPanel</td>
-<td>cpanel.com</td>
-</tr>
-<tr>
-<td>DirectAdmin</td>
-<td><a href="http://www.directadmin.com/">www.directadmin.com</a></td>
-</tr>
-<tr>
-<td>plesk</td>
-<td><a href="http://www.plesk.com/">www.plesk.com</a></td>
-</tr>
-</tbody></table>
-<h2 id="免费面板"><a href="#免费面板" class="headerlink" title="免费面板"></a>免费面板</h2><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>官网</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ZPanel</td>
-<td><a href="http://www.zpanelcp.com/">www.zpanelcp.com</a></td>
-</tr>
-<tr>
-<td>AMH面板</td>
-<td>amh.sh</td>
-</tr>
-<tr>
-<td>Kloxo</td>
-<td>mratwork.com</td>
-</tr>
-<tr>
-<td>dockeradmin</td>
-<td><a href="http://www.dockeradmin.net/">www.dockeradmin.net</a></td>
-</tr>
-<tr>
-<td>virtualmin</td>
-<td><a href="http://www.virtualmin.com/">www.virtualmin.com</a></td>
-</tr>
-<tr>
-<td>宝塔面板</td>
-<td>bt.cn</td>
-</tr>
-<tr>
-<td>appnode</td>
-<td><a href="http://www.appnode.com/">www.appnode.com</a></td>
-</tr>
-<tr>
-<td>CyberPanel</td>
-<td>cyberpanel.net</td>
-</tr>
-</tbody></table>
-<h2 id="快速从域名服务商转出域名"><a href="#快速从域名服务商转出域名" class="headerlink" title="快速从域名服务商转出域名"></a>快速从域名服务商转出域名</h2><h3 id="快速从Namesilo转出域名"><a href="#快速从Namesilo转出域名" class="headerlink" title="快速从Namesilo转出域名"></a>快速从Namesilo转出域名</h3><p>当新注册商向Namesilo发起域名转出请求后，Namesilo会在“Transfer Manager”页面显示“Pending Outbound Transfers ”列出待转出域名。</p>
-<p>所以，当你需要将域名快速从Namesilo转出时，只需要登录Nameilo网站，选择“Transfer Manager”，在“Pending Outbound Transfers ”列表中找到你要转出的域名，点击“APPROVE”即可快速的将域名转入到新运营商。</p>
-]]></content>
-      <categories>
-        <category>Software</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>Server</tag>
-        <tag>随笔</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
